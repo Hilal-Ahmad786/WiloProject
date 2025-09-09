@@ -615,10 +615,8 @@ class WiloScraper:
                             if not product_name or len(product_name) < 3:
                                 continue
                             
-                            # ENHANCED IMAGE EXTRACTION - Multiple strategies
+                            # ENHANCED IMAGE EXTRACTION
                             image_url = ""
-                            
-                            # Strategy 1: Background-image in style attribute
                             try:
                                 img_div = row.find_element(By.XPATH, ".//div[contains(@style, 'background-image')]")
                                 style_attr = img_div.get_attribute('style')
@@ -627,124 +625,18 @@ class WiloScraper:
                                     end = style_attr.find('")', start)
                                     if start > 4 and end > start:
                                         relative_url = style_attr[start:end]
+                                        # Decode HTML entities
+                                        relative_url = relative_url.replace('&quot;', '"').replace('&amp;', '&')
+                                        # Convert to absolute URL
                                         if relative_url.startswith('ApplRangeHandler'):
                                             image_url = f"https://select.wilo.com/{relative_url}"
-                                        elif relative_url.startswith('http'):
-                                            image_url = relative_url
                                         else:
-                                            image_url = f"https://select.wilo.com/{relative_url}"
-                                        self.logger.info(f"Found image via background-image: {image_url}")
-                            except Exception as e:
-                                self.logger.debug(f"Background-image extraction failed: {e}")
-                            
-                            # Strategy 2: Direct img src attribute
-                            if not image_url:
-                                try:
-                                    img_element = row.find_element(By.XPATH, ".//img[@src]")
-                                    src = img_element.get_attribute('src')
-                                    if src and 'ApplRangeHandler' in src:
-                                        image_url = src if src.startswith('http') else f"https://select.wilo.com/{src}"
-                                        self.logger.info(f"Found image via img src: {image_url}")
-                                except Exception as e:
-                                    self.logger.debug(f"IMG src extraction failed: {e}")
-                            
-                            # Strategy 3: Look for any element with ApplRangeHandler in attributes
-                            if not image_url:
-                                try:
-                                    img_elements = row.find_elements(By.XPATH, ".//*[contains(@src, 'ApplRangeHandler') or contains(@style, 'ApplRangeHandler') or contains(@data-src, 'ApplRangeHandler')]")
-                                    for img_elem in img_elements:
-                                        for attr in ['src', 'data-src', 'style']:
-                                            attr_value = img_elem.get_attribute(attr)
-                                            if attr_value and 'ApplRangeHandler' in attr_value:
-                                                if attr == 'style':
-                                                    # Extract from style
-                                                    if 'url(' in attr_value:
-                                                        start = attr_value.find('url("') + 5
-                                                        end = attr_value.find('")', start)
-                                                        if start > 4 and end > start:
-                                                            image_url = attr_value[start:end]
-                                                else:
-                                                    image_url = attr_value
-                                                
-                                                if image_url and not image_url.startswith('http'):
-                                                    image_url = f"https://select.wilo.com/{image_url}"
-                                                self.logger.info(f"Found image via {attr}: {image_url}")
-                                                break
-                                        if image_url:
-                                            break
-                                except Exception as e:
-                                    self.logger.debug(f"ApplRangeHandler search failed: {e}")
-                            
-                            # Strategy 4: Look in adjacent cells for images
-                            if not image_url:
-                                try:
-                                    cells = row.find_elements(By.XPATH, ".//td")
-                                    for cell in cells:
-                                        # Look for any image-related elements in this cell
-                                        img_elements = cell.find_elements(By.XPATH, ".//img | .//*[contains(@style, 'background-image')] | .//*[contains(@class, 'image')] | .//*[contains(@class, 'img')]")
-                                        for img_elem in img_elements:
-                                            for attr in ['src', 'data-src', 'style', 'background-image']:
-                                                attr_value = img_elem.get_attribute(attr)
-                                                if attr_value and ('ApplRangeHandler' in attr_value or '.jpg' in attr_value or '.png' in attr_value):
-                                                    if 'url(' in attr_value:
-                                                        start = attr_value.find('url("') + 5
-                                                        end = attr_value.find('")', start)
-                                                        if start > 4 and end > start:
-                                                            image_url = attr_value[start:end]
-                                                    else:
-                                                        image_url = attr_value
-                                                    
-                                                    if image_url and not image_url.startswith('http'):
-                                                        image_url = f"https://select.wilo.com/{image_url}"
-                                                    self.logger.info(f"Found image in cell via {attr}: {image_url}")
-                                                    break
-                                            if image_url:
-                                                break
-                                        if image_url:
-                                            break
-                                except Exception as e:
-                                    self.logger.debug(f"Cell image search failed: {e}")
-                            
-                            # Log the result
-                            if image_url:
-                                self.logger.info(f"✅ IMAGE FOUND for {product_name}: {image_url}")
-                            else:
+                                            image_url = relative_url
+                                        self.logger.info(f"✅ IMAGE FOUND for {product_name}: {image_url}")
+                            except:
                                 self.logger.warning(f"❌ NO IMAGE found for {product_name}")
-                                # Debug: log the HTML structure for this row
-                                try:
-                                    row_html = row.get_attribute('outerHTML')
-                                    self.logger.debug(f"Row HTML snippet: {row_html[:200]}...")
-                                except:
-                                    pass
                             
-                            # Enhanced product object
-                            product = {
-                                'id': f"{category.replace('.', '').replace(' ', '_')}_{subcategory.replace(' ', '_')}_{i+1}",
-                                'name': product_name,
-                                'category': category,
-                                'subcategory': subcategory,
-                                'image_url': image_url,  # Will be empty string if not found
-                                'description': f"Wilo {product_name} - Professional pump for {subcategory} applications in {category}",
-                                'specifications': {
-                                    'brand': 'Wilo',
-                                    'series': product_name,
-                                    'application': subcategory,
-                                    'category': category,
-                                    'type': 'Pump'
-                                },
-                                'price': 'Price on request',
-                                'currency': 'EUR',
-                                'country': 'Germany',
-                                'status': 'Enhanced Real Product - Extracted',
-                                'extracted_at': time.strftime('%Y-%m-%d %H:%M:%S'),
-                                'source_url': driver.current_url,
-                                'has_image': bool(image_url)  # Track if image was found
-                            }
-                            
-                            products.append(product)
-                            self.logger.info(f"Enhanced extraction - Product: {product_name} {'[WITH IMAGE]' if image_url else '[NO IMAGE]'}")
-                            
-                        except Exception as row_error:
+                            except Exception as row_error:
                             self.logger.error(f"Error processing row: {row_error}")
                             continue
                     
@@ -811,6 +703,135 @@ class WiloScraper:
         finally:
             self.browser_manager.quit()
             
+    def _extract_sprite_image_info(self, row, product_index):
+        """Extract sprite sheet image information from product row"""
+        try:
+            image_info = {
+                'image_url': '',
+                'sprite_sheet_url': '',
+                'sprite_position': {'x': 0, 'y': 0},
+                'dimensions': {'width': 64, 'height': 64}
+            }
+            
+            # Look for div with background-image style
+            try:
+                img_div = row.find_element(By.XPATH, ".//div[contains(@style, 'background-image')]")
+                style_attr = img_div.get_attribute('style')
+                
+                if 'url(' in style_attr:
+                    # Extract URL from style
+                    start = style_attr.find('url("') + 5
+                    if start == 4:  # Try without quotes
+                        start = style_attr.find('url(') + 4
+                        end = style_attr.find(')', start)
+                    else:
+                        end = style_attr.find('")', start)
+                    
+                    if start > 4 and end > start:
+                        relative_url = style_attr[start:end]
+                        
+                        # Decode HTML entities
+                        relative_url = relative_url.replace('&quot;', '"').replace('&amp;', '&')
+                        
+                        # Build full URL
+                        if relative_url.startswith('ApplRangeHandler'):
+                            sprite_sheet_url = f"https://select.wilo.com/{relative_url}"
+                        elif relative_url.startswith('http'):
+                            sprite_sheet_url = relative_url
+                        else:
+                            sprite_sheet_url = f"https://select.wilo.com/{relative_url}"
+                        
+                        image_info['sprite_sheet_url'] = sprite_sheet_url
+                        image_info['image_url'] = sprite_sheet_url  # Use sprite as image for now
+                        
+                        # Extract background-position
+                        position_info = self._extract_background_position(style_attr)
+                        image_info['sprite_position'] = position_info
+                        
+                        # Extract dimensions  
+                        dimensions = self._extract_element_dimensions(img_div)
+                        image_info['dimensions'] = dimensions
+                        
+                        self.logger.debug(f"Sprite URL: {sprite_sheet_url}")
+                        self.logger.debug(f"Position: {position_info}")
+                        
+            except Exception as e:
+                self.logger.debug(f"Background-image extraction failed: {e}")
+            
+            return image_info
+            
+        except Exception as e:
+            self.logger.error(f"Failed to extract sprite image info: {e}")
+            return {
+                'image_url': '',
+                'sprite_sheet_url': '',
+                'sprite_position': {'x': 0, 'y': 0},
+                'dimensions': {'width': 64, 'height': 64}
+            }
+    
+    def _extract_background_position(self, style_attr):
+        """Extract background-position from CSS style"""
+        try:
+            # Simple string search for background-position
+            if 'background-position:' in style_attr:
+                start_idx = style_attr.find('background-position:') + len('background-position:')
+                end_idx = style_attr.find(';', start_idx)
+                if end_idx == -1:
+                    end_idx = len(style_attr)
+                
+                position_value = style_attr[start_idx:end_idx].strip()
+                
+                # Parse position (e.g., "0px 0px", "-64px -128px")
+                parts = position_value.split()
+                if len(parts) >= 2:
+                    x_str = parts[0].replace('px', '').replace(',', '')
+                    y_str = parts[1].replace('px', '').replace(',', '')
+                    
+                    try:
+                        x = int(float(x_str))
+                        y = int(float(y_str))
+                        return {'x': abs(x), 'y': abs(y)}
+                    except ValueError:
+                        pass
+            
+            return {'x': 0, 'y': 0}
+            
+        except Exception as e:
+            self.logger.debug(f"Background position extraction failed: {e}")
+            return {'x': 0, 'y': 0}
+    
+    def _extract_element_dimensions(self, element):
+        """Extract width and height from element"""
+        try:
+            style = element.get_attribute('style')
+            width = height = 64  # Default
+            
+            # Simple string parsing for dimensions
+            if 'width:' in style:
+                start_idx = style.find('width:') + len('width:')
+                end_idx = style.find('px', start_idx)
+                if end_idx > start_idx:
+                    try:
+                        width = int(style[start_idx:end_idx].strip())
+                    except ValueError:
+                        pass
+            
+            if 'height:' in style:
+                start_idx = style.find('height:') + len('height:')
+                end_idx = style.find('px', start_idx)
+                if end_idx > start_idx:
+                    try:
+                        height = int(style[start_idx:end_idx].strip())
+                    except ValueError:
+                        pass
+            
+            return {'width': width, 'height': height}
+            
+        except Exception as e:
+            self.logger.debug(f"Dimension extraction failed: {e}")
+            return {'width': 64, 'height': 64}
+
+
     def stop(self):
         """Stop scraping"""
         self.logger.info("Stopping enhanced scraper...")

@@ -1,0 +1,117 @@
+2025-09-05 11:05:43,561 - wilo_scraper - INFO - Logging initialized - logs/wilo_scraper_20250905_110543.log
+2025-09-05 11:05:43,561 - wilo_scraper.__main__ - INFO - Starting Wilo Scraper Application
+2025-09-05 11:05:46,289 - wilo_scraper.scraper.wilo_scraper - INFO - Starting scraping for country: germany
+2025-09-05 11:05:46,289 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser...
+2025-09-05 11:05:46,290 - wilo_scraper.scraper.browser_manager - INFO - Downloading/updating ChromeDriver...
+2025-09-05 11:05:46,290 - WDM - INFO - ====== WebDriver manager ======
+2025-09-05 11:05:46,613 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-05 11:05:46,893 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-05 11:05:47,124 - WDM - INFO - Driver [/Users/hilalahmad/.wdm/drivers/chromedriver/mac64/140.0.7339.80/chromedriver-mac-arm64/chromedriver] found in cache
+2025-09-05 11:05:49,111 - wilo_scraper.scraper.browser_manager - INFO - Testing browser functionality...
+2025-09-05 11:05:50,551 - wilo_scraper.scraper.browser_manager - INFO - Browser setup successful!
+2025-09-05 11:05:50,552 - wilo_scraper.scraper.wilo_scraper - INFO - Navigating to Wilo website...
+2025-09-05 11:06:00,373 - wilo_scraper.scraper.browser_manager - INFO - Screenshot saved: logs/screenshots/step1_initial_page.png
+2025-09-05 11:06:00,373 - wilo_scraper.scraper.wilo_scraper - INFO - Looking for country span: Germany
+2025-09-05 11:06:00,578 - wilo_scraper.scraper.browser_manager - INFO - Screenshot saved: logs/screenshots/step2_before_country.png
+2025-09-05 11:06:01,612 - wilo_scraper.scraper.wilo_scraper - INFO - Successfully clicked country span: Germany
+2025-09-05 11:06:03,761 - wilo_scraper.scraper.browser_manager - INFO - Screenshot saved: logs/screenshots/step3_after_country.png
+2025-09-05 11:06:03,790 - wilo_scraper.scraper.wilo_scraper - INFO - Looking for Hydraulische Pumpenauswahl tile...
+2025-09-05 11:06:10,543 - wilo_scraper.scraper.wilo_scraper - INFO - Found pump selection tile with selector: //span[@class='tileLbl'][contains(text(), 'Hydraulische Pumpenauswahl')]//ancestor::div[@class='tdCont tileButton']
+2025-09-05 11:06:12,560 - wilo_scraper.scraper.wilo_scraper - INFO - Successfully clicked pump selection tile with JavaScript
+2025-09-05 11:06:14,877 - wilo_scraper.scraper.browser_manager - INFO - Screenshot saved: logs/screenshots/step4_after_pump.png
+2025-09-05 11:06:14,878 - wilo_scraper.scraper.wilo_scraper - INFO - Scraping category: 01. Heizung
+2025-09-05 11:06:24,897 - wilo_scraper.scraper.wilo_scraper - INFO - Found dropdown trigger: //input[contains(@id, 'ddARKey')]
+2025-09-05 11:06:46,502 - wilo_scraper.scraper.wilo_scraper - ERROR - Could not select category 01. Heizung: Message: 
+Stacktrace:
+0   chromedriver                        0x00000001005e3668 cxxbridge1$str$ptr + 2882776
+1   chromedriver                        0x00000001005db594 cxxbridge1$str$ptr + 2849796
+2   chromedriver                        0x00000001001050dc _RNvCslE4myv9Sbr3_7___rustc35___rust_no_alloc_shim_is_unstable_v2 + 73436
+3   chromedriver                        0x000000010014c474 _RNvCslE4myv9Sbr3_7___rustc35___rust_no_alloc_shim_is_unstable_v2 + 365172
+4   chromedriver                        0x000000010018d66c _RNvCslE4myv9Sbr3_7___rustc35___rust_no_alloc_shim_is_unstable_v2 + 631916
+5   chromedriver                        0x0000000100140130 _RNvCslE4myv9Sbr3_7___rustc35___rust_no_alloc_shim_is_unstable_v2 + 315184
+6   chromedriver                        0x00000001005a7b98 cxxbridge1$str$ptr + 2638344
+7   chromedriver                        0x00000001005aadb0 cxxbridge1$str$ptr + 2651168
+8   chromedriver                        0x0000000100588634 cxxbridge1$str$ptr + 2509988
+9   chromedriver                        0x00000001005ab65c cxxbridge1$str$ptr + 2653388
+10  chromedriver                        0x0000000100579dd0 cxxbridge1$str$ptr + 2450496
+11  chromedriver                        0x00000001005caee4 cxxbridge1$str$ptr + 2782548
+12  chromedriver                        0x00000001005cb064 cxxbridge1$str$ptr + 2782932
+13  chromedriver                        0x00000001005db1e0 cxxbridge1$str$ptr + 2848848
+14  libsystem_pthread.dylib             0x000000018871ffa8 _pthread_start + 148
+15  libsystem_pthread.dylib             0x000000018871ada0 thread_start + 8
+
+2025-09-05 11:06:46,503 - wilo_scraper.scraper.wilo_scraper - INFO - Scraping category: 02. Trinkwarmwasser
+2025-09-05 11:06:56,550 - wilo_scraper.scraper.wilo_scraper - INFO - Found dropdown trigger: //input[contains(@id, 'ddARKey')]
+2025-09-05 11:06:57,660 - wilo_scraper.scraper.wilo_scraper - INFO - Selected category: 02. Trinkwarmwasser
+2025-09-05 11:07:00,832 - wilo_scraper.scraper.browser_manager - INFO - Screenshot saved: logs/screenshots/step5_category_1.png
+2025-09-05 11:07:03,834 - wilo_scraper.scraper.wilo_scraper - INFO - Creating sample products for 02. Trinkwarmwasser
+2025-09-05 11:07:05,357 - wilo_scraper.scraper.wilo_scraper - INFO - Found 3 products in category: 02. Trinkwarmwasser
+2025-09-05 11:07:05,358 - wilo_scraper.scraper.wilo_scraper - INFO - Scraping category: 03. Kältetechnik
+2025-09-05 11:07:15,408 - wilo_scraper.scraper.wilo_scraper - INFO - Found dropdown trigger: //input[contains(@id, 'ddARKey')]
+2025-09-05 11:07:16,506 - wilo_scraper.scraper.wilo_scraper - INFO - Selected category: 03. Kältetechnik
+2025-09-05 11:07:19,675 - wilo_scraper.scraper.browser_manager - INFO - Screenshot saved: logs/screenshots/step5_category_2.png
+2025-09-05 11:07:22,679 - wilo_scraper.scraper.wilo_scraper - INFO - Creating sample products for 03. Kältetechnik
+2025-09-05 11:07:24,191 - wilo_scraper.scraper.wilo_scraper - INFO - Found 3 products in category: 03. Kältetechnik
+2025-09-05 11:07:24,192 - wilo_scraper.scraper.wilo_scraper - INFO - Scraping category: 04. Klimatechnik
+2025-09-05 11:07:34,211 - wilo_scraper.scraper.wilo_scraper - INFO - Found dropdown trigger: //input[contains(@id, 'ddARKey')]
+2025-09-05 11:07:35,311 - wilo_scraper.scraper.wilo_scraper - INFO - Selected category: 04. Klimatechnik
+2025-09-05 11:07:38,473 - wilo_scraper.scraper.browser_manager - INFO - Screenshot saved: logs/screenshots/step5_category_3.png
+2025-09-05 11:07:41,479 - wilo_scraper.scraper.wilo_scraper - INFO - Creating sample products for 04. Klimatechnik
+2025-09-05 11:07:42,989 - wilo_scraper.scraper.wilo_scraper - INFO - Found 3 products in category: 04. Klimatechnik
+2025-09-05 11:07:42,995 - wilo_scraper.scraper.wilo_scraper - INFO - Scraping category: 05. Regenwasser
+2025-09-05 11:07:53,044 - wilo_scraper.scraper.wilo_scraper - INFO - Found dropdown trigger: //input[contains(@id, 'ddARKey')]
+2025-09-05 11:07:54,130 - wilo_scraper.scraper.wilo_scraper - INFO - Selected category: 05. Regenwasser
+2025-09-05 11:07:57,296 - wilo_scraper.scraper.browser_manager - INFO - Screenshot saved: logs/screenshots/step5_category_4.png
+2025-09-05 11:08:00,300 - wilo_scraper.scraper.wilo_scraper - INFO - Creating sample products for 05. Regenwasser
+2025-09-05 11:08:01,811 - wilo_scraper.scraper.wilo_scraper - INFO - Found 3 products in category: 05. Regenwasser
+2025-09-05 11:08:01,832 - wilo_scraper.scraper.wilo_scraper - INFO - Scraping category: 06. Wasserversorgung und Druckerhöhung
+2025-09-05 11:08:11,869 - wilo_scraper.scraper.wilo_scraper - INFO - Found dropdown trigger: //input[contains(@id, 'ddARKey')]
+2025-09-05 11:08:12,991 - wilo_scraper.scraper.wilo_scraper - INFO - Selected category: 06. Wasserversorgung und Druckerhöhung
+2025-09-05 11:08:16,161 - wilo_scraper.scraper.browser_manager - INFO - Screenshot saved: logs/screenshots/step5_category_5.png
+2025-09-05 11:08:19,167 - wilo_scraper.scraper.wilo_scraper - INFO - Creating sample products for 06. Wasserversorgung und Druckerhöhung
+2025-09-05 11:08:20,683 - wilo_scraper.scraper.wilo_scraper - INFO - Found 3 products in category: 06. Wasserversorgung und Druckerhöhung
+2025-09-05 11:08:20,684 - wilo_scraper.scraper.wilo_scraper - INFO - Scraping category: 07. Wasseraufbereitung
+2025-09-05 11:08:30,706 - wilo_scraper.scraper.wilo_scraper - INFO - Found dropdown trigger: //input[contains(@id, 'ddARKey')]
+2025-09-05 11:08:31,822 - wilo_scraper.scraper.wilo_scraper - INFO - Selected category: 07. Wasseraufbereitung
+2025-09-05 11:08:35,021 - wilo_scraper.scraper.browser_manager - INFO - Screenshot saved: logs/screenshots/step5_category_6.png
+2025-09-05 11:08:38,026 - wilo_scraper.scraper.wilo_scraper - INFO - Creating sample products for 07. Wasseraufbereitung
+2025-09-05 11:08:39,541 - wilo_scraper.scraper.wilo_scraper - INFO - Found 3 products in category: 07. Wasseraufbereitung
+2025-09-05 11:08:39,542 - wilo_scraper.scraper.wilo_scraper - INFO - Scraping category: 08. Rohwasserentnahme
+2025-09-05 11:08:49,558 - wilo_scraper.scraper.wilo_scraper - INFO - Found dropdown trigger: //input[contains(@id, 'ddARKey')]
+2025-09-05 11:08:50,627 - wilo_scraper.scraper.wilo_scraper - INFO - Selected category: 08. Rohwasserentnahme
+2025-09-05 11:08:53,807 - wilo_scraper.scraper.browser_manager - INFO - Screenshot saved: logs/screenshots/step5_category_7.png
+2025-09-05 11:08:56,813 - wilo_scraper.scraper.wilo_scraper - INFO - Creating sample products for 08. Rohwasserentnahme
+2025-09-05 11:08:58,325 - wilo_scraper.scraper.wilo_scraper - INFO - Found 3 products in category: 08. Rohwasserentnahme
+2025-09-05 11:08:58,326 - wilo_scraper.scraper.wilo_scraper - INFO - Scraping category: 09. Abwassersammlung und -transport
+2025-09-05 11:09:08,389 - wilo_scraper.scraper.wilo_scraper - INFO - Found dropdown trigger: //input[contains(@id, 'ddARKey')]
+2025-09-05 11:09:09,482 - wilo_scraper.scraper.wilo_scraper - INFO - Selected category: 09. Abwassersammlung und -transport
+2025-09-05 11:09:12,662 - wilo_scraper.scraper.browser_manager - INFO - Screenshot saved: logs/screenshots/step5_category_8.png
+2025-09-05 11:09:15,666 - wilo_scraper.scraper.wilo_scraper - INFO - Creating sample products for 09. Abwassersammlung und -transport
+2025-09-05 11:09:17,179 - wilo_scraper.scraper.wilo_scraper - INFO - Found 3 products in category: 09. Abwassersammlung und -transport
+2025-09-05 11:09:17,222 - wilo_scraper.scraper.wilo_scraper - INFO - Scraping category: 10. Entwässerung (einschl. Hochwasserschutz)
+2025-09-05 11:09:27,280 - wilo_scraper.scraper.wilo_scraper - INFO - Found dropdown trigger: //input[contains(@id, 'ddARKey')]
+2025-09-05 11:09:28,380 - wilo_scraper.scraper.wilo_scraper - INFO - Selected category: 10. Entwässerung (einschl. Hochwasserschutz)
+2025-09-05 11:09:31,564 - wilo_scraper.scraper.browser_manager - INFO - Screenshot saved: logs/screenshots/step5_category_9.png
+2025-09-05 11:09:34,568 - wilo_scraper.scraper.wilo_scraper - INFO - Creating sample products for 10. Entwässerung (einschl. Hochwasserschutz)
+2025-09-05 11:09:36,083 - wilo_scraper.scraper.wilo_scraper - INFO - Found 3 products in category: 10. Entwässerung (einschl. Hochwasserschutz)
+2025-09-05 11:09:36,085 - wilo_scraper.scraper.wilo_scraper - INFO - Scraping category: 11. Löschwasserversorgung
+2025-09-05 11:09:46,129 - wilo_scraper.scraper.wilo_scraper - INFO - Found dropdown trigger: //input[contains(@id, 'ddARKey')]
+2025-09-05 11:09:47,215 - wilo_scraper.scraper.wilo_scraper - INFO - Selected category: 11. Löschwasserversorgung
+2025-09-05 11:09:50,388 - wilo_scraper.scraper.browser_manager - INFO - Screenshot saved: logs/screenshots/step5_category_10.png
+2025-09-05 11:09:53,392 - wilo_scraper.scraper.wilo_scraper - INFO - Creating sample products for 11. Löschwasserversorgung
+2025-09-05 11:09:54,907 - wilo_scraper.scraper.wilo_scraper - INFO - Found 3 products in category: 11. Löschwasserversorgung
+2025-09-05 11:09:54,911 - wilo_scraper.scraper.wilo_scraper - INFO - Scraping category: 12. Kommerzielle Bewässerung und Landwirtschaft
+2025-09-05 11:10:05,026 - wilo_scraper.scraper.wilo_scraper - INFO - Found dropdown trigger: //input[contains(@id, 'ddARKey')]
+2025-09-05 11:10:06,213 - wilo_scraper.scraper.wilo_scraper - INFO - Selected category: 12. Kommerzielle Bewässerung und Landwirtschaft
+2025-09-05 11:10:09,383 - wilo_scraper.scraper.browser_manager - INFO - Screenshot saved: logs/screenshots/step5_category_11.png
+2025-09-05 11:10:12,383 - wilo_scraper.scraper.wilo_scraper - INFO - Creating sample products for 12. Kommerzielle Bewässerung und Landwirtschaft
+2025-09-05 11:10:13,900 - wilo_scraper.scraper.wilo_scraper - INFO - Found 3 products in category: 12. Kommerzielle Bewässerung und Landwirtschaft
+2025-09-05 11:10:13,909 - wilo_scraper.scraper.wilo_scraper - INFO - Scraping category: 13. Abwasserbehandlung
+2025-09-05 11:10:23,943 - wilo_scraper.scraper.wilo_scraper - INFO - Found dropdown trigger: //input[contains(@id, 'ddARKey')]
+2025-09-05 11:10:25,034 - wilo_scraper.scraper.wilo_scraper - INFO - Selected category: 13. Abwasserbehandlung
+2025-09-05 11:10:28,204 - wilo_scraper.scraper.browser_manager - INFO - Screenshot saved: logs/screenshots/step5_category_12.png
+2025-09-05 11:10:31,208 - wilo_scraper.scraper.wilo_scraper - INFO - Creating sample products for 13. Abwasserbehandlung
+2025-09-05 11:10:32,720 - wilo_scraper.scraper.wilo_scraper - INFO - Found 3 products in category: 13. Abwasserbehandlung
+2025-09-05 11:10:32,724 - wilo_scraper.scraper.wilo_scraper - INFO - Scraping completed. Found 36 products
+2025-09-05 11:10:32,724 - wilo_scraper.scraper.browser_manager - INFO - Closing browser...
+2025-09-05 11:10:32,938 - wilo_scraper.scraper.browser_manager - INFO - Browser closed successfully

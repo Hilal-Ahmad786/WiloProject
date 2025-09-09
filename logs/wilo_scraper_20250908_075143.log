@@ -1,0 +1,39 @@
+2025-09-08 07:51:43,233 - wilo_scraper - INFO - Logging initialized - logs/wilo_scraper_20250908_075143.log
+2025-09-08 07:51:43,233 - wilo_scraper.__main__ - INFO - Starting Wilo Scraper Application
+2025-09-08 07:51:51,579 - wilo_scraper.scraper.wilo_scraper - INFO - Starting scraping for country: germany
+2025-09-08 07:51:51,584 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser...
+2025-09-08 07:51:51,584 - wilo_scraper.scraper.browser_manager - INFO - Downloading/updating ChromeDriver...
+2025-09-08 07:51:51,584 - WDM - INFO - ====== WebDriver manager ======
+2025-09-08 07:51:55,608 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-08 07:51:56,151 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-08 07:51:56,374 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-08 07:51:57,146 - WDM - INFO - WebDriver version 140.0.7339.80 selected
+2025-09-08 07:51:57,148 - WDM - INFO - Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/140.0.7339.80/mac-arm64/chromedriver-mac-arm64.zip
+2025-09-08 07:51:57,149 - WDM - INFO - About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/140.0.7339.80/mac-arm64/chromedriver-mac-arm64.zip
+2025-09-08 07:51:57,411 - WDM - INFO - Driver downloading response is 200
+2025-09-08 07:52:00,828 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-08 07:52:01,491 - WDM - INFO - Driver has been saved in cache [/Users/hilalahmad/.wdm/drivers/chromedriver/mac64/140.0.7339.80]
+2025-09-08 07:52:01,517 - wilo_scraper.scraper.browser_manager - ERROR - Failed to setup driver: Message: Service /Users/hilalahmad/.wdm/drivers/chromedriver/mac64/140.0.7339.80/chromedriver-mac-arm64/chromedriver unexpectedly exited. Status code was: -9
+
+2025-09-08 07:52:01,517 - wilo_scraper.scraper.wilo_scraper - ERROR - Scraping failed: Failed to setup browser
+2025-09-08 07:52:09,348 - wilo_scraper.scraper.wilo_scraper - INFO - Starting scraping for country: germany
+2025-09-08 07:52:09,354 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser...
+2025-09-08 07:52:09,354 - wilo_scraper.scraper.browser_manager - INFO - Downloading/updating ChromeDriver...
+2025-09-08 07:52:09,355 - WDM - INFO - ====== WebDriver manager ======
+2025-09-08 07:52:09,610 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-08 07:52:09,933 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-08 07:52:10,278 - WDM - INFO - Driver [/Users/hilalahmad/.wdm/drivers/chromedriver/mac64/140.0.7339.80/chromedriver-mac-arm64/chromedriver] found in cache
+2025-09-08 07:52:42,986 - wilo_scraper.scraper.browser_manager - ERROR - Failed to setup driver: Message: Can not connect to the Service /Users/hilalahmad/.wdm/drivers/chromedriver/mac64/140.0.7339.80/chromedriver-mac-arm64/chromedriver
+
+2025-09-08 07:53:43,013 - selenium.webdriver.common.service - ERROR - Service process refused to terminate gracefully with SIGTERM, escalating to SIGKILL.
+Traceback (most recent call last):
+  File "/Users/hilalahmad/Desktop/MyProjects/GermanFiverWilo/wilo-scraper/venv/lib/python3.13/site-packages/selenium/webdriver/common/service.py", line 179, in _terminate_process
+    self.process.wait(60)
+    ~~~~~~~~~~~~~~~~~^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/subprocess.py", line 1280, in wait
+    return self._wait(timeout=timeout)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/subprocess.py", line 2058, in _wait
+    raise TimeoutExpired(self.args, timeout)
+subprocess.TimeoutExpired: Command '['/Users/hilalahmad/.wdm/drivers/chromedriver/mac64/140.0.7339.80/chromedriver-mac-arm64/chromedriver', '--port=49946']' timed out after 60 seconds
+2025-09-08 07:53:43,042 - wilo_scraper.scraper.wilo_scraper - ERROR - Scraping failed: Failed to setup browser

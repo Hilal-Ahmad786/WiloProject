@@ -1,0 +1,24 @@
+2025-09-05 10:31:18,184 - wilo_scraper - INFO - Logging initialized - logs/wilo_scraper_20250905_103118.log
+2025-09-05 10:31:18,184 - wilo_scraper.__main__ - INFO - Starting Wilo Scraper Application
+2025-09-05 10:31:20,356 - wilo_scraper.scraper.wilo_scraper - INFO - Testing navigation...
+2025-09-05 10:31:20,357 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser...
+2025-09-05 10:31:20,357 - wilo_scraper.scraper.browser_manager - INFO - Downloading/updating ChromeDriver...
+2025-09-05 10:31:20,358 - WDM - INFO - ====== WebDriver manager ======
+2025-09-05 10:31:20,544 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-05 10:31:20,993 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-05 10:31:21,216 - WDM - INFO - Driver [/Users/hilalahmad/.wdm/drivers/chromedriver/mac64/140.0.7339.80/chromedriver-mac-arm64/chromedriver] found in cache
+2025-09-05 10:31:22,474 - wilo_scraper.scraper.browser_manager - INFO - Testing browser functionality...
+2025-09-05 10:31:23,159 - wilo_scraper.scraper.browser_manager - INFO - Browser setup successful!
+2025-09-05 10:31:23,160 - wilo_scraper.scraper.wilo_scraper - ERROR - Navigation test failed: 'BrowserManager' object has no attribute 'get_driver'
+2025-09-05 10:31:23,160 - wilo_scraper.gui.main_window - ERROR - Navigation test worker failed: 'BrowserManager' object has no attribute 'quit'
+2025-09-05 10:31:28,389 - wilo_scraper.scraper.wilo_scraper - INFO - Starting scraping for country: germany
+2025-09-05 10:31:28,392 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser...
+2025-09-05 10:31:28,392 - wilo_scraper.scraper.browser_manager - INFO - Downloading/updating ChromeDriver...
+2025-09-05 10:31:28,392 - WDM - INFO - ====== WebDriver manager ======
+2025-09-05 10:31:28,578 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-05 10:31:28,869 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-05 10:31:29,162 - WDM - INFO - Driver [/Users/hilalahmad/.wdm/drivers/chromedriver/mac64/140.0.7339.80/chromedriver-mac-arm64/chromedriver] found in cache
+2025-09-05 10:31:30,264 - wilo_scraper.scraper.browser_manager - INFO - Testing browser functionality...
+2025-09-05 10:31:31,956 - wilo_scraper.scraper.browser_manager - INFO - Browser setup successful!
+2025-09-05 10:31:31,956 - wilo_scraper.scraper.wilo_scraper - ERROR - Scraping failed: 'BrowserManager' object has no attribute 'get_driver'
+2025-09-05 10:31:31,956 - wilo_scraper.gui.main_window - ERROR - Scraping worker failed: 'BrowserManager' object has no attribute 'quit'

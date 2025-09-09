@@ -1,0 +1,34 @@
+2025-09-08 07:56:17,483 - wilo_scraper - INFO - Logging initialized - logs/wilo_scraper_20250908_075617.log
+2025-09-08 07:56:17,483 - wilo_scraper.__main__ - INFO - Starting Wilo Scraper Application
+2025-09-08 07:56:22,174 - wilo_scraper.scraper.wilo_scraper - INFO - Starting scraping for country: germany
+2025-09-08 07:56:22,178 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser...
+2025-09-08 07:56:22,178 - wilo_scraper.scraper.browser_manager - INFO - Attempting webdriver-manager setup...
+2025-09-08 07:56:22,178 - WDM - INFO - ====== WebDriver manager ======
+2025-09-08 07:56:22,402 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-08 07:56:22,756 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-08 07:56:23,011 - WDM - INFO - Driver [/Users/hilalahmad/.wdm/drivers/chromedriver/mac64/140.0.7339.80/chromedriver-mac-arm64/chromedriver] found in cache
+2025-09-08 07:56:23,011 - wilo_scraper.scraper.browser_manager - INFO - Fixed permissions for: /Users/hilalahmad/.wdm/drivers/chromedriver/mac64/140.0.7339.80/chromedriver-mac-arm64/chromedriver
+2025-09-08 07:56:23,011 - wilo_scraper.scraper.browser_manager - INFO - webdriver-manager setup successful
+2025-09-08 07:56:23,011 - wilo_scraper.scraper.browser_manager - INFO - Creating Chrome driver (attempt 1/3)...
+2025-09-08 07:56:55,715 - wilo_scraper.scraper.browser_manager - WARNING - Driver creation attempt 1 failed: Message: Can not connect to the Service /Users/hilalahmad/.wdm/drivers/chromedriver/mac64/140.0.7339.80/chromedriver-mac-arm64/chromedriver
+
+2025-09-08 07:56:57,718 - wilo_scraper.scraper.browser_manager - INFO - Creating Chrome driver (attempt 2/3)...
+2025-09-08 07:57:30,425 - wilo_scraper.scraper.browser_manager - WARNING - Driver creation attempt 2 failed: Message: Can not connect to the Service /Users/hilalahmad/.wdm/drivers/chromedriver/mac64/140.0.7339.80/chromedriver-mac-arm64/chromedriver
+
+2025-09-08 07:57:32,431 - wilo_scraper.scraper.browser_manager - INFO - Creating Chrome driver (attempt 3/3)...
+2025-09-08 07:58:05,333 - wilo_scraper.scraper.browser_manager - WARNING - Driver creation attempt 3 failed: Message: Can not connect to the Service /Users/hilalahmad/.wdm/drivers/chromedriver/mac64/140.0.7339.80/chromedriver-mac-arm64/chromedriver
+
+2025-09-08 07:58:05,334 - wilo_scraper.scraper.browser_manager - ERROR - Failed to setup driver: Message: Can not connect to the Service /Users/hilalahmad/.wdm/drivers/chromedriver/mac64/140.0.7339.80/chromedriver-mac-arm64/chromedriver
+
+2025-09-08 07:59:05,393 - selenium.webdriver.common.service - ERROR - Service process refused to terminate gracefully with SIGTERM, escalating to SIGKILL.
+Traceback (most recent call last):
+  File "/Users/hilalahmad/Desktop/MyProjects/GermanFiverWilo/wilo-scraper/venv/lib/python3.13/site-packages/selenium/webdriver/common/service.py", line 179, in _terminate_process
+    self.process.wait(60)
+    ~~~~~~~~~~~~~~~~~^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/subprocess.py", line 1280, in wait
+    return self._wait(timeout=timeout)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/subprocess.py", line 2058, in _wait
+    raise TimeoutExpired(self.args, timeout)
+subprocess.TimeoutExpired: Command '['/Users/hilalahmad/.wdm/drivers/chromedriver/mac64/140.0.7339.80/chromedriver-mac-arm64/chromedriver', '--port=51128']' timed out after 60 seconds
+2025-09-08 07:59:05,409 - wilo_scraper.scraper.wilo_scraper - ERROR - Scraping failed: Failed to setup browser

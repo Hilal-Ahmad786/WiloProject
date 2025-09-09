@@ -1,0 +1,33 @@
+2025-09-05 10:39:14,314 - wilo_scraper - INFO - Logging initialized - logs/wilo_scraper_20250905_103914.log
+2025-09-05 10:39:14,314 - wilo_scraper.__main__ - INFO - Starting Wilo Scraper Application
+2025-09-05 10:39:16,588 - wilo_scraper.scraper.wilo_scraper - INFO - Testing navigation...
+2025-09-05 10:39:16,589 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser...
+2025-09-05 10:39:16,590 - wilo_scraper.scraper.browser_manager - INFO - Downloading/updating ChromeDriver...
+2025-09-05 10:39:16,590 - WDM - INFO - ====== WebDriver manager ======
+2025-09-05 10:39:16,978 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-05 10:39:17,281 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-05 10:39:17,634 - WDM - INFO - Driver [/Users/hilalahmad/.wdm/drivers/chromedriver/mac64/140.0.7339.80/chromedriver-mac-arm64/chromedriver] found in cache
+2025-09-05 10:39:19,264 - wilo_scraper.scraper.browser_manager - INFO - Testing browser functionality...
+2025-09-05 10:39:20,687 - wilo_scraper.scraper.browser_manager - INFO - Browser setup successful!
+2025-09-05 10:39:33,252 - wilo_scraper.scraper.browser_manager - INFO - Screenshot saved: logs/screenshots/navigation_test.png
+2025-09-05 10:39:33,254 - wilo_scraper.scraper.wilo_scraper - INFO - Navigation test completed successfully
+2025-09-05 10:39:33,255 - wilo_scraper.scraper.browser_manager - INFO - Closing browser...
+2025-09-05 10:39:33,339 - wilo_scraper.scraper.browser_manager - INFO - Browser closed successfully
+2025-09-05 10:39:38,121 - wilo_scraper.scraper.wilo_scraper - INFO - Starting scraping for country: germany
+2025-09-05 10:39:38,125 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser...
+2025-09-05 10:39:38,125 - wilo_scraper.scraper.browser_manager - INFO - Downloading/updating ChromeDriver...
+2025-09-05 10:39:38,126 - WDM - INFO - ====== WebDriver manager ======
+2025-09-05 10:39:38,336 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-05 10:39:38,693 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-05 10:39:38,916 - WDM - INFO - Driver [/Users/hilalahmad/.wdm/drivers/chromedriver/mac64/140.0.7339.80/chromedriver-mac-arm64/chromedriver] found in cache
+2025-09-05 10:39:39,969 - wilo_scraper.scraper.browser_manager - INFO - Testing browser functionality...
+2025-09-05 10:39:40,334 - wilo_scraper.scraper.browser_manager - INFO - Browser setup successful!
+2025-09-05 10:39:40,350 - wilo_scraper.scraper.wilo_scraper - INFO - Navigating to Wilo website...
+2025-09-05 10:39:51,729 - wilo_scraper.scraper.browser_manager - INFO - Screenshot saved: logs/screenshots/step1_initial_page.png
+2025-09-05 10:39:51,730 - wilo_scraper.scraper.wilo_scraper - INFO - Looking for country: Deutschland
+2025-09-05 10:39:51,885 - wilo_scraper.scraper.browser_manager - INFO - Screenshot saved: logs/screenshots/step2_before_country.png
+2025-09-05 10:40:42,020 - wilo_scraper.scraper.wilo_scraper - INFO - Country text found on page but element not clickable
+2025-09-05 10:40:42,119 - wilo_scraper.scraper.wilo_scraper - INFO - Available clickable elements: ['Albania']
+2025-09-05 10:40:42,120 - wilo_scraper.scraper.wilo_scraper - ERROR - Scraping failed: Failed to select country
+2025-09-05 10:40:42,129 - wilo_scraper.scraper.browser_manager - INFO - Closing browser...
+2025-09-05 10:40:42,254 - wilo_scraper.scraper.browser_manager - INFO - Browser closed successfully

@@ -1,0 +1,17 @@
+{
+  "shopify": {
+    "shop_url": "your-shop.myshopify.com",
+    "access_token": "your_access_token_here",
+    "api_version": "2024-01"
+  },
+  "scraping": {
+    "max_products_per_category": 100,
+    "delay_between_actions": 2,
+    "headless_mode": false,
+    "download_images": true
+  },
+  "database": {
+    "type": "sqlite",
+    "path": "data/wilo_products.db"
+  }
+}

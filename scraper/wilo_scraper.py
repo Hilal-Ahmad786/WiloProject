@@ -358,41 +358,150 @@ class WiloScraper:
             return True
     
     def _uncheck_image_hide_checkbox(self):
-        """Uncheck 'Bilder ausblenden' to show product images"""
+        """Uncheck 'Bilder ausblenden' to show product images - ENHANCED"""
         try:
             driver = self.browser_manager.get_driver()
             
+            self.logger.info("🖼️ Looking for 'Bilder ausblenden' checkbox to show images...")
+            
+            # Multiple strategies to find the checkbox
             checkbox_selectors = [
                 "//input[@id='cbHideImg']",
-                "//input[@name='cbHideImg']",
-                "//input[contains(@onclick, 'onSeriesGridToggleMinimizedViewClicked')]"
+                "//input[@name='cbHideImg']", 
+                "//input[contains(@onclick, 'onSeriesGridToggleMinimizedViewClicked')]",
+                "//input[contains(@onclick, 'HideImg')]",
+                "//label[contains(text(), 'Bilder ausblenden')]//input",
+                "//label[contains(text(), 'Bilder ausblenden')]//preceding-sibling::input",
+                "//span[contains(text(), 'Bilder ausblenden')]//input",
+                "//span[contains(text(), 'Bilder ausblenden')]//preceding-sibling::input",
+                "//div[contains(text(), 'Bilder ausblenden')]//input",
+                "//input[@type='checkbox'][following-sibling::*[contains(text(), 'Bilder ausblenden')]]",
+                "//input[@type='checkbox'][preceding-sibling::*[contains(text(), 'Bilder ausblenden')]]"
             ]
             
-            for selector in checkbox_selectors:
+            checkbox_found = False
+            
+            for i, selector in enumerate(checkbox_selectors):
                 try:
-                    checkbox = driver.find_element(By.XPATH, selector)
-                    if checkbox.is_displayed():
-                        is_checked = checkbox.is_selected() or checkbox.get_attribute('checked')
+                    self.logger.debug(f"Trying selector {i+1}: {selector}")
+                    checkboxes = driver.find_elements(By.XPATH, selector)
+                    
+                    for checkbox in checkboxes:
+                        if checkbox.is_displayed():
+                            # Check current state
+                            is_checked = checkbox.is_selected() or checkbox.get_attribute('checked') == 'true'
+                            
+                            self.logger.info(f"Found 'Bilder ausblenden' checkbox (selector {i+1})")
+                            self.logger.info(f"Current state: {'CHECKED' if is_checked else 'UNCHECKED'}")
+                            
+                            if is_checked:
+                                # Uncheck it to show images
+                                try:
+                                    driver.execute_script("arguments[0].click();", checkbox)
+                                    self.logger.info("✅ Successfully UNCHECKED 'Bilder ausblenden' with JavaScript click")
+                                    checkbox_found = True
+                                except:
+                                    try:
+                                        checkbox.click()
+                                        self.logger.info("✅ Successfully UNCHECKED 'Bilder ausblenden' with regular click")
+                                        checkbox_found = True
+                                    except:
+                                        self.logger.warning("Failed to click checkbox, trying to set attribute directly")
+                                        try:
+                                            driver.execute_script("arguments[0].checked = false;", checkbox)
+                                            driver.execute_script("arguments[0].dispatchEvent(new Event('change'));", checkbox)
+                                            self.logger.info("✅ Successfully UNCHECKED 'Bilder ausblenden' by setting attribute")
+                                            checkbox_found = True
+                                        except:
+                                            continue
+                                
+                                # Wait for page to update
+                                time.sleep(2)
+                                
+                                # Take screenshot to verify
+                                self.browser_manager.take_screenshot("step7_images_enabled_verification.png")
+                                
+                                # Verify the change
+                                try:
+                                    new_state = checkbox.is_selected() or checkbox.get_attribute('checked') == 'true'
+                                    if not new_state:
+                                        self.logger.info("🖼️ Images should now be VISIBLE!")
+                                    else:
+                                        self.logger.warning("⚠️ Checkbox might still be checked")
+                                except:
+                                    pass
+                                
+                                break
+                            else:
+                                self.logger.info("✅ 'Bilder ausblenden' already UNCHECKED - Images should be visible")
+                                checkbox_found = True
+                                break
+                    
+                    if checkbox_found:
+                        break
                         
-                        if is_checked:
-                            driver.execute_script("arguments[0].click();", checkbox)
-                            self.logger.info("Unchecked 'Bilder ausblenden' - Images should now be visible")
-                            time.sleep(2)
-                            self.browser_manager.take_screenshot("step7_images_enabled.png")
-                        else:
-                            self.logger.info("'Bilder ausblenden' already unchecked")
-                        
-                        return True
-                except:
+                except Exception as e:
+                    self.logger.debug(f"Selector {i+1} failed: {e}")
                     continue
             
-            self.logger.warning("Could not find 'Bilder ausblenden' checkbox")
-            return True
+            if not checkbox_found:
+                self.logger.warning("⚠️ Could not find 'Bilder ausblenden' checkbox")
+                
+                # Debug: Look for any checkboxes on the page
+                try:
+                    all_checkboxes = driver.find_elements(By.XPATH, "//input[@type='checkbox']")
+                    self.logger.info(f"Found {len(all_checkboxes)} total checkboxes on page")
+                    
+                    for i, cb in enumerate(all_checkboxes[:10]):  # Check first 10
+                        try:
+                            if cb.is_displayed():
+                                # Get surrounding text
+                                parent = cb.find_element(By.XPATH, ".//..")
+                                surrounding_text = parent.text.strip()[:100]
+                                self.logger.debug(f"Checkbox {i+1}: {surrounding_text}")
+                                
+                                # If it contains image-related text, try it
+                                if any(word in surrounding_text.lower() for word in ['bild', 'image', 'hide', 'ausblend']):
+                                    self.logger.info(f"Found potential image checkbox: {surrounding_text}")
+                                    if cb.is_selected():
+                                        try:
+                                            driver.execute_script("arguments[0].click();", cb)
+                                            self.logger.info("✅ Unchecked potential image hiding checkbox")
+                                            time.sleep(1)
+                                            checkbox_found = True
+                                            break
+                                        except:
+                                            continue
+                        except:
+                            continue
+                except Exception as e:
+                    self.logger.debug(f"Debug checkbox search failed: {e}")
+            
+            # Final verification - look for visible images
+            try:
+                time.sleep(2)  # Wait for any dynamic loading
+                
+                # Check if there are any product images visible now
+                image_elements = driver.find_elements(By.XPATH, "//img[contains(@src, 'ApplRangeHandler')] | //*[contains(@style, 'background-image') and contains(@style, 'ApplRangeHandler')]")
+                
+                if image_elements:
+                    visible_images = [img for img in image_elements if img.is_displayed()]
+                    self.logger.info(f"🖼️ Found {len(visible_images)} visible product images on page")
+                else:
+                    self.logger.warning("⚠️ No product images found - they might still be hidden")
+                    
+                    # Take a debug screenshot
+                    self.browser_manager.take_screenshot("debug_no_images_found.png")
+                    
+            except Exception as e:
+                self.logger.debug(f"Image verification failed: {e}")
+            
+            return checkbox_found
             
         except Exception as e:
             self.logger.error(f"Failed to uncheck image checkbox: {e}")
-            return True
-    
+            return False
+
     def _get_subcategories_for_category(self, category):
         """Get subcategories specific to the current category"""
         try:
@@ -478,10 +587,12 @@ class WiloScraper:
             return True
     
     def _extract_products_from_current_view(self, category, subcategory):
-        """Extract products from current page view with enhanced data"""
+        """Extract products from current page view with ENHANCED IMAGE extraction"""
         try:
             driver = self.browser_manager.get_driver()
             products = []
+            
+            self.browser_manager.take_screenshot(f"step8_products_{subcategory[:10]}.png")
             
             # Look for product grid rows
             grid_row_selectors = [
@@ -504,8 +615,10 @@ class WiloScraper:
                             if not product_name or len(product_name) < 3:
                                 continue
                             
-                            # Extract image URL
+                            # ENHANCED IMAGE EXTRACTION - Multiple strategies
                             image_url = ""
+                            
+                            # Strategy 1: Background-image in style attribute
                             try:
                                 img_div = row.find_element(By.XPATH, ".//div[contains(@style, 'background-image')]")
                                 style_attr = img_div.get_attribute('style')
@@ -516,75 +629,152 @@ class WiloScraper:
                                         relative_url = style_attr[start:end]
                                         if relative_url.startswith('ApplRangeHandler'):
                                             image_url = f"https://select.wilo.com/{relative_url}"
-                                        else:
+                                        elif relative_url.startswith('http'):
                                             image_url = relative_url
-                            except:
-                                pass
+                                        else:
+                                            image_url = f"https://select.wilo.com/{relative_url}"
+                                        self.logger.info(f"Found image via background-image: {image_url}")
+                            except Exception as e:
+                                self.logger.debug(f"Background-image extraction failed: {e}")
+                            
+                            # Strategy 2: Direct img src attribute
+                            if not image_url:
+                                try:
+                                    img_element = row.find_element(By.XPATH, ".//img[@src]")
+                                    src = img_element.get_attribute('src')
+                                    if src and 'ApplRangeHandler' in src:
+                                        image_url = src if src.startswith('http') else f"https://select.wilo.com/{src}"
+                                        self.logger.info(f"Found image via img src: {image_url}")
+                                except Exception as e:
+                                    self.logger.debug(f"IMG src extraction failed: {e}")
+                            
+                            # Strategy 3: Look for any element with ApplRangeHandler in attributes
+                            if not image_url:
+                                try:
+                                    img_elements = row.find_elements(By.XPATH, ".//*[contains(@src, 'ApplRangeHandler') or contains(@style, 'ApplRangeHandler') or contains(@data-src, 'ApplRangeHandler')]")
+                                    for img_elem in img_elements:
+                                        for attr in ['src', 'data-src', 'style']:
+                                            attr_value = img_elem.get_attribute(attr)
+                                            if attr_value and 'ApplRangeHandler' in attr_value:
+                                                if attr == 'style':
+                                                    # Extract from style
+                                                    if 'url(' in attr_value:
+                                                        start = attr_value.find('url("') + 5
+                                                        end = attr_value.find('")', start)
+                                                        if start > 4 and end > start:
+                                                            image_url = attr_value[start:end]
+                                                else:
+                                                    image_url = attr_value
+                                                
+                                                if image_url and not image_url.startswith('http'):
+                                                    image_url = f"https://select.wilo.com/{image_url}"
+                                                self.logger.info(f"Found image via {attr}: {image_url}")
+                                                break
+                                        if image_url:
+                                            break
+                                except Exception as e:
+                                    self.logger.debug(f"ApplRangeHandler search failed: {e}")
+                            
+                            # Strategy 4: Look in adjacent cells for images
+                            if not image_url:
+                                try:
+                                    cells = row.find_elements(By.XPATH, ".//td")
+                                    for cell in cells:
+                                        # Look for any image-related elements in this cell
+                                        img_elements = cell.find_elements(By.XPATH, ".//img | .//*[contains(@style, 'background-image')] | .//*[contains(@class, 'image')] | .//*[contains(@class, 'img')]")
+                                        for img_elem in img_elements:
+                                            for attr in ['src', 'data-src', 'style', 'background-image']:
+                                                attr_value = img_elem.get_attribute(attr)
+                                                if attr_value and ('ApplRangeHandler' in attr_value or '.jpg' in attr_value or '.png' in attr_value):
+                                                    if 'url(' in attr_value:
+                                                        start = attr_value.find('url("') + 5
+                                                        end = attr_value.find('")', start)
+                                                        if start > 4 and end > start:
+                                                            image_url = attr_value[start:end]
+                                                    else:
+                                                        image_url = attr_value
+                                                    
+                                                    if image_url and not image_url.startswith('http'):
+                                                        image_url = f"https://select.wilo.com/{image_url}"
+                                                    self.logger.info(f"Found image in cell via {attr}: {image_url}")
+                                                    break
+                                            if image_url:
+                                                break
+                                        if image_url:
+                                            break
+                                except Exception as e:
+                                    self.logger.debug(f"Cell image search failed: {e}")
+                            
+                            # Log the result
+                            if image_url:
+                                self.logger.info(f"✅ IMAGE FOUND for {product_name}: {image_url}")
+                            else:
+                                self.logger.warning(f"❌ NO IMAGE found for {product_name}")
+                                # Debug: log the HTML structure for this row
+                                try:
+                                    row_html = row.get_attribute('outerHTML')
+                                    self.logger.debug(f"Row HTML snippet: {row_html[:200]}...")
+                                except:
+                                    pass
                             
                             # Enhanced product object
                             product = {
-                                'id': f"{category}_{subcategory}_{i+1}",
+                                'id': f"{category.replace('.', '').replace(' ', '_')}_{subcategory.replace(' ', '_')}_{i+1}",
                                 'name': product_name,
                                 'category': category,
                                 'subcategory': subcategory,
-                                'image_url': image_url,
-                                'description': f"Wilo {product_name} - Professional pump for {subcategory} applications",
+                                'image_url': image_url,  # Will be empty string if not found
+                                'description': f"Wilo {product_name} - Professional pump for {subcategory} applications in {category}",
                                 'specifications': {
                                     'brand': 'Wilo',
                                     'series': product_name,
                                     'application': subcategory,
-                                    'category': category
+                                    'category': category,
+                                    'type': 'Pump'
                                 },
                                 'price': 'Price on request',
                                 'currency': 'EUR',
                                 'country': 'Germany',
-                                'status': 'Real Product - Enhanced Extraction',
+                                'status': 'Enhanced Real Product - Extracted',
                                 'extracted_at': time.strftime('%Y-%m-%d %H:%M:%S'),
-                                'source_url': driver.current_url
+                                'source_url': driver.current_url,
+                                'has_image': bool(image_url)  # Track if image was found
                             }
                             
                             products.append(product)
-                            self.logger.info(f"Enhanced extraction - Product: {product_name}")
+                            self.logger.info(f"Enhanced extraction - Product: {product_name} {'[WITH IMAGE]' if image_url else '[NO IMAGE]'}")
                             
                         except Exception as row_error:
+                            self.logger.error(f"Error processing row: {row_error}")
                             continue
                     
                     if products:
                         break
                         
                 except Exception as selector_error:
+                    self.logger.error(f"Error with selector {selector}: {selector_error}")
                     continue
             
-            # Fallback extraction
-            if not products:
-                try:
-                    name_elements = driver.find_elements(By.XPATH, "//span[@class='common_lbl_bold']")
-                    for i, name_element in enumerate(name_elements):
-                        name = name_element.text.strip()
-                        if name and len(name) > 3:
-                            product = {
-                                'id': f"{category}_{subcategory}_fallback_{i+1}",
-                                'name': name,
-                                'category': category,
-                                'subcategory': subcategory,
-                                'image_url': '',
-                                'description': f"Wilo {name}",
-                                'specifications': {'brand': 'Wilo'},
-                                'price': 'Price on request',
-                                'country': 'Germany',
-                                'status': 'Real Product - Fallback Extraction'
-                            }
-                            products.append(product)
-                            self.logger.info(f"Fallback extraction - Product: {name}")
-                except:
-                    pass
+            # Debug: Take screenshot showing current page state
+            if products:
+                self.browser_manager.take_screenshot(f"step9_extracted_products_{subcategory[:10]}.png")
+                
+                # Log summary
+                with_images = sum(1 for p in products if p['has_image'])
+                without_images = len(products) - with_images
+                self.logger.info(f"📊 EXTRACTION SUMMARY for {subcategory}:")
+                self.logger.info(f"   Total products: {len(products)}")
+                self.logger.info(f"   With images: {with_images}")
+                self.logger.info(f"   Without images: {without_images}")
             
             return products
             
         except Exception as e:
             self.logger.error(f"Failed to extract products from current view: {e}")
             return []
-    
+
+
+
     def test_navigation(self):
         """Test navigation to Wilo website"""
         try:

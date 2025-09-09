@@ -1,24 +1,114 @@
-#!/usr/bin/env python3
 """
-Fix Shopify Upload Error - 'ShopifyConfig' object has no attribute 'root'
+Complete Shopify configuration widget with REAL upload functionality
 """
-
-def fix_shopify_widget():
-    """Fix the progress callback issue in ShopifyConfig widget"""
-    
-    fixed_shopify_widget_content = '''"""
-Enhanced Shopify configuration widget with upload functionality - FIXED
-
 
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 import threading
 import json
+import requests
+import time
 from datetime import datetime
-from shopify.shopify_client import ShopifyClient
+
+class ShopifyClient:
+    """Real Shopify API client for product upload"""
+    
+    def __init__(self, shop_url, access_token):
+        self.shop_url = shop_url
+        self.access_token = access_token
+        
+        # Build API URL
+        if not shop_url.startswith('http'):
+            if not shop_url.endswith('.myshopify.com'):
+                shop_url = f"{shop_url}.myshopify.com"
+            shop_url = f"https://{shop_url}"
+        
+        self.base_url = f"{shop_url}/admin/api/2024-01"
+        self.headers = {
+            'X-Shopify-Access-Token': access_token,
+            'Content-Type': 'application/json'
+        }
+    
+    def create_product(self, product_data):
+        """Create a single product in Shopify"""
+        try:
+            # Transform Wilo product to Shopify format
+            shopify_product = {
+                'title': product_data.get('name', 'Wilo Product'),
+                'body_html': self._build_description(product_data),
+                'vendor': 'Wilo',
+                'product_type': product_data.get('subcategory', 'Pump'),
+                'tags': f"Wilo, {product_data.get('category', 'Pump')}, {product_data.get('subcategory', 'Standard')}",
+                'status': 'draft',  # Create as draft for review
+                'variants': [{
+                    'title': 'Default',
+                    'price': '0.00',  # Price to be set manually
+                    'inventory_management': 'shopify',
+                    'inventory_quantity': 0,
+                    'requires_shipping': True,
+                    'taxable': True,
+                    'sku': self._generate_sku(product_data)
+                }]
+            }
+            
+            # Add image if available
+            if product_data.get('image_url'):
+                shopify_product['images'] = [{
+                    'src': product_data['image_url'],
+                    'alt': product_data.get('name', 'Wilo Product')
+                }]
+            
+            # Create product
+            payload = {'product': shopify_product}
+            response = requests.post(
+                f"{self.base_url}/products.json",
+                headers=self.headers,
+                json=payload,
+                timeout=30
+            )
+            
+            if response.status_code == 201:
+                return response.json()['product']
+            else:
+                print(f"Error creating product: {response.status_code} - {response.text}")
+                return None
+                
+        except Exception as e:
+            print(f"Exception creating product: {e}")
+            return None
+    
+    def _build_description(self, product):
+        """Build product description"""
+        name = product.get('name', 'Wilo Product')
+        category = product.get('category', 'Pump')
+        subcategory = product.get('subcategory', 'Standard')
+        description = product.get('description', '')
+        
+        html = f"<h2>{name}</h2>"
+        if description:
+            html += f"<p>{description}</p>"
+        
+        html += f"<p><strong>Category:</strong> {category}</p>"
+        html += f"<p><strong>Type:</strong> {subcategory}</p>"
+        html += "<h3>Features</h3>"
+        html += "<ul>"
+        html += "<li>High-quality German engineering</li>"
+        html += "<li>Energy-efficient operation</li>"
+        html += "<li>Reliable performance</li>"
+        html += "<li>Professional grade components</li>"
+        html += "</ul>"
+        
+        return html
+    
+    def _generate_sku(self, product):
+        """Generate SKU"""
+        name = product.get('name', 'WILO').upper().replace(' ', '-').replace('.', '')
+        category_num = product.get('category', '01. Unknown').split('.')[0].strip()
+        sku = f"WILO-{category_num}-{name}"
+        return ''.join(c for c in sku if c.isalnum() or c in '-_')[:50]
 
 class ShopifyConfig(ttk.LabelFrame):
-    """Enhanced Shopify configuration widget with upload functionality"""
+    """Complete Shopify configuration widget with REAL upload functionality"""
     
     def __init__(self, parent, settings):
         super().__init__(parent, text="Shopify Integration", padding="10")
@@ -37,14 +127,14 @@ class ShopifyConfig(ttk.LabelFrame):
         
         # Shop URL
         ttk.Label(connection_frame, text="Shop URL:").grid(row=0, column=0, sticky='w', pady=2)
-        self.shop_url_var = tk.StringVar(value=self.settings.shopify_shop_url)
+        self.shop_url_var = tk.StringVar(value=getattr(self.settings, 'shopify_shop_url', ''))
         shop_url_entry = ttk.Entry(connection_frame, textvariable=self.shop_url_var, width=40)
         shop_url_entry.grid(row=0, column=1, sticky='w', padx=5)
         ttk.Label(connection_frame, text="(e.g., mystore.myshopify.com)", font=('Arial', 8)).grid(row=0, column=2, sticky='w', padx=5)
         
         # Access Token
         ttk.Label(connection_frame, text="Access Token:").grid(row=1, column=0, sticky='w', pady=2)
-        self.access_token_var = tk.StringVar(value=self.settings.shopify_access_token)
+        self.access_token_var = tk.StringVar(value=getattr(self.settings, 'shopify_access_token', ''))
         token_entry = ttk.Entry(connection_frame, textvariable=self.access_token_var, width=40, show="*")
         token_entry.grid(row=1, column=1, sticky='w', padx=5)
         
@@ -152,11 +242,10 @@ class ShopifyConfig(ttk.LabelFrame):
     def test_connection(self):
         """Test Shopify API connection"""
         try:
-            # Update settings
-            self.settings.shopify_shop_url = self.shop_url_var.get().strip()
-            self.settings.shopify_access_token = self.access_token_var.get().strip()
+            shop_url = self.shop_url_var.get().strip()
+            access_token = self.access_token_var.get().strip()
             
-            if not self.settings.shopify_shop_url or not self.settings.shopify_access_token:
+            if not shop_url or not access_token:
                 messagebox.showwarning("Missing Information", "Please enter both shop URL and access token.")
                 return
             
@@ -176,41 +265,60 @@ class ShopifyConfig(ttk.LabelFrame):
     def _test_connection_worker(self):
         """Worker thread for testing connection"""
         try:
-            # Create Shopify client
-            self.shopify_client = ShopifyClient(self.settings)
+            shop_url = self.shop_url_var.get().strip()
+            access_token = self.access_token_var.get().strip()
             
-            # Test connection
-            success = self.shopify_client.test_connection()
+            # Build proper URL
+            if not shop_url.startswith('http'):
+                if not shop_url.endswith('.myshopify.com'):
+                    shop_url = f"{shop_url}.myshopify.com"
+                shop_url = f"https://{shop_url}"
+            
+            # Test API call
+            headers = {
+                'X-Shopify-Access-Token': access_token,
+                'Content-Type': 'application/json'
+            }
+            
+            response = requests.get(f"{shop_url}/admin/api/2024-01/shop.json", headers=headers, timeout=10)
             
             # Update UI on main thread
-            self.after(0, self._update_connection_status, success)
+            if response.status_code == 200:
+                shop_data = response.json().get('shop', {})
+                shop_name = shop_data.get('name', 'Unknown')
+                self.after(0, self._update_connection_status, True, shop_name)
+            else:
+                self.after(0, self._update_connection_status, False, f"HTTP {response.status_code}")
             
         except Exception as e:
             self.after(0, self._update_connection_status, False, str(e))
     
-    def _update_connection_status(self, success, error=None):
+    def _update_connection_status(self, success, info=None):
         """Update connection status on main thread"""
         try:
             if success:
                 self.is_connected = True
-                self.status_var.set("✅ Connected successfully!")
+                self.status_var.set(f"✅ Connected to {info}!")
                 self.upload_scraped_button.config(state='normal')
                 self.upload_file_button.config(state='normal')
-                messagebox.showinfo("Success", "✅ Connected to Shopify successfully!")
+                messagebox.showinfo("Success", f"✅ Connected to {info} successfully!")
             else:
                 self.is_connected = False
-                error_msg = f": {error}" if error else ""
-                self.status_var.set(f"❌ Connection failed{error_msg}")
-                messagebox.showerror("Error", f"❌ Failed to connect to Shopify{error_msg}")
+                self.status_var.set(f"❌ Connection failed: {info}")
+                messagebox.showerror("Error", f"❌ Failed to connect: {info}")
         finally:
             self.test_button.config(state='normal')
     
     def save_settings(self):
         """Save Shopify settings"""
         try:
-            self.settings.shopify_shop_url = self.shop_url_var.get().strip()
-            self.settings.shopify_access_token = self.access_token_var.get().strip()
-            self.settings.save()
+            if hasattr(self.settings, 'shopify_shop_url'):
+                self.settings.shopify_shop_url = self.shop_url_var.get().strip()
+            if hasattr(self.settings, 'shopify_access_token'):
+                self.settings.shopify_access_token = self.access_token_var.get().strip()
+            
+            if hasattr(self.settings, 'save'):
+                self.settings.save()
             
             messagebox.showinfo("Success", "✅ Settings saved successfully!")
             
@@ -218,7 +326,7 @@ class ShopifyConfig(ttk.LabelFrame):
             messagebox.showerror("Error", f"❌ Failed to save settings: {e}")
     
     def upload_scraped_products(self):
-        """Upload currently scraped products to Shopify"""
+        """Upload currently scraped products to Shopify - REAL IMPLEMENTATION"""
         try:
             if not self.is_connected:
                 messagebox.showwarning("Not Connected", "Please test connection first.")
@@ -234,13 +342,13 @@ class ShopifyConfig(ttk.LabelFrame):
             # Confirm upload
             result = messagebox.askyesno(
                 "Confirm Upload", 
-                f"Upload {len(products)} products to Shopify?\\n\\nProducts will be created as {'drafts' if self.draft_mode_var.get() else 'active products'}."
+                f"Upload {len(products)} products to Shopify?\n\nProducts will be created as {'drafts' if self.draft_mode_var.get() else 'active products'}.\n\nThis will make REAL API calls!"
             )
             
             if not result:
                 return
             
-            # Start upload in separate thread
+            # Start REAL upload in separate thread
             self.upload_scraped_button.config(state='disabled')
             self.upload_file_button.config(state='disabled')
             
@@ -250,6 +358,128 @@ class ShopifyConfig(ttk.LabelFrame):
             
         except Exception as e:
             messagebox.showerror("Error", f"❌ Upload failed: {e}")
+    
+    def _upload_worker(self, products):
+        """Worker thread for uploading products - REAL IMPLEMENTATION"""
+        try:
+            # Create Shopify client
+            shop_url = self.shop_url_var.get().strip()
+            access_token = self.access_token_var.get().strip()
+            
+            client = ShopifyClient(shop_url, access_token)
+            
+            # Results tracking
+            successful = []
+            failed = []
+            
+            # Set progress bar
+            self.after(0, lambda: self.progress_bar.config(maximum=len(products), value=0))
+            
+            # Upload each product
+            for i, product in enumerate(products):
+                try:
+                    # Update progress
+                    self.after(0, lambda i=i, p=product: self.progress_var.set(f"Uploading {i+1}/{len(products)}: {p.get('name', 'Unknown')}"))
+                    
+                    # Create product in Shopify
+                    result = client.create_product(product)
+                    
+                    if result:
+                        successful.append({
+                            'product': product,
+                            'shopify_id': result['id'],
+                            'shopify_title': result['title']
+                        })
+                        print(f"✅ Created: {product.get('name')} (ID: {result['id']})")
+                    else:
+                        failed.append({
+                            'product': product,
+                            'error': 'Creation failed'
+                        })
+                        print(f"❌ Failed: {product.get('name')}")
+                    
+                    # Update progress bar
+                    self.after(0, lambda i=i: self.progress_bar.config(value=i+1))
+                    
+                    # Rate limiting - wait between requests
+                    time.sleep(0.5)
+                    
+                except Exception as e:
+                    failed.append({
+                        'product': product,
+                        'error': str(e)
+                    })
+                    print(f"❌ Error: {product.get('name')} - {e}")
+            
+            # Show results
+            self.after(0, lambda: self._display_upload_results(successful, failed))
+            
+            # Show completion message
+            success_count = len(successful)
+            error_count = len(failed)
+            total = len(products)
+            
+            def show_completion():
+                if error_count == 0:
+                    messagebox.showinfo("Upload Complete", f"✅ Successfully uploaded all {success_count} products to Shopify!")
+                else:
+                    messagebox.showwarning(
+                        "Upload Complete with Errors", 
+                        f"Upload completed:\n✅ Successful: {success_count}\n❌ Failed: {error_count}\n📊 Total: {total}"
+                    )
+            
+            self.after(0, show_completion)
+            
+        except Exception as e:
+            self.after(0, lambda: messagebox.showerror("Error", f"❌ Upload failed: {e}"))
+        finally:
+            # Re-enable buttons
+            self.after(0, lambda: self.upload_scraped_button.config(state='normal'))
+            self.after(0, lambda: self.upload_file_button.config(state='normal'))
+            self.after(0, lambda: self.progress_var.set("Upload completed"))
+    
+    def _display_upload_results(self, successful, failed):
+        """Display upload results in the text widget"""
+        try:
+            self.results_text.config(state='normal')
+            self.results_text.delete(1.0, tk.END)
+            
+            # Header
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            self.results_text.insert(tk.END, f"=== REAL Upload Results - {timestamp} ===\n\n")
+            
+            # Summary
+            self.results_text.insert(tk.END, f"Total Products: {len(successful) + len(failed)}\n")
+            self.results_text.insert(tk.END, f"✅ Successful: {len(successful)}\n")
+            self.results_text.insert(tk.END, f"❌ Failed: {len(failed)}\n\n")
+            
+            # Successful uploads
+            if successful:
+                self.results_text.insert(tk.END, "=== SUCCESSFUL UPLOADS ===\n")
+                for item in successful:
+                    product = item['product']
+                    shopify_id = item['shopify_id']
+                    
+                    self.results_text.insert(tk.END, f"✅ {product.get('name', 'Unknown')} ")
+                    self.results_text.insert(tk.END, f"(Shopify ID: {shopify_id})\n")
+                
+                self.results_text.insert(tk.END, "\n")
+            
+            # Failed uploads
+            if failed:
+                self.results_text.insert(tk.END, "=== FAILED UPLOADS ===\n")
+                for item in failed:
+                    product = item['product']
+                    error = item.get('error', 'Unknown error')
+                    
+                    self.results_text.insert(tk.END, f"❌ {product.get('name', 'Unknown')} ")
+                    self.results_text.insert(tk.END, f"- Error: {error}\n")
+            
+            self.results_text.config(state='disabled')
+            self.results_text.see(tk.END)
+            
+        except Exception as e:
+            print(f"Error displaying results: {e}")
     
     def upload_from_file(self):
         """Upload products from JSON file"""
@@ -278,7 +508,7 @@ class ShopifyConfig(ttk.LabelFrame):
             # Confirm upload
             result = messagebox.askyesno(
                 "Confirm Upload", 
-                f"Upload {len(products)} products from file to Shopify?"
+                f"Upload {len(products)} products from file to Shopify?\n\nThis will make REAL API calls!"
             )
             
             if not result:
@@ -294,97 +524,6 @@ class ShopifyConfig(ttk.LabelFrame):
             
         except Exception as e:
             messagebox.showerror("Error", f"❌ File upload failed: {e}")
-    
-    def _upload_worker(self, products):
-        """Worker thread for uploading products - FIXED"""
-        try:
-            # FIXED: Use a proper progress callback that works with threading
-            def progress_callback(message):
-                try:
-                    # Schedule GUI update on main thread
-                    self.after(0, lambda: self.progress_var.set(message))
-                except:
-                    pass  # Ignore GUI update errors during threading
-            
-            # Set initial progress
-            self.after(0, lambda: self.progress_bar.config(maximum=len(products), value=0))
-            
-            # Upload products
-            results = self.shopify_client.bulk_upload_products(products, progress_callback)
-            
-            # Update progress bar on main thread
-            self.after(0, lambda: self.progress_bar.config(value=len(products)))
-            
-            # Show results on main thread
-            self.after(0, lambda: self._display_upload_results(results))
-            
-            # Show completion message on main thread
-            success_count = results['success_count']
-            error_count = results['error_count']
-            total = results['total']
-            
-            def show_completion_message():
-                if error_count == 0:
-                    messagebox.showinfo("Upload Complete", f"✅ Successfully uploaded all {success_count} products!")
-                else:
-                    messagebox.showwarning(
-                        "Upload Complete with Errors", 
-                        f"Upload completed:\\n✅ Successful: {success_count}\\n❌ Failed: {error_count}\\n📊 Total: {total}"
-                    )
-            
-            self.after(0, show_completion_message)
-            
-        except Exception as e:
-            self.after(0, lambda: messagebox.showerror("Error", f"❌ Upload failed: {e}"))
-        finally:
-            # Re-enable buttons on main thread
-            self.after(0, lambda: self.upload_scraped_button.config(state='normal'))
-            self.after(0, lambda: self.upload_file_button.config(state='normal'))
-            self.after(0, lambda: self.progress_var.set("Upload completed"))
-    
-    def _display_upload_results(self, results):
-        """Display upload results in the text widget"""
-        try:
-            self.results_text.config(state='normal')
-            self.results_text.delete(1.0, tk.END)
-            
-            # Header
-            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            self.results_text.insert(tk.END, f"=== Upload Results - {timestamp} ===\\n\\n")
-            
-            # Summary
-            self.results_text.insert(tk.END, f"Total Products: {results['total']}\\n")
-            self.results_text.insert(tk.END, f"✅ Successful: {results['success_count']}\\n")
-            self.results_text.insert(tk.END, f"❌ Failed: {results['error_count']}\\n\\n")
-            
-            # Successful uploads
-            if results['successful']:
-                self.results_text.insert(tk.END, "=== SUCCESSFUL UPLOADS ===\\n")
-                for item in results['successful']:
-                    product = item['product']
-                    action = item.get('action', 'created')
-                    shopify_id = item.get('shopify_id', 'Unknown')
-                    
-                    self.results_text.insert(tk.END, f"✅ {product.get('name', 'Unknown')} ")
-                    self.results_text.insert(tk.END, f"({action}) - ID: {shopify_id}\\n")
-                
-                self.results_text.insert(tk.END, "\\n")
-            
-            # Failed uploads
-            if results['failed']:
-                self.results_text.insert(tk.END, "=== FAILED UPLOADS ===\\n")
-                for item in results['failed']:
-                    product = item['product']
-                    error = item.get('error', 'Unknown error')
-                    
-                    self.results_text.insert(tk.END, f"❌ {product.get('name', 'Unknown')} ")
-                    self.results_text.insert(tk.END, f"- Error: {error}\\n")
-            
-            self.results_text.config(state='disabled')
-            self.results_text.see(tk.END)
-            
-        except Exception as e:
-            print(f"Error displaying results: {e}")
     
     def export_products(self):
         """Export scraped products to JSON file"""
@@ -409,7 +548,7 @@ class ShopifyConfig(ttk.LabelFrame):
             with open(file_path, 'w', encoding='utf-8') as f:
                 json.dump(products, f, indent=2, ensure_ascii=False)
             
-            messagebox.showinfo("Export Complete", f"✅ Exported {len(products)} products to:\\n{file_path}")
+            messagebox.showinfo("Export Complete", f"✅ Exported {len(products)} products to:\n{file_path}")
             
         except Exception as e:
             messagebox.showerror("Error", f"❌ Export failed: {e}")
@@ -430,35 +569,3 @@ class ShopifyConfig(ttk.LabelFrame):
             'shop_url': self.shop_url_var.get(),
             'access_token': self.access_token_var.get()
         }
-'''
-    
-    # Write the fixed widget
-    with open('gui/widgets/shopify_config.py', 'w') as f:
-        f.write(fixed_shopify_widget_content)
-    
-    print("✅ Fixed Shopify widget - GUI threading issue resolved")
-
-def main():
-    """Fix the Shopify upload error"""
-    print("🔧 Fixing Shopify Upload Error")
-    print("=" * 30)
-    
-    fix_shopify_widget()
-    
-    print("\n✅ Fixed the 'root' attribute error!")
-    print("\n🛠️ What was fixed:")
-    print("   - Replaced direct 'self.root' access with 'self.after()' scheduling")
-    print("   - Fixed progress callback for threading")
-    print("   - Added proper GUI thread safety")
-    print("   - Fixed all GUI update calls")
-    
-    print("\n🚀 Now try again:")
-    print("   1. Run: python main.py")
-    print("   2. Go to Shopify Integration tab")
-    print("   3. Test connection (should still work)")
-    print("   4. Upload scraped products (should work now!)")
-    
-    print("\n🎯 Your 36 products should upload successfully!")
-
-if __name__ == "__main__":
-    main()

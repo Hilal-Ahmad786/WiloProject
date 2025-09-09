@@ -1,0 +1,121 @@
+2025-09-09 07:19:23,266 - wilo_scraper - INFO - Logging initialized - logs/wilo_scraper_20250909_071923.log
+2025-09-09 07:19:23,266 - wilo_scraper.__main__ - INFO - Starting Wilo Scraper Application
+2025-09-09 07:19:34,462 - wilo_scraper.scraper.wilo_scraper - INFO - Starting enhanced scraping for country: germany
+2025-09-09 07:19:34,468 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser (simple mode)...
+2025-09-09 07:19:34,468 - wilo_scraper.scraper.browser_manager - INFO - Trying simple Chrome setup...
+2025-09-09 07:19:36,745 - wilo_scraper.scraper.browser_manager - INFO - ✅ Chrome opened successfully!
+2025-09-09 07:19:36,790 - wilo_scraper.scraper.wilo_scraper - INFO - Navigating to Wilo website...
+2025-09-09 07:19:52,135 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step1_initial_page.png
+2025-09-09 07:19:52,185 - wilo_scraper.scraper.wilo_scraper - INFO - Looking for country span: Germany
+2025-09-09 07:19:52,298 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step2_before_country.png
+2025-09-09 07:19:53,395 - wilo_scraper.scraper.wilo_scraper - INFO - Successfully clicked country span: Germany
+2025-09-09 07:19:55,552 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step3_after_country.png
+2025-09-09 07:19:55,590 - wilo_scraper.scraper.wilo_scraper - INFO - Looking for Hydraulische Pumpenauswahl tile...
+2025-09-09 07:19:55,590 - wilo_scraper.scraper.wilo_scraper - INFO - Waiting for page to fully load after country selection...
+2025-09-09 07:19:55,590 - wilo_scraper.scraper.wilo_scraper - INFO - Waiting 5 seconds for tiles to appear...
+2025-09-09 07:20:03,422 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step4_wait_5s.png
+2025-09-09 07:20:03,552 - wilo_scraper.scraper.wilo_scraper - INFO - Found tile with keyword 'auswahl': Hydraulische Pumpenauswahl
+2025-09-09 07:20:05,565 - wilo_scraper.scraper.wilo_scraper - INFO - Successfully clicked pump selection tile
+2025-09-09 07:20:11,210 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step5_after_tile_click.png
+2025-09-09 07:20:14,218 - wilo_scraper.scraper.wilo_scraper - INFO - After tile click, current URL: https://select.wilo.com/ApplRange.aspx
+2025-09-09 07:20:14,219 - wilo_scraper.scraper.wilo_scraper - INFO - Extracting products from category: 01. Heizung
+2025-09-09 07:20:14,347 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step6_category_0_start.png
+2025-09-09 07:20:14,374 - wilo_scraper.scraper.wilo_scraper - INFO - Category dropdown not found or 01. Heizung already selected
+2025-09-09 07:20:14,393 - wilo_scraper.scraper.wilo_scraper - INFO - Unchecked 'Bilder ausblenden' - Images should now be visible
+2025-09-09 07:20:16,550 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step7_images_enabled.png
+2025-09-09 07:20:16,550 - wilo_scraper.scraper.wilo_scraper - INFO - Found 3 subcategories for 01. Heizung
+2025-09-09 07:20:16,550 - wilo_scraper.scraper.wilo_scraper - INFO - Processing subcategory 1/2: Umwälzpumpen
+2025-09-09 07:20:16,573 - wilo_scraper.scraper.wilo_scraper - WARNING - Could not click subcategory: Umwälzpumpen, continuing anyway
+2025-09-09 07:20:19,587 - wilo_scraper.scraper.wilo_scraper - INFO - Found 49 grid rows with selector: //tr[contains(@class, 'jqgrow')]
+2025-09-09 07:20:19,609 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos BST
+2025-09-09 07:20:19,631 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-B
+2025-09-09 07:20:19,653 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-D
+2025-09-09 07:20:19,669 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-I
+2025-09-09 07:20:19,687 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-N
+2025-09-09 07:20:19,709 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-N Bareshaft
+2025-09-09 07:20:19,723 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-NHT
+2025-09-09 07:20:19,740 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos PICO plus
+2025-09-09 07:20:19,754 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos TERA-SCH
+2025-09-09 07:20:19,777 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: CronoBloc-BL-E
+2025-09-09 07:20:19,792 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: CronoLine-IL-E
+2025-09-09 07:20:19,807 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: CronoNorm-NLG
+2025-09-09 07:20:19,822 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: CronoTwin-DL-E
+2025-09-09 07:20:19,840 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Helix FIRST V
+2025-09-09 07:20:19,861 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Helix V
+2025-09-09 07:20:19,885 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Medana CV1-L
+2025-09-09 07:20:19,912 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Multivert MVI
+2025-09-09 07:20:19,931 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: SCP
+2025-09-09 07:20:19,947 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: SiFlux
+2025-09-09 07:20:19,961 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA
+2025-09-09 07:20:19,976 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA B
+2025-09-09 07:20:19,992 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA-D
+2025-09-09 07:20:20,010 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA2.0-B
+2025-09-09 07:20:20,026 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA2.0-D
+2025-09-09 07:20:20,105 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted 24 products from Umwälzpumpen
+2025-09-09 07:20:20,258 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step7_cat0_sub0_products.png
+2025-09-09 07:20:20,258 - wilo_scraper.scraper.wilo_scraper - INFO - Processing subcategory 2/2: Inline-Pumpen
+2025-09-09 07:20:20,294 - wilo_scraper.scraper.wilo_scraper - INFO - Clicked subcategory: Inline-Pumpen
+2025-09-09 07:20:26,310 - wilo_scraper.scraper.wilo_scraper - INFO - Found 13 grid rows with selector: //tr[contains(@class, 'jqgrow')]
+2025-09-09 07:20:26,328 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-D
+2025-09-09 07:20:26,347 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-I
+2025-09-09 07:20:26,366 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: CronoLine-IL-E
+2025-09-09 07:20:26,383 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: CronoTwin-DL-E
+2025-09-09 07:20:26,398 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA
+2025-09-09 07:20:26,413 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA-D
+2025-09-09 07:20:26,426 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA2.0-D
+2025-09-09 07:20:26,446 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA2.0-I
+2025-09-09 07:20:26,460 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: VeroLine-IPL
+2025-09-09 07:20:26,475 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: VeroTwin-DPL
+2025-09-09 07:20:26,489 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos GIGA2.0-D
+2025-09-09 07:20:26,505 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos GIGA2.0-I
+2025-09-09 07:20:26,505 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted 12 products from Inline-Pumpen
+2025-09-09 07:20:26,651 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step7_cat0_sub1_products.png
+2025-09-09 07:20:26,651 - wilo_scraper.scraper.wilo_scraper - INFO - Total extracted 36 products from 01. Heizung
+2025-09-09 07:20:26,676 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted 36 products from 01. Heizung
+2025-09-09 07:20:28,691 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced scraping completed. Found 36 products total
+2025-09-09 07:20:28,691 - wilo_scraper.scraper.browser_manager - INFO - Closing browser...
+2025-09-09 07:20:28,787 - wilo_scraper.scraper.browser_manager - INFO - ✅ Browser closed
+2025-09-09 07:21:28,525 - wilo_scraper.shopify.shopify_client - INFO - ✅ Connected to Shopify store: tbbt.de
+2025-09-09 07:21:28,526 - wilo_scraper.shopify.shopify_client - INFO - Store URL: tbbt.de
+2025-09-09 07:21:28,526 - wilo_scraper.shopify.shopify_client - INFO - Store ID: 98019606868
+2025-09-09 07:21:46,745 - wilo_scraper.shopify.shopify_client - INFO - Starting bulk upload of 36 products...
+2025-09-09 07:21:46,750 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Atmos BST: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:46,751 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Atmos GIGA-B: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:46,802 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Atmos GIGA-D: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:46,803 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Atmos GIGA-I: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:46,828 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Atmos GIGA-N: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:46,867 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Atmos GIGA-N Bareshaft: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:46,868 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Atmos GIGA-NHT: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:46,887 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Atmos PICO plus: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:46,887 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Atmos TERA-SCH: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:46,887 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product CronoBloc-BL-E: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:46,903 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product CronoLine-IL-E: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:46,933 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product CronoNorm-NLG: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:46,933 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product CronoTwin-DL-E: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:46,950 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Helix FIRST V: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:46,950 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Helix V: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:46,950 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Medana CV1-L: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:46,966 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Multivert MVI: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:46,966 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product SCP: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:46,978 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product SiFlux: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:47,005 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Stratos GIGA: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:47,005 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Stratos GIGA B: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:47,021 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Stratos GIGA-D: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:47,021 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Stratos GIGA2.0-B: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:47,021 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Stratos GIGA2.0-D: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:47,043 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Atmos GIGA-D: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:47,072 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Atmos GIGA-I: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:47,072 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product CronoLine-IL-E: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:47,089 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product CronoTwin-DL-E: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:47,089 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Stratos GIGA: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:47,106 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Stratos GIGA-D: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:47,106 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Stratos GIGA2.0-D: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:47,119 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Stratos GIGA2.0-I: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:47,147 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product VeroLine-IPL: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:47,147 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product VeroTwin-DPL: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:47,164 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Yonos GIGA2.0-D: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:47,164 - wilo_scraper.shopify.shopify_client - ERROR - ❌ Error processing product Yonos GIGA2.0-I: 'ShopifyConfig' object has no attribute 'root'
+2025-09-09 07:21:47,164 - wilo_scraper.shopify.shopify_client - INFO - ✅ Bulk upload completed!
+2025-09-09 07:21:47,164 - wilo_scraper.shopify.shopify_client - INFO -    Successful: 0
+2025-09-09 07:21:47,164 - wilo_scraper.shopify.shopify_client - INFO -    Failed: 36
+2025-09-09 07:21:47,164 - wilo_scraper.shopify.shopify_client - INFO -    Total: 36

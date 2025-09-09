@@ -1,0 +1,210 @@
+2025-09-09 07:10:12,111 - wilo_scraper - INFO - Logging initialized - logs/wilo_scraper_20250909_071012.log
+2025-09-09 07:10:12,111 - wilo_scraper.__main__ - INFO - Starting Wilo Scraper Application
+2025-09-09 07:10:14,645 - wilo_scraper.scraper.wilo_scraper - INFO - Starting enhanced scraping for country: germany
+2025-09-09 07:10:14,646 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser (simple mode)...
+2025-09-09 07:10:14,646 - wilo_scraper.scraper.browser_manager - INFO - Trying simple Chrome setup...
+2025-09-09 07:10:17,341 - wilo_scraper.scraper.browser_manager - INFO - ✅ Chrome opened successfully!
+2025-09-09 07:10:17,342 - wilo_scraper.scraper.wilo_scraper - INFO - Navigating to Wilo website...
+2025-09-09 07:10:31,859 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step1_initial_page.png
+2025-09-09 07:10:31,870 - wilo_scraper.scraper.wilo_scraper - INFO - Looking for country span: Germany
+2025-09-09 07:10:31,970 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step2_before_country.png
+2025-09-09 07:10:33,010 - wilo_scraper.scraper.wilo_scraper - INFO - Successfully clicked country span: Germany
+2025-09-09 07:10:35,184 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step3_after_country.png
+2025-09-09 07:10:35,185 - wilo_scraper.scraper.wilo_scraper - INFO - Looking for Hydraulische Pumpenauswahl tile...
+2025-09-09 07:10:35,185 - wilo_scraper.scraper.wilo_scraper - INFO - Waiting for page to fully load after country selection...
+2025-09-09 07:10:35,185 - wilo_scraper.scraper.wilo_scraper - INFO - Waiting 5 seconds for tiles to appear...
+2025-09-09 07:10:40,294 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step4_wait_5s.png
+2025-09-09 07:10:40,343 - wilo_scraper.scraper.wilo_scraper - INFO - Found tile with keyword 'Hydraulische': Hydraulische Pumpenauswahl
+2025-09-09 07:10:42,355 - wilo_scraper.scraper.wilo_scraper - INFO - Successfully clicked pump selection tile
+2025-09-09 07:10:44,889 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step5_after_tile_click.png
+2025-09-09 07:10:47,906 - wilo_scraper.scraper.wilo_scraper - INFO - After tile click, current URL: https://select.wilo.com/ApplRange.aspx
+2025-09-09 07:10:47,924 - wilo_scraper.scraper.wilo_scraper - INFO - Extracting products from category: 01. Heizung
+2025-09-09 07:10:48,075 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step6_category_0_start.png
+2025-09-09 07:10:48,101 - wilo_scraper.scraper.wilo_scraper - INFO - Category dropdown not found or 01. Heizung already selected
+2025-09-09 07:10:48,121 - wilo_scraper.scraper.wilo_scraper - INFO - Unchecked 'Bilder ausblenden' - Images should now be visible
+2025-09-09 07:10:50,270 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step7_images_enabled.png
+2025-09-09 07:10:50,270 - wilo_scraper.scraper.wilo_scraper - INFO - Found 3 subcategories for 01. Heizung
+2025-09-09 07:10:50,270 - wilo_scraper.scraper.wilo_scraper - INFO - Processing subcategory 1/2: Umwälzpumpen
+2025-09-09 07:10:50,296 - wilo_scraper.scraper.wilo_scraper - INFO - Clicked subcategory: Umwälzpumpen
+2025-09-09 07:10:56,317 - wilo_scraper.scraper.wilo_scraper - INFO - Found 9 grid rows with selector: //tr[contains(@class, 'jqgrow')]
+2025-09-09 07:10:56,349 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos PICO plus
+2025-09-09 07:10:56,367 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos MAXO
+2025-09-09 07:10:56,386 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos MAXO-D
+2025-09-09 07:10:56,403 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos MAXO-Z
+2025-09-09 07:10:56,420 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos PICO plus
+2025-09-09 07:10:56,434 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Varios PICO-STG
+2025-09-09 07:10:56,449 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos MAXO plus
+2025-09-09 07:10:56,465 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos PICO HU
+2025-09-09 07:10:56,481 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos PICO plus
+2025-09-09 07:10:56,481 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted 9 products from Umwälzpumpen
+2025-09-09 07:10:56,629 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step7_cat0_sub0_products.png
+2025-09-09 07:10:56,629 - wilo_scraper.scraper.wilo_scraper - INFO - Processing subcategory 2/2: Inline-Pumpen
+2025-09-09 07:10:56,648 - wilo_scraper.scraper.wilo_scraper - INFO - Clicked subcategory: Inline-Pumpen
+2025-09-09 07:11:02,665 - wilo_scraper.scraper.wilo_scraper - INFO - Found 13 grid rows with selector: //tr[contains(@class, 'jqgrow')]
+2025-09-09 07:11:02,693 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-D
+2025-09-09 07:11:02,733 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-I
+2025-09-09 07:11:02,784 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: CronoLine-IL-E
+2025-09-09 07:11:02,800 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: CronoTwin-DL-E
+2025-09-09 07:11:02,820 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA
+2025-09-09 07:11:02,836 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA-D
+2025-09-09 07:11:02,851 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA2.0-D
+2025-09-09 07:11:02,865 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA2.0-I
+2025-09-09 07:11:02,879 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: VeroLine-IPL
+2025-09-09 07:11:02,893 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: VeroTwin-DPL
+2025-09-09 07:11:02,915 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos GIGA2.0-D
+2025-09-09 07:11:02,933 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos GIGA2.0-I
+2025-09-09 07:11:02,933 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted 12 products from Inline-Pumpen
+2025-09-09 07:11:03,089 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step7_cat0_sub1_products.png
+2025-09-09 07:11:03,089 - wilo_scraper.scraper.wilo_scraper - INFO - Total extracted 21 products from 01. Heizung
+2025-09-09 07:11:03,092 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted 21 products from 01. Heizung
+2025-09-09 07:11:05,098 - wilo_scraper.scraper.wilo_scraper - INFO - Extracting products from category: 02. Trinkwarmwasser
+2025-09-09 07:11:05,255 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step6_category_1_start.png
+2025-09-09 07:11:06,366 - wilo_scraper.scraper.wilo_scraper - INFO - Selected category: 02. Trinkwarmwasser
+2025-09-09 07:11:08,387 - wilo_scraper.scraper.wilo_scraper - INFO - 'Bilder ausblenden' already unchecked
+2025-09-09 07:11:08,390 - wilo_scraper.scraper.wilo_scraper - INFO - Found 2 subcategories for 02. Trinkwarmwasser
+2025-09-09 07:11:08,390 - wilo_scraper.scraper.wilo_scraper - INFO - Processing subcategory 1/2: Trinkwasser-Pumpen
+2025-09-09 07:11:08,410 - wilo_scraper.scraper.wilo_scraper - WARNING - Could not click subcategory: Trinkwasser-Pumpen, continuing anyway
+2025-09-09 07:11:11,423 - wilo_scraper.scraper.wilo_scraper - INFO - Found 8 grid rows with selector: //tr[contains(@class, 'jqgrow')]
+2025-09-09 07:11:11,448 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Star-Z
+2025-09-09 07:11:11,472 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Star-Z NOVA
+2025-09-09 07:11:11,490 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos MAXO-Z
+2025-09-09 07:11:11,506 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos PICO-Z
+2025-09-09 07:11:11,520 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: TOP-Z
+2025-09-09 07:11:11,534 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: VeroLine-IP-Z
+2025-09-09 07:11:11,549 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos MAXO-Z plus
+2025-09-09 07:11:11,565 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos PICO-Z
+2025-09-09 07:11:11,565 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted 8 products from Trinkwasser-Pumpen
+2025-09-09 07:11:11,703 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step7_cat1_sub0_products.png
+2025-09-09 07:11:11,703 - wilo_scraper.scraper.wilo_scraper - INFO - Processing subcategory 2/2: Brauchwasser-Pumpen
+2025-09-09 07:11:11,727 - wilo_scraper.scraper.wilo_scraper - WARNING - Could not click subcategory: Brauchwasser-Pumpen, continuing anyway
+2025-09-09 07:11:14,734 - wilo_scraper.scraper.wilo_scraper - INFO - Found 8 grid rows with selector: //tr[contains(@class, 'jqgrow')]
+2025-09-09 07:11:14,750 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Star-Z
+2025-09-09 07:11:14,765 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Star-Z NOVA
+2025-09-09 07:11:14,780 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos MAXO-Z
+2025-09-09 07:11:14,795 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos PICO-Z
+2025-09-09 07:11:14,809 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: TOP-Z
+2025-09-09 07:11:14,823 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: VeroLine-IP-Z
+2025-09-09 07:11:14,837 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos MAXO-Z plus
+2025-09-09 07:11:14,851 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos PICO-Z
+2025-09-09 07:11:14,851 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted 8 products from Brauchwasser-Pumpen
+2025-09-09 07:11:15,020 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step7_cat1_sub1_products.png
+2025-09-09 07:11:15,020 - wilo_scraper.scraper.wilo_scraper - INFO - Total extracted 16 products from 02. Trinkwarmwasser
+2025-09-09 07:11:15,023 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted 16 products from 02. Trinkwarmwasser
+2025-09-09 07:11:17,040 - wilo_scraper.scraper.wilo_scraper - INFO - Extracting products from category: 03. Kältetechnik
+2025-09-09 07:11:17,189 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step6_category_2_start.png
+2025-09-09 07:11:18,293 - wilo_scraper.scraper.wilo_scraper - INFO - Selected category: 03. Kältetechnik
+2025-09-09 07:11:20,307 - wilo_scraper.scraper.wilo_scraper - INFO - 'Bilder ausblenden' already unchecked
+2025-09-09 07:11:20,308 - wilo_scraper.scraper.wilo_scraper - INFO - Found 2 subcategories for 03. Kältetechnik
+2025-09-09 07:11:20,308 - wilo_scraper.scraper.wilo_scraper - INFO - Processing subcategory 1/2: Kälte-Umwälzpumpen
+2025-09-09 07:11:20,329 - wilo_scraper.scraper.wilo_scraper - WARNING - Could not click subcategory: Kälte-Umwälzpumpen, continuing anyway
+2025-09-09 07:11:23,342 - wilo_scraper.scraper.wilo_scraper - INFO - Found 58 grid rows with selector: //tr[contains(@class, 'jqgrow')]
+2025-09-09 07:11:23,365 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos BST
+2025-09-09 07:11:23,384 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-B
+2025-09-09 07:11:23,402 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-D
+2025-09-09 07:11:23,419 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-I
+2025-09-09 07:11:23,442 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-N
+2025-09-09 07:11:23,462 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-N Bareshaft
+2025-09-09 07:11:23,476 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos PICO plus
+2025-09-09 07:11:23,488 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos TERA-SCH
+2025-09-09 07:11:23,502 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: BAC
+2025-09-09 07:11:23,527 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: CronoBloc-BL-E
+2025-09-09 07:11:23,542 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: CronoLine-IL-E
+2025-09-09 07:11:23,556 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: CronoNorm-NLG
+2025-09-09 07:11:23,571 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: CronoTwin-DL-E
+2025-09-09 07:11:23,589 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Helix FIRST V
+2025-09-09 07:11:23,607 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Helix V
+2025-09-09 07:11:23,625 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Helix VE
+2025-09-09 07:11:23,640 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Helix2.0-VE
+2025-09-09 07:11:23,654 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Medana CH1-L
+2025-09-09 07:11:23,669 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Medana CH1-LC
+2025-09-09 07:11:23,682 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Medana CH1-LSP
+2025-09-09 07:11:23,697 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Medana CV1-L
+2025-09-09 07:11:23,716 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Multivert MVI
+2025-09-09 07:11:23,734 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Multivert MVIE
+2025-09-09 07:11:23,749 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Multivert MVIS
+2025-09-09 07:11:23,764 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Multivert MVISE
+2025-09-09 07:11:23,777 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: SCP
+2025-09-09 07:11:23,790 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: SiFlux
+2025-09-09 07:11:23,804 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA
+2025-09-09 07:11:23,822 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA B
+2025-09-09 07:11:23,836 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA-D
+2025-09-09 07:11:23,851 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA2.0-B
+2025-09-09 07:11:23,866 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA2.0-D
+2025-09-09 07:11:23,879 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA2.0-I
+2025-09-09 07:11:23,891 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos MAXO
+2025-09-09 07:11:23,907 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos MAXO-D
+2025-09-09 07:11:23,921 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos MAXO-Z
+2025-09-09 07:11:23,934 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos PICO plus
+2025-09-09 07:11:23,946 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Sub TWI (konfigurierbar)
+2025-09-09 07:11:23,963 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Sub TWU 4-...-GT
+2025-09-09 07:11:23,982 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Varios PICO-STG
+2025-09-09 07:11:23,997 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: VeroLine-IPL
+2025-09-09 07:11:24,011 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: VeroTwin-DPL
+2025-09-09 07:11:24,031 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos GIGA-N
+2025-09-09 07:11:24,045 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos GIGA2.0-D
+2025-09-09 07:11:24,060 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos GIGA2.0-I
+2025-09-09 07:11:24,076 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos MAXO plus
+2025-09-09 07:11:24,095 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos PICO plus
+2025-09-09 07:11:24,109 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Zeox FIRST H
+2025-09-09 07:11:24,124 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Zeox FIRST V
+2025-09-09 07:11:24,125 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted 49 products from Kälte-Umwälzpumpen
+2025-09-09 07:11:24,313 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step7_cat2_sub0_products.png
+2025-09-09 07:11:24,314 - wilo_scraper.scraper.wilo_scraper - INFO - Processing subcategory 2/2: Kühlwasser-Pumpen
+2025-09-09 07:11:24,331 - wilo_scraper.scraper.wilo_scraper - WARNING - Could not click subcategory: Kühlwasser-Pumpen, continuing anyway
+2025-09-09 07:11:27,344 - wilo_scraper.scraper.wilo_scraper - INFO - Found 58 grid rows with selector: //tr[contains(@class, 'jqgrow')]
+2025-09-09 07:11:27,363 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos BST
+2025-09-09 07:11:27,381 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-B
+2025-09-09 07:11:27,400 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-D
+2025-09-09 07:11:27,416 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-I
+2025-09-09 07:11:27,434 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-N
+2025-09-09 07:11:27,452 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-N Bareshaft
+2025-09-09 07:11:27,468 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos PICO plus
+2025-09-09 07:11:27,482 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos TERA-SCH
+2025-09-09 07:11:27,495 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: BAC
+2025-09-09 07:11:27,521 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: CronoBloc-BL-E
+2025-09-09 07:11:27,539 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: CronoLine-IL-E
+2025-09-09 07:11:27,553 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: CronoNorm-NLG
+2025-09-09 07:11:27,570 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: CronoTwin-DL-E
+2025-09-09 07:11:27,585 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Helix FIRST V
+2025-09-09 07:11:27,604 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Helix V
+2025-09-09 07:11:27,624 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Helix VE
+2025-09-09 07:11:27,645 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Helix2.0-VE
+2025-09-09 07:11:27,659 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Medana CH1-L
+2025-09-09 07:11:27,672 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Medana CH1-LC
+2025-09-09 07:11:27,686 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Medana CH1-LSP
+2025-09-09 07:11:27,699 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Medana CV1-L
+2025-09-09 07:11:27,718 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Multivert MVI
+2025-09-09 07:11:27,736 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Multivert MVIE
+2025-09-09 07:11:27,753 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Multivert MVIS
+2025-09-09 07:11:27,767 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Multivert MVISE
+2025-09-09 07:11:27,783 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: SCP
+2025-09-09 07:11:27,798 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: SiFlux
+2025-09-09 07:11:27,817 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA
+2025-09-09 07:11:27,834 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA B
+2025-09-09 07:11:27,848 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA-D
+2025-09-09 07:11:27,861 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA2.0-B
+2025-09-09 07:11:27,875 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA2.0-D
+2025-09-09 07:11:27,889 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA2.0-I
+2025-09-09 07:11:27,905 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos MAXO
+2025-09-09 07:11:27,921 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos MAXO-D
+2025-09-09 07:11:27,937 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos MAXO-Z
+2025-09-09 07:11:27,951 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos PICO plus
+2025-09-09 07:11:27,962 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Sub TWI (konfigurierbar)
+2025-09-09 07:11:27,975 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Sub TWU 4-...-GT
+2025-09-09 07:11:27,989 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Varios PICO-STG
+2025-09-09 07:11:28,003 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: VeroLine-IPL
+2025-09-09 07:11:28,018 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: VeroTwin-DPL
+2025-09-09 07:11:28,032 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos GIGA-N
+2025-09-09 07:11:28,046 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos GIGA2.0-D
+2025-09-09 07:11:28,058 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos GIGA2.0-I
+2025-09-09 07:11:28,071 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos MAXO plus
+2025-09-09 07:11:28,086 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos PICO plus
+2025-09-09 07:11:28,103 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Zeox FIRST H
+2025-09-09 07:11:28,117 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Zeox FIRST V
+2025-09-09 07:11:28,117 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted 49 products from Kühlwasser-Pumpen
+2025-09-09 07:11:28,250 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step7_cat2_sub1_products.png
+2025-09-09 07:11:28,250 - wilo_scraper.scraper.wilo_scraper - INFO - Total extracted 98 products from 03. Kältetechnik
+2025-09-09 07:11:28,260 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted 98 products from 03. Kältetechnik
+2025-09-09 07:11:30,272 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced scraping completed. Found 135 products total
+2025-09-09 07:11:30,272 - wilo_scraper.scraper.browser_manager - INFO - Closing browser...
+2025-09-09 07:11:31,389 - wilo_scraper.scraper.browser_manager - INFO - ✅ Browser closed

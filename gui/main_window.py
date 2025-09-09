@@ -1,5 +1,5 @@
 """
-Main GUI window for Wilo scraper application
+Enhanced Main Window with Shopify Integration
 """
 
 import tkinter as tk
@@ -16,7 +16,7 @@ from scraper.wilo_scraper import WiloScraper
 from utils.logger import get_logger, LogCapture, GUILogHandler
 
 class MainWindow:
-    """Main application window"""
+    """Enhanced main application window with Shopify integration"""
     
     def __init__(self, root, settings):
         self.root = root
@@ -26,7 +26,7 @@ class MainWindow:
         # Initialize variables
         self.scraper = None
         self.is_scraping = False
-        self.scraped_products = []
+        self.scraped_products = []  # Store all scraped products
         
         # Setup logging for GUI
         self.log_capture = LogCapture()
@@ -39,14 +39,14 @@ class MainWindow:
         # Create GUI components
         self._create_widgets()
         
-        # Connect signals - AFTER all widgets are created
+        # Connect signals
         self._connect_signals()
     
     def _setup_window(self):
         """Setup main window properties"""
-        self.root.title("Wilo Product Scraper Dashboard")
-        self.root.geometry("1200x800")
-        self.root.minsize(800, 600)
+        self.root.title("Wilo Product Scraper & Shopify Uploader")
+        self.root.geometry("1400x900")
+        self.root.minsize(1000, 700)
         
         # Center window
         self.root.update_idletasks()
@@ -63,19 +63,19 @@ class MainWindow:
         
         # Create tab frames
         self.main_frame = ttk.Frame(self.notebook)
-        self.config_frame = ttk.Frame(self.notebook)
+        self.shopify_frame = ttk.Frame(self.notebook)
         self.results_frame = ttk.Frame(self.notebook)
         
         # Add tabs
-        self.notebook.add(self.main_frame, text="Main Scraper")
-        self.notebook.add(self.config_frame, text="Configuration")
-        self.notebook.add(self.results_frame, text="Results")
+        self.notebook.add(self.main_frame, text="🚀 Main Scraper")
+        self.notebook.add(self.shopify_frame, text="🛒 Shopify Integration")
+        self.notebook.add(self.results_frame, text="📊 Results & Export")
         
         # Create main tab content
         self._create_main_tab()
         
-        # Create config tab content
-        self._create_config_tab()
+        # Create Shopify tab content
+        self._create_shopify_tab()
         
         # Create results tab content
         self._create_results_tab()
@@ -108,14 +108,13 @@ class MainWindow:
         self.browser_settings.pack(fill=tk.X, pady=5)
         
         # Control buttons
-        control_frame = ttk.LabelFrame(left_panel, text="Controls", padding=10)
+        control_frame = ttk.LabelFrame(left_panel, text="Scraping Controls", padding=10)
         control_frame.pack(fill=tk.X, pady=5)
         
         self.start_button = ttk.Button(
             control_frame,
             text="🚀 Start Scraping",
-            command=self.start_scraping,
-            style="Accent.TButton"
+            command=self.start_scraping
         )
         self.start_button.pack(fill=tk.X, pady=2)
         
@@ -134,6 +133,25 @@ class MainWindow:
         )
         self.test_button.pack(fill=tk.X, pady=2)
         
+        # Quick Shopify upload
+        shopify_quick_frame = ttk.LabelFrame(left_panel, text="Quick Shopify Upload", padding=10)
+        shopify_quick_frame.pack(fill=tk.X, pady=5)
+        
+        self.quick_upload_button = ttk.Button(
+            shopify_quick_frame,
+            text="🛒 Upload to Shopify",
+            command=self.quick_shopify_upload,
+            state=tk.DISABLED
+        )
+        self.quick_upload_button.pack(fill=tk.X, pady=2)
+        
+        # Product count display
+        count_frame = ttk.LabelFrame(left_panel, text="Product Count", padding=10)
+        count_frame.pack(fill=tk.X, pady=5)
+        
+        self.product_count_var = tk.StringVar(value="0 products scraped")
+        ttk.Label(count_frame, textvariable=self.product_count_var, font=('Arial', 12, 'bold')).pack()
+        
         # Right panel for progress
         right_panel = ttk.Frame(self.main_frame)
         right_panel.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True, padx=5, pady=5)
@@ -142,47 +160,15 @@ class MainWindow:
         self.progress_tracker = ProgressTracker(right_panel, self.log_capture)
         self.progress_tracker.pack(fill=tk.BOTH, expand=True)
     
-    def _create_config_tab(self):
-        """Create configuration tab"""
+    def _create_shopify_tab(self):
+        """Create Shopify integration tab"""
         
-        # Shopify configuration
-        self.shopify_config = ShopifyConfig(self.config_frame, self.settings)
-        self.shopify_config.pack(fill=tk.X, padx=10, pady=5)
+        # Enhanced Shopify configuration
+        self.shopify_config = ShopifyConfig(self.shopify_frame, self.settings)
+        self.shopify_config.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
         
-        # Scraping settings
-        settings_frame = ttk.LabelFrame(self.config_frame, text="Scraping Settings", padding=10)
-        settings_frame.pack(fill=tk.X, padx=10, pady=5)
-        
-        # Max products
-        max_products_frame = ttk.Frame(settings_frame)
-        max_products_frame.pack(fill=tk.X, pady=2)
-        
-        ttk.Label(max_products_frame, text="Max products per category:").pack(side=tk.LEFT)
-        
-        self.max_products_var = tk.StringVar(value=str(self.settings.max_products_per_category))
-        max_products_spinbox = ttk.Spinbox(
-            max_products_frame,
-            from_=10,
-            to=1000,
-            textvariable=self.max_products_var,
-            width=10
-        )
-        max_products_spinbox.pack(side=tk.RIGHT)
-        
-        # Download images checkbox
-        self.include_images_var = tk.BooleanVar(value=self.settings.download_images)
-        ttk.Checkbutton(
-            settings_frame,
-            text="Download product images",
-            variable=self.include_images_var
-        ).pack(anchor=tk.W, pady=5)
-        
-        # Save settings button
-        ttk.Button(
-            settings_frame,
-            text="💾 Save Settings",
-            command=self.save_settings
-        ).pack(pady=10)
+        # Connect scraped products getter
+        self.shopify_config.set_scraped_products_getter(lambda: self.scraped_products)
     
     def _create_results_tab(self):
         """Create results tab"""
@@ -191,58 +177,50 @@ class MainWindow:
         self.results_table = ResultsTable(self.results_frame)
         self.results_table.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
         
-        # Export buttons
+        # Export and action buttons
         export_frame = ttk.Frame(self.results_frame)
         export_frame.pack(fill=tk.X, padx=10, pady=5)
         
         ttk.Button(
             export_frame,
-            text="📄 Export CSV",
+            text="📄 Export to CSV",
             command=self.export_csv
         ).pack(side=tk.LEFT, padx=5)
         
         ttk.Button(
             export_frame,
-            text="📋 Export JSON",
+            text="📋 Export to JSON",
             command=self.export_json
         ).pack(side=tk.LEFT, padx=5)
         
         ttk.Button(
             export_frame,
-            text="🛒 Upload to Shopify",
-            command=self.upload_to_shopify
+            text="🗑️ Clear Results",
+            command=self.clear_results
         ).pack(side=tk.LEFT, padx=5)
+        
+        # Statistics frame
+        stats_frame = ttk.LabelFrame(self.results_frame, text="Statistics", padding=10)
+        stats_frame.pack(fill=tk.X, padx=10, pady=5)
+        
+        self.stats_text = tk.Text(stats_frame, height=4, state='disabled')
+        self.stats_text.pack(fill=tk.X)
     
     def _connect_signals(self):
-        """Connect widget signals - FIXED for modern Tkinter"""
+        """Connect widget signals"""
         try:
-            # Use trace_add instead of trace for newer Tkinter versions
-            if hasattr(self.max_products_var, 'trace_add'):
-                self.max_products_var.trace_add('write', self._on_max_products_changed)
-                self.include_images_var.trace_add('write', self._on_include_images_changed)
+            # Variable tracing for settings
+            if hasattr(tk.StringVar, 'trace_add'):
+                # Modern Tkinter
+                pass  # Add traces if needed
             else:
-                # Fallback for older Tkinter versions
-                self.max_products_var.trace('w', self._on_max_products_changed)
-                self.include_images_var.trace('w', self._on_include_images_changed)
+                # Older Tkinter
+                pass
         except Exception as e:
             self.logger.warning(f"Could not set up variable traces: {e}")
     
-    def _on_max_products_changed(self, *args):
-        """Handle max products setting change"""
-        try:
-            value = int(self.max_products_var.get())
-            self.settings.scraping.max_products_per_category = value
-            self.settings.max_products_per_category = value  # Legacy compatibility
-        except ValueError:
-            pass
-    
-    def _on_include_images_changed(self, *args):
-        """Handle include images setting change"""
-        self.settings.scraping.download_images = self.include_images_var.get()
-        self.settings.download_images = self.include_images_var.get()  # Legacy compatibility
-    
     def start_scraping(self):
-        """Start the scraping process"""
+        """Start the enhanced scraping process"""
         if self.is_scraping:
             return
         
@@ -252,27 +230,22 @@ class MainWindow:
             
             # Update browser settings
             browser_settings = self.browser_settings.get_settings()
-            self.settings.scraping.headless_mode = browser_settings['headless_mode']
-            self.settings.scraping.timeout = browser_settings['browser_timeout']
-            self.settings.scraping.delay_between_actions = browser_settings['page_load_delay']
-            
-            # Update legacy properties
             self.settings.headless_mode = browser_settings['headless_mode']
             self.settings.browser_timeout = browser_settings['browser_timeout']
             self.settings.page_load_delay = browser_settings['page_load_delay']
             
-            # Create scraper
+            # Create enhanced scraper
             self.scraper = WiloScraper(self.settings)
             
             # Set callbacks
             self.scraper.set_progress_callback(self.progress_tracker.update_progress)
-            self.scraper.set_products_callback(self.results_table.add_product)
+            self.scraper.set_products_callback(self.add_product)
             
             # Update UI
             self.is_scraping = True
             self.start_button.config(state=tk.DISABLED)
             self.stop_button.config(state=tk.NORMAL)
-            self.status_var.set("Scraping in progress...")
+            self.status_var.set("Enhanced scraping in progress...")
             
             # Start scraping in separate thread
             self.scraping_thread = threading.Thread(
@@ -288,9 +261,11 @@ class MainWindow:
             self._reset_scraping_ui()
     
     def _scraping_worker(self, country_key):
-        """Worker function for scraping thread"""
+        """Enhanced worker function for scraping thread"""
         try:
             products = self.scraper.start_scraping(country_key)
+            
+            # Store products
             self.scraped_products.extend(products)
             
             # Update UI on main thread
@@ -301,16 +276,85 @@ class MainWindow:
             self.root.after(0, self._on_scraping_failed, str(e))
     
     def _on_scraping_completed(self, product_count):
-        """Handle scraping completion"""
-        self.status_var.set(f"Scraping completed! Found {product_count} products")
+        """Handle enhanced scraping completion"""
+        self.status_var.set(f"Enhanced scraping completed! Found {product_count} products")
         self._reset_scraping_ui()
-        messagebox.showinfo("Success", f"Scraping completed! Found {product_count} products")
+        self._update_product_count()
+        self._update_statistics()
+        
+        # Enable Shopify upload if products were found
+        if product_count > 0:
+            self.quick_upload_button.config(state=tk.NORMAL)
+        
+        messagebox.showinfo("Success", f"✅ Enhanced scraping completed!\n\nFound {product_count} products\nTotal products: {len(self.scraped_products)}")
     
     def _on_scraping_failed(self, error_message):
         """Handle scraping failure"""
         self.status_var.set("Scraping failed")
         self._reset_scraping_ui()
-        messagebox.showerror("Error", f"Scraping failed: {error_message}")
+        messagebox.showerror("Error", f"❌ Scraping failed: {error_message}")
+    
+    def add_product(self, product_data):
+        """Add product to results (enhanced)"""
+        # Add to results table
+        self.results_table.add_product(product_data)
+        
+        # Update count
+        self._update_product_count()
+    
+    def _update_product_count(self):
+        """Update product count display"""
+        count = len(self.scraped_products)
+        self.product_count_var.set(f"{count} products scraped")
+    
+    def _update_statistics(self):
+        """Update statistics display"""
+        try:
+            if not self.scraped_products:
+                return
+            
+            # Calculate statistics
+            total_products = len(self.scraped_products)
+            categories = set(p.get('category', 'Unknown') for p in self.scraped_products)
+            subcategories = set(p.get('subcategory', 'Unknown') for p in self.scraped_products)
+            
+            # Update stats text
+            self.stats_text.config(state='normal')
+            self.stats_text.delete(1.0, tk.END)
+            
+            stats = f"Total Products: {total_products}\n"
+            stats += f"Categories: {len(categories)}\n"
+            stats += f"Subcategories: {len(subcategories)}\n"
+            stats += f"Average per Category: {total_products / len(categories):.1f}"
+            
+            self.stats_text.insert(1.0, stats)
+            self.stats_text.config(state='disabled')
+            
+        except Exception as e:
+            self.logger.error(f"Error updating statistics: {e}")
+    
+    def quick_shopify_upload(self):
+        """Quick Shopify upload from main tab"""
+        try:
+            if not self.scraped_products:
+                messagebox.showwarning("No Products", "No products to upload. Please scrape some products first.")
+                return
+            
+            # Switch to Shopify tab
+            self.notebook.select(1)
+            
+            # Show upload confirmation
+            result = messagebox.askyesno(
+                "Quick Upload", 
+                f"Upload {len(self.scraped_products)} scraped products to Shopify?\n\nThis will use your current Shopify settings."
+            )
+            
+            if result:
+                # Trigger upload on Shopify tab
+                self.shopify_config.upload_scraped_products()
+            
+        except Exception as e:
+            messagebox.showerror("Error", f"❌ Quick upload failed: {e}")
     
     def stop_scraping(self):
         """Stop the scraping process"""
@@ -360,79 +404,93 @@ class MainWindow:
         """Handle navigation test completion"""
         if success:
             self.status_var.set("Navigation test successful!")
-            messagebox.showinfo("Success", "Navigation test successful!")
+            messagebox.showinfo("Success", "✅ Navigation test successful!")
         else:
             self.status_var.set("Navigation test failed")
-            messagebox.showerror("Error", "Navigation test failed")
+            messagebox.showerror("Error", "❌ Navigation test failed")
     
     def _on_navigation_test_failed(self, error_message):
         """Handle navigation test failure"""
         self.status_var.set("Navigation test failed")
-        messagebox.showerror("Error", f"Navigation test failed: {error_message}")
-    
-    def save_settings(self):
-        """Save current settings"""
-        try:
-            # Update settings from GUI
-            self.settings.scraping.max_products_per_category = int(self.max_products_var.get())
-            self.settings.scraping.download_images = self.include_images_var.get()
-            
-            # Update Shopify settings
-            shopify_settings = self.shopify_config.get_settings()
-            self.settings.shopify.shop_url = shopify_settings['shop_url']
-            self.settings.shopify.access_token = shopify_settings['access_token']
-            
-            # Save to file
-            self.settings.save()
-            
-            self.status_var.set("Settings saved successfully")
-            messagebox.showinfo("Success", "Settings saved successfully!")
-            
-        except Exception as e:
-            self.logger.error(f"Failed to save settings: {e}")
-            messagebox.showerror("Error", f"Failed to save settings: {e}")
+        messagebox.showerror("Error", f"❌ Navigation test failed: {error_message}")
     
     def export_csv(self):
         """Export results to CSV"""
         try:
-            products = self.results_table.get_all_products()
-            if not products:
+            if not self.scraped_products:
                 messagebox.showwarning("No Data", "No products to export")
                 return
             
-            # TODO: Implement CSV export
-            messagebox.showinfo("Info", "CSV export functionality to be implemented")
+            from tkinter import filedialog
+            import csv
+            
+            file_path = filedialog.asksaveasfilename(
+                title="Export to CSV",
+                defaultextension=".csv",
+                filetypes=[("CSV files", "*.csv"), ("All files", "*.*")]
+            )
+            
+            if not file_path:
+                return
+            
+            # Export to CSV
+            with open(file_path, 'w', newline='', encoding='utf-8') as f:
+                fieldnames = ['name', 'category', 'subcategory', 'price', 'description', 'country', 'status']
+                writer = csv.DictWriter(f, fieldnames=fieldnames)
+                writer.writeheader()
+                
+                for product in self.scraped_products:
+                    row = {field: product.get(field, '') for field in fieldnames}
+                    writer.writerow(row)
+            
+            messagebox.showinfo("Export Complete", f"✅ Exported {len(self.scraped_products)} products to CSV!")
             
         except Exception as e:
-            messagebox.showerror("Error", f"Export failed: {e}")
+            messagebox.showerror("Error", f"❌ CSV export failed: {e}")
     
     def export_json(self):
         """Export results to JSON"""
         try:
-            products = self.results_table.get_all_products()
-            if not products:
+            if not self.scraped_products:
                 messagebox.showwarning("No Data", "No products to export")
                 return
             
-            # TODO: Implement JSON export
-            messagebox.showinfo("Info", "JSON export functionality to be implemented")
+            from tkinter import filedialog
+            import json
             
-        except Exception as e:
-            messagebox.showerror("Error", f"Export failed: {e}")
-    
-    def upload_to_shopify(self):
-        """Upload products to Shopify"""
-        try:
-            products = self.results_table.get_all_products()
-            if not products:
-                messagebox.showwarning("No Data", "No products to upload")
+            file_path = filedialog.asksaveasfilename(
+                title="Export to JSON",
+                defaultextension=".json",
+                filetypes=[("JSON files", "*.json"), ("All files", "*.*")]
+            )
+            
+            if not file_path:
                 return
             
-            # TODO: Implement Shopify upload
-            messagebox.showinfo("Info", "Shopify upload functionality to be implemented")
+            # Export to JSON
+            with open(file_path, 'w', encoding='utf-8') as f:
+                json.dump(self.scraped_products, f, indent=2, ensure_ascii=False)
+            
+            messagebox.showinfo("Export Complete", f"✅ Exported {len(self.scraped_products)} products to JSON!")
             
         except Exception as e:
-            messagebox.showerror("Error", f"Upload failed: {e}")
+            messagebox.showerror("Error", f"❌ JSON export failed: {e}")
+    
+    def clear_results(self):
+        """Clear all results"""
+        try:
+            result = messagebox.askyesno("Clear Results", "Clear all scraped products?\n\nThis cannot be undone.")
+            
+            if result:
+                self.scraped_products.clear()
+                self.results_table.clear()
+                self._update_product_count()
+                self._update_statistics()
+                self.quick_upload_button.config(state=tk.DISABLED)
+                self.status_var.set("Results cleared")
+            
+        except Exception as e:
+            messagebox.showerror("Error", f"❌ Failed to clear results: {e}")
     
     def update_status(self, message):
         """Update status bar"""

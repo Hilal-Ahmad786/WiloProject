@@ -1,0 +1,43 @@
+2025-09-09 07:00:18,525 - wilo_scraper - INFO - Logging initialized - logs/wilo_scraper_20250909_070018.log
+2025-09-09 07:00:18,526 - wilo_scraper.__main__ - INFO - Starting Wilo Scraper Application
+2025-09-09 07:00:21,568 - wilo_scraper.scraper.wilo_scraper - INFO - Starting scraping for country: germany
+2025-09-09 07:00:21,568 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser (simple mode)...
+2025-09-09 07:00:21,568 - wilo_scraper.scraper.browser_manager - INFO - Trying simple Chrome setup...
+2025-09-09 07:00:28,586 - wilo_scraper.scraper.browser_manager - INFO - ✅ Chrome opened successfully!
+2025-09-09 07:00:28,603 - wilo_scraper.scraper.wilo_scraper - INFO - Navigating to Wilo website...
+2025-09-09 07:00:48,823 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step1_initial_page.png
+2025-09-09 07:00:48,841 - wilo_scraper.scraper.wilo_scraper - INFO - Looking for country span: Germany
+2025-09-09 07:00:48,949 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step2_before_country.png
+2025-09-09 07:00:49,998 - wilo_scraper.scraper.wilo_scraper - INFO - Successfully clicked country span: Germany
+2025-09-09 07:00:52,169 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step3_after_country.png
+2025-09-09 07:00:52,170 - wilo_scraper.scraper.wilo_scraper - INFO - Looking for Hydraulische Pumpenauswahl tile...
+2025-09-09 07:00:52,170 - wilo_scraper.scraper.wilo_scraper - INFO - Waiting for page to fully load after country selection...
+2025-09-09 07:00:52,170 - wilo_scraper.scraper.wilo_scraper - INFO - Waiting 5 seconds for tiles to appear...
+2025-09-09 07:00:57,488 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step4_wait_5s.png
+2025-09-09 07:00:57,536 - wilo_scraper.scraper.wilo_scraper - INFO - Found tile with keyword 'Hydraulische': Hydraulische Pumpenauswahl
+2025-09-09 07:00:59,547 - wilo_scraper.scraper.wilo_scraper - INFO - Successfully clicked pump selection tile
+2025-09-09 07:01:02,129 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step5_after_tile_click.png
+2025-09-09 07:01:05,139 - wilo_scraper.scraper.wilo_scraper - INFO - After tile click, current URL: https://select.wilo.com/ApplRange.aspx
+2025-09-09 07:01:05,140 - wilo_scraper.scraper.wilo_scraper - INFO - Extracting REAL products from category: 01. Heizung
+2025-09-09 07:01:05,292 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step6_extraction_start.png
+2025-09-09 07:01:10,606 - wilo_scraper.scraper.wilo_scraper - INFO - Unchecked 'Bilder ausblenden' - Images should now be visible
+2025-09-09 07:01:12,991 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step7_images_enabled.png
+2025-09-09 07:01:13,211 - wilo_scraper.scraper.wilo_scraper - INFO - Found subcategories: ['Umwälzpumpen']
+2025-09-09 07:01:13,213 - wilo_scraper.scraper.wilo_scraper - INFO - Processing subcategory 1/1: Umwälzpumpen
+2025-09-09 07:01:13,461 - wilo_scraper.scraper.wilo_scraper - INFO - Clicked subcategory: Umwälzpumpen
+2025-09-09 07:01:19,676 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step8_products_Umwälzpump.png
+2025-09-09 07:01:19,712 - wilo_scraper.scraper.wilo_scraper - INFO - Found 9 grid rows with selector: //tr[contains(@class, 'jqgrow')]
+2025-09-09 07:01:19,760 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted REAL product: Atmos PICO plus
+2025-09-09 07:01:19,787 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted REAL product: Stratos MAXO
+2025-09-09 07:01:19,805 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted REAL product: Stratos MAXO-D
+2025-09-09 07:01:19,827 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted REAL product: Stratos MAXO-Z
+2025-09-09 07:01:19,844 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted REAL product: Stratos PICO plus
+2025-09-09 07:01:19,859 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted REAL product: Varios PICO-STG
+2025-09-09 07:01:19,877 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted REAL product: Yonos MAXO plus
+2025-09-09 07:01:19,895 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted REAL product: Yonos PICO HU
+2025-09-09 07:01:19,909 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted REAL product: Yonos PICO plus
+2025-09-09 07:01:19,909 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted 9 products from Umwälzpumpen
+2025-09-09 07:01:19,909 - wilo_scraper.scraper.wilo_scraper - INFO - Total extracted 9 REAL products from 01. Heizung
+2025-09-09 07:01:20,015 - wilo_scraper.scraper.wilo_scraper - INFO - REAL scraping completed. Found 9 products
+2025-09-09 07:01:20,019 - wilo_scraper.scraper.browser_manager - INFO - Closing browser...
+2025-09-09 07:01:22,299 - wilo_scraper.scraper.browser_manager - INFO - ✅ Browser closed

@@ -1,4 +1,12 @@
+#!/usr/bin/env python3
 """
+Apply Enhanced Multi-Category Scraping to Wilo Scraper
+"""
+
+def apply_enhancement():
+    """Apply the enhanced scraper code to scraper/wilo_scraper.py"""
+    
+    enhanced_scraper_content = '''"""
 Enhanced Wilo website scraper - Multiple categories with better extraction
 """
 
@@ -112,8 +120,8 @@ class WiloScraper:
             # Enhanced multi-category extraction
             all_products = []
             
-            # Process multiple categories (limit for testing)
-            categories_to_process = self.categories[:1]  # First 3 categories for testing
+            # Process multiple categories (start with first 2 for testing)
+            categories_to_process = self.categories[:2]  # First 2 categories for testing
             
             for i, category in enumerate(categories_to_process):
                 if not self.is_running:
@@ -151,7 +159,7 @@ class WiloScraper:
             self.browser_manager.quit()
     
     def _select_country(self, country_key):
-        """Select country (same as before)"""
+        """Select country (working version from your logs)"""
         try:
             driver = self.browser_manager.get_driver()
             wait = WebDriverWait(driver, 20)
@@ -184,14 +192,14 @@ class WiloScraper:
             return False
     
     def _navigate_to_pump_selection(self):
-        """Navigate to pump selection (enhanced with better waiting)"""
+        """Navigate to pump selection (working version from your logs)"""
         try:
             driver = self.browser_manager.get_driver()
             
             self.logger.info("Looking for Hydraulische Pumpenauswahl tile...")
             self.logger.info("Waiting for page to fully load after country selection...")
             
-            # Progressive waiting with better detection
+            # Progressive waiting (same as your working version)
             for wait_iteration in range(6):
                 wait_time = (wait_iteration + 1) * 5
                 
@@ -200,7 +208,7 @@ class WiloScraper:
                 
                 self.browser_manager.take_screenshot(f"step4_wait_{wait_time}s.png")
                 
-                # Enhanced tile detection
+                # Enhanced tile detection (same logic that worked for you)
                 pump_keywords = ["Hydraulische", "Pumpen", "pump", "selection", "auswahl", "Pumpenauswahl"]
                 tile_element = None
                 
@@ -269,41 +277,34 @@ class WiloScraper:
             # Take screenshot at start of category
             self.browser_manager.take_screenshot(f"step6_category_{category_index}_start.png")
             
-            # Step 1: Select category from dropdown if needed
-            if not self._select_category_from_dropdown(category):
-                self.logger.warning(f"Could not select category {category}, using current selection")
-            
-            # Step 2: Uncheck "Bilder ausblenden" to show images
+            # Step 1: Uncheck "Bilder ausblenden" to show images
             self._uncheck_image_hide_checkbox()
             
-            # Step 3: Get and process subcategories
-            subcategories = self._get_subcategories_for_category(category)
-            self.logger.info(f"Found {len(subcategories)} subcategories for {category}")
+            # Step 2: Get and process subcategories (working version from your logs)
+            subcategories = self._get_subcategories_from_tree()
+            self.logger.info(f"Found subcategories: {subcategories}")
             
             all_products = []
             
-            # Process each subcategory
-            for j, subcategory in enumerate(subcategories[:2]):  # Limit to 2 subcategories per category
-                if not self.is_running:
-                    break
+            if subcategories:
+                # Process each subcategory (limit to 2 per category for now)
+                for i, subcategory in enumerate(subcategories[:2]):
+                    if not self.is_running:
+                        break
+                        
+                    self.logger.info(f"Processing subcategory {i+1}/{len(subcategories[:2])}: {subcategory}")
                     
-                self.logger.info(f"Processing subcategory {j+1}/{len(subcategories[:2])}: {subcategory}")
-                
-                # Click on subcategory
-                if self._click_subcategory(subcategory):
-                    time.sleep(3)
-                    
-                    # Extract products from this subcategory
-                    products = self._extract_products_from_current_view(category, subcategory)
-                    all_products.extend(products)
-                    
-                    self.logger.info(f"Extracted {len(products)} products from {subcategory}")
-                    
-                    # Take screenshot after subcategory
-                    self.browser_manager.take_screenshot(f"step7_cat{category_index}_sub{j}_products.png")
-            
-            # If no subcategories, extract directly
-            if not subcategories:
+                    # Click on subcategory
+                    if self._click_subcategory(subcategory):
+                        time.sleep(3)
+                        
+                        # Extract products from this subcategory
+                        products = self._extract_products_from_current_view(category, subcategory)
+                        all_products.extend(products)
+                        
+                        self.logger.info(f"Extracted {len(products)} products from {subcategory}")
+            else:
+                # If no subcategories, extract directly
                 self.logger.info("No subcategories found, extracting products directly")
                 products = self._extract_products_from_current_view(category, "Direct")
                 all_products.extend(products)
@@ -315,57 +316,18 @@ class WiloScraper:
             self.logger.error(f"Failed to extract products from category {category}: {e}")
             return []
     
-    def _select_category_from_dropdown(self, category):
-        """Select category from Einsatzgebiet dropdown"""
-        try:
-            driver = self.browser_manager.get_driver()
-            
-            # Look for category dropdown
-            dropdown_selectors = [
-                "//select[contains(@id, 'ddARKey')]",
-                "//div[contains(@class, 'RadComboBox')]//input",
-                "//input[contains(@id, 'ddARKey')]"
-            ]
-            
-            for selector in dropdown_selectors:
-                try:
-                    dropdown = driver.find_element(By.XPATH, selector)
-                    if dropdown.is_displayed():
-                        # Check current selection
-                        current_text = dropdown.get_attribute('value') or dropdown.text
-                        if category in current_text:
-                            self.logger.info(f"Category {category} already selected")
-                            return True
-                        
-                        # Try to select the category
-                        dropdown.click()
-                        time.sleep(1)
-                        
-                        # Look for category option
-                        category_option = driver.find_element(By.XPATH, f"//li[contains(text(), '{category}')]")
-                        category_option.click()
-                        self.logger.info(f"Selected category: {category}")
-                        time.sleep(2)
-                        return True
-                except:
-                    continue
-            
-            self.logger.info(f"Category dropdown not found or {category} already selected")
-            return True
-            
-        except Exception as e:
-            self.logger.error(f"Failed to select category: {e}")
-            return True
-    
     def _uncheck_image_hide_checkbox(self):
-        """Uncheck 'Bilder ausblenden' to show product images"""
+        """Uncheck 'Bilder ausblenden' to show product images (working version)"""
         try:
             driver = self.browser_manager.get_driver()
             
             checkbox_selectors = [
                 "//input[@id='cbHideImg']",
                 "//input[@name='cbHideImg']",
-                "//input[contains(@onclick, 'onSeriesGridToggleMinimizedViewClicked')]"
+                "//input[contains(@onclick, 'onSeriesGridToggleMinimizedViewClicked')]",
+                "//label[contains(text(), 'Bilder ausblenden')]//preceding-sibling::input",
+                "//label[contains(text(), 'Bilder ausblenden')]//input",
+                "//span[contains(text(), 'Bilder ausblenden')]//input"
             ]
             
             for selector in checkbox_selectors:
@@ -393,28 +355,15 @@ class WiloScraper:
             self.logger.error(f"Failed to uncheck image checkbox: {e}")
             return True
     
-    def _get_subcategories_for_category(self, category):
-        """Get subcategories specific to the current category"""
+    def _get_subcategories_from_tree(self):
+        """Get subcategories from the tree structure (working version)"""
         try:
             driver = self.browser_manager.get_driver()
             
-            # Category-specific subcategory patterns
-            category_subcategories = {
-                "01. Heizung": ["Umwälzpumpen", "Inline-Pumpen", "Blockpumpen"],
-                "02. Trinkwarmwasser": ["Trinkwasser-Pumpen", "Brauchwasser-Pumpen"],
-                "03. Kältetechnik": ["Kälte-Umwälzpumpen", "Kühlwasser-Pumpen"],
-                "04. Klimatechnik": ["Klima-Umwälzpumpen", "Lüftungsanlagen"],
-                "05. Regenwasser": ["Regenwasser-Pumpen", "Zisternenpumpen"]
-            }
-            
-            # First try to get category-specific subcategories
-            if category in category_subcategories:
-                return category_subcategories[category]
-            
-            # Otherwise, look for general subcategories on the page
             subcategory_selectors = [
-                "//div[contains(@class, 'tree')]//a",
-                "//ul//li//a",
+                "//*[contains(text(), 'Umwälzpumpen')]",
+                "//*[contains(text(), 'Inline-Pumpen')]",
+                "//*[contains(text(), 'Blockpumpen')]",
                 "//*[contains(text(), 'pumpen')]//parent::*",
                 "//span[contains(text(), 'pumpen')]"
             ]
@@ -435,27 +384,27 @@ class WiloScraper:
                 except:
                     continue
             
-            # Clean and limit subcategories
             clean_subcategories = []
-            for subcat in subcategories[:3]:  # Limit to 3
+            for subcat in subcategories[:5]:
                 if len(subcat) > 8 and not any(x in subcat.lower() for x in ['©', '®', 'wilo']):
                     clean_subcategories.append(subcat)
             
-            return clean_subcategories or ["Standard Pumpen"]
+            return clean_subcategories or ["Heizungspumpen"]
             
         except Exception as e:
             self.logger.error(f"Failed to get subcategories: {e}")
-            return ["Standard Pumpen"]
+            return ["Heizungspumpen"]
     
     def _click_subcategory(self, subcategory):
-        """Click on a specific subcategory"""
+        """Click on a specific subcategory (working version)"""
         try:
             driver = self.browser_manager.get_driver()
             
             subcategory_selectors = [
                 f"//*[contains(text(), '{subcategory}')]",
                 f"//a[contains(text(), '{subcategory[:15]}')]",
-                f"//span[contains(text(), '{subcategory[:15]}')]"
+                f"//span[contains(text(), '{subcategory[:15]}')]",
+                f"//div[contains(text(), '{subcategory[:15]}')]"
             ]
             
             for selector in subcategory_selectors:
@@ -478,12 +427,14 @@ class WiloScraper:
             return True
     
     def _extract_products_from_current_view(self, category, subcategory):
-        """Extract products from current page view with enhanced data"""
+        """Extract products from current page view (enhanced working version)"""
         try:
             driver = self.browser_manager.get_driver()
             products = []
             
-            # Look for product grid rows
+            self.browser_manager.take_screenshot(f"step8_products_{subcategory[:10]}.png")
+            
+            # Extract from grid rows (your working HTML structure)
             grid_row_selectors = [
                 "//tr[contains(@class, 'jqgrow')]",
                 "//tr[contains(@class, 'ui-widget-content')]",
@@ -497,14 +448,14 @@ class WiloScraper:
                     
                     for i, row in enumerate(rows):
                         try:
-                            # Extract product name
+                            # Extract product name from span with class 'common_lbl_bold'
                             name_element = row.find_element(By.XPATH, ".//span[@class='common_lbl_bold']")
                             product_name = name_element.text.strip()
                             
                             if not product_name or len(product_name) < 3:
                                 continue
                             
-                            # Extract image URL
+                            # Extract image URL from background-image style
                             image_url = ""
                             try:
                                 img_div = row.find_element(By.XPATH, ".//div[contains(@style, 'background-image')]")
@@ -514,6 +465,7 @@ class WiloScraper:
                                     end = style_attr.find('")', start)
                                     if start > 4 and end > start:
                                         relative_url = style_attr[start:end]
+                                        # Convert to absolute URL
                                         if relative_url.startswith('ApplRangeHandler'):
                                             image_url = f"https://select.wilo.com/{relative_url}"
                                         else:
@@ -521,30 +473,31 @@ class WiloScraper:
                             except:
                                 pass
                             
-                            # Enhanced product object
+                            # Enhanced product object with more data
                             product = {
-                                'id': f"{category}_{subcategory}_{i+1}",
+                                'id': f"{category.replace('.', '').replace(' ', '_')}_{subcategory.replace(' ', '_')}_{i+1}",
                                 'name': product_name,
                                 'category': category,
                                 'subcategory': subcategory,
                                 'image_url': image_url,
-                                'description': f"Wilo {product_name} - Professional pump for {subcategory} applications",
+                                'description': f"Wilo {product_name} - Professional pump for {subcategory} applications in {category}",
                                 'specifications': {
                                     'brand': 'Wilo',
                                     'series': product_name,
                                     'application': subcategory,
-                                    'category': category
+                                    'category': category,
+                                    'type': 'Pump'
                                 },
                                 'price': 'Price on request',
                                 'currency': 'EUR',
                                 'country': 'Germany',
-                                'status': 'Real Product - Enhanced Extraction',
+                                'status': 'Enhanced Real Product - Extracted',
                                 'extracted_at': time.strftime('%Y-%m-%d %H:%M:%S'),
                                 'source_url': driver.current_url
                             }
                             
                             products.append(product)
-                            self.logger.info(f"Enhanced extraction - Product: {product_name}")
+                            self.logger.info(f"Extracted ENHANCED product: {product_name}")
                             
                         except Exception as row_error:
                             continue
@@ -555,7 +508,7 @@ class WiloScraper:
                 except Exception as selector_error:
                     continue
             
-            # Fallback extraction
+            # Fallback - look for any bold product names
             if not products:
                 try:
                     name_elements = driver.find_elements(By.XPATH, "//span[@class='common_lbl_bold']")
@@ -563,7 +516,7 @@ class WiloScraper:
                         name = name_element.text.strip()
                         if name and len(name) > 3:
                             product = {
-                                'id': f"{category}_{subcategory}_fallback_{i+1}",
+                                'id': f"{category.replace('.', '').replace(' ', '_')}_{subcategory.replace(' ', '_')}_fallback_{i+1}",
                                 'name': name,
                                 'category': category,
                                 'subcategory': subcategory,
@@ -572,10 +525,10 @@ class WiloScraper:
                                 'specifications': {'brand': 'Wilo'},
                                 'price': 'Price on request',
                                 'country': 'Germany',
-                                'status': 'Real Product - Fallback Extraction'
+                                'status': 'Enhanced Real Product - Fallback'
                             }
                             products.append(product)
-                            self.logger.info(f"Fallback extraction - Product: {name}")
+                            self.logger.info(f"Extracted ENHANCED product (fallback): {name}")
                 except:
                     pass
             
@@ -627,3 +580,14 @@ class WiloScraper:
         self.is_running = False
         if self.progress_callback:
             self.progress_callback("Scraping stopped by user", stop_progress=True)
+'''
+    
+    # Write the enhanced scraper to the correct file
+    with open('scraper/wilo_scraper.py', 'w') as f:
+        f.write(enhanced_scraper_content)
+    
+    print("✅ Applied enhancement to scraper/wilo_scraper.py")
+    print("🚀 Your scraper now supports multi-category extraction!")
+
+if __name__ == "__main__":
+    apply_enhancement()

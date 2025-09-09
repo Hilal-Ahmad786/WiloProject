@@ -1,3 +1,0 @@
-Admin API access token =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
-APi key=89f39e5902cf55a33104e8ff4ae4f135
-api secret key =fb7fbb044c3df5b87e0703b7da16a797

@@ -1,4 +1,12 @@
+#!/usr/bin/env python3
 """
+Fix import errors by removing references to old wilo_scraper.py
+"""
+
+def fix_enhanced_scraper_controller():
+    """Remove old scraper imports and simplify to catalog-only"""
+    
+    updated_controller_content = '''"""
 Enhanced scraper controller widget - CATALOG ONLY VERSION
 """
 
@@ -204,8 +212,8 @@ class EnhancedScraperController(ttk.LabelFrame):
         
         self.status_var.set(f"Catalog scraping completed! Found {product_count} products")
         
-        message = f"✅ Catalog scraping completed!\n\n"
-        message += f"Found {product_count} new products\n"
+        message = f"✅ Catalog scraping completed!\\n\\n"
+        message += f"Found {product_count} new products\\n"
         message += f"Total products: {len(self.scraped_products)}"
         
         messagebox.showinfo("Scraping Complete", message)
@@ -292,20 +300,20 @@ class EnhancedScraperController(ttk.LabelFrame):
         scrollbar.pack(side='right', fill='y')
         
         # Display results
-        header = f"=== CATALOG SCRAPING RESULTS ({len(self.scraped_products)} products) ===\n\n"
+        header = f"=== CATALOG SCRAPING RESULTS ({len(self.scraped_products)} products) ===\\n\\n"
         results_text.insert('1.0', header)
         
         for i, product in enumerate(self.scraped_products, 1):
-            results_text.insert('end', f"{i}. {product.get('name', 'Unknown')}\n")
-            results_text.insert('end', f"   Source: {product.get('source', 'catalog')}\n")
-            results_text.insert('end', f"   Category: {product.get('category', 'Unknown')}\n")
-            results_text.insert('end', f"   Images: {len(product.get('product_images', []))} product + {1 if product.get('card_image_url') else 0} card\n")
+            results_text.insert('end', f"{i}. {product.get('name', 'Unknown')}\\n")
+            results_text.insert('end', f"   Source: {product.get('source', 'catalog')}\\n")
+            results_text.insert('end', f"   Category: {product.get('category', 'Unknown')}\\n")
+            results_text.insert('end', f"   Images: {len(product.get('product_images', []))} product + {1 if product.get('card_image_url') else 0} card\\n")
             if product.get('short_description'):
                 desc = product['short_description'][:100] + "..." if len(product['short_description']) > 100 else product['short_description']
-                results_text.insert('end', f"   Description: {desc}\n")
+                results_text.insert('end', f"   Description: {desc}\\n")
             if product.get('advantages'):
-                results_text.insert('end', f"   Advantages: {len(product['advantages'])} items\n")
-            results_text.insert('end', "\n")
+                results_text.insert('end', f"   Advantages: {len(product['advantages'])} items\\n")
+            results_text.insert('end', "\\n")
         
         results_text.config(state='disabled')
     
@@ -324,3 +332,41 @@ class EnhancedScraperController(ttk.LabelFrame):
             self.scraped_products.clear()
             self.product_count_var.set("0")
             self.status_var.set("Results cleared")
+'''
+    
+    with open('gui/widgets/enhanced_scraper_controller.py', 'w') as f:
+        f.write(updated_controller_content)
+    
+    print("✅ Fixed enhanced scraper controller - removed old imports")
+
+def main():
+    """Main fix function"""
+    print("🔧 FIXING IMPORT ERRORS")
+    print("=" * 30)
+    
+    try:
+        fix_enhanced_scraper_controller()
+        
+        print("\\n✅ IMPORT ERRORS FIXED!")
+        print("\\n🎯 Changes made:")
+        print("• Removed old wilo_scraper.py import")
+        print("• Simplified to catalog-only scraper")
+        print("• Updated UI to reflect catalog-only functionality")
+        print("• Removed original scraper options")
+        
+        print("\\n🚀 Now test the application:")
+        print("python main.py")
+        print("\\n📋 What you'll see:")
+        print("• Only catalog scraper option")
+        print("• Simplified interface")
+        print("• H1 title extraction from product pages")
+        print("• Real content upload to Shopify")
+        
+    except Exception as e:
+        print(f"❌ Error during fix: {e}")
+        return 1
+    
+    return 0
+
+if __name__ == "__main__":
+    exit(main())

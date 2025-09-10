@@ -1,0 +1,57 @@
+2025-09-10 09:04:53,841 - wilo_scraper - INFO - Logging initialized - logs/wilo_scraper_20250910_090453.log
+2025-09-10 09:04:53,841 - wilo_scraper.__main__ - INFO - Starting Wilo Scraper Application
+2025-09-10 09:05:07,297 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Starting catalog scraping for max 2 products
+2025-09-10 09:05:07,302 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser (simple mode)...
+2025-09-10 09:05:07,303 - wilo_scraper.scraper.browser_manager - INFO - Trying simple Chrome setup...
+2025-09-10 09:05:09,794 - wilo_scraper.scraper.browser_manager - INFO - ✅ Chrome opened successfully!
+2025-09-10 09:05:09,795 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Navigating to Wilo catalog page...
+2025-09-10 09:05:20,518 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_step1_initial_page.png
+2025-09-10 09:05:25,541 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Found 46 product cards
+2025-09-10 09:05:25,541 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing 2 cards
+2025-09-10 09:05:25,554 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === PROCESSING CARD 1 ===
+2025-09-10 09:05:25,584 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted card data for position 1
+2025-09-10 09:05:25,636 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Clicked via link for card 1
+2025-09-10 09:05:30,793 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_product_0_page.png
+2025-09-10 09:05:30,833 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted real name from H1: Wilo-Atmos TERA-SCH
+2025-09-10 09:05:30,935 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 2 images and 0 videos
+2025-09-10 09:05:30,998 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted short description: 1013 characters
+2025-09-10 09:05:31,043 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 9 advantages
+2025-09-10 09:05:31,056 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted long description: 0 characters
+2025-09-10 09:05:31,059 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 PRODUCT DEBUG for Wilo-Atmos TERA-SCH:
+2025-09-10 09:05:31,059 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Real name from H1: Wilo-Atmos TERA-SCH
+2025-09-10 09:05:31,059 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc length: 1013 chars
+2025-09-10 09:05:31,059 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Advantages count: 9
+2025-09-10 09:05:31,059 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Product images: 2
+2025-09-10 09:05:31,059 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc preview: Splitcase-Pumpe für einen zuverlässigen Betrieb und energieeffizienten Transport großer Volumenström...
+2025-09-10 09:05:31,059 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    First advantage: Zuverlässiger Dauerbetrieb für eine effiziente Tri...
+2025-09-10 09:05:34,113 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted: Wilo-Atmos TERA-SCH
+2025-09-10 09:05:36,124 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === PROCESSING CARD 2 ===
+2025-09-10 09:05:36,165 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted card data for position 2
+2025-09-10 09:05:36,171 - wilo_scraper.scraper.wilo_catalog_scraper - ERROR - Card click failed: Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=140.0.7339.133); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#staleelementreferenceexception
+Stacktrace:
+0   chromedriver                        0x0000000104e47674 cxxbridge1$str$ptr + 2882776
+1   chromedriver                        0x0000000104e3f5a0 cxxbridge1$str$ptr + 2849796
+2   chromedriver                        0x00000001049690dc _RNvCslE4myv9Sbr3_7___rustc35___rust_no_alloc_shim_is_unstable_v2 + 73436
+3   chromedriver                        0x000000010496ed94 _RNvCslE4myv9Sbr3_7___rustc35___rust_no_alloc_shim_is_unstable_v2 + 97172
+4   chromedriver                        0x0000000104971360 _RNvCslE4myv9Sbr3_7___rustc35___rust_no_alloc_shim_is_unstable_v2 + 106848
+5   chromedriver                        0x00000001049f2600 _RNvCslE4myv9Sbr3_7___rustc35___rust_no_alloc_shim_is_unstable_v2 + 635904
+6   chromedriver                        0x00000001049f166c _RNvCslE4myv9Sbr3_7___rustc35___rust_no_alloc_shim_is_unstable_v2 + 631916
+7   chromedriver                        0x00000001049a4130 _RNvCslE4myv9Sbr3_7___rustc35___rust_no_alloc_shim_is_unstable_v2 + 315184
+8   chromedriver                        0x0000000104e0bba4 cxxbridge1$str$ptr + 2638344
+9   chromedriver                        0x0000000104e0edbc cxxbridge1$str$ptr + 2651168
+10  chromedriver                        0x0000000104dec640 cxxbridge1$str$ptr + 2509988
+11  chromedriver                        0x0000000104e0f668 cxxbridge1$str$ptr + 2653388
+12  chromedriver                        0x0000000104dddddc cxxbridge1$str$ptr + 2450496
+13  chromedriver                        0x0000000104e2eef0 cxxbridge1$str$ptr + 2782548
+14  chromedriver                        0x0000000104e2f070 cxxbridge1$str$ptr + 2782932
+15  chromedriver                        0x0000000104e3f1ec cxxbridge1$str$ptr + 2848848
+16  libsystem_pthread.dylib             0x000000018871ffa8 _pthread_start + 148
+17  libsystem_pthread.dylib             0x000000018871ada0 thread_start + 8
+
+2025-09-10 09:05:36,172 - wilo_scraper.scraper.wilo_catalog_scraper - WARNING - ❌ Failed to get details for card 2
+2025-09-10 09:05:38,173 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === EXTRACTION COMPLETE ===
+2025-09-10 09:05:38,174 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Successfully processed 1 out of 2 cards
+2025-09-10 09:05:38,174 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Catalog scraping completed. Found 1 products
+2025-09-10 09:05:38,174 - wilo_scraper.scraper.browser_manager - INFO - Closing browser...
+2025-09-10 09:05:38,342 - wilo_scraper.scraper.browser_manager - INFO - ✅ Browser closed

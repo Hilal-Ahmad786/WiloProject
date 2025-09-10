@@ -1,5 +1,5 @@
 """
-Enhanced Wilo website scraper - Multiple categories with better extraction
+Enhanced Wilo website scraper - FIXED version with proper background image extraction
 """
 
 import time
@@ -12,7 +12,7 @@ from config.countries import get_country_config, COUNTRIES
 from utils.logger import get_logger
 
 class WiloScraper:
-    """Enhanced scraper for Wilo products with multi-category support"""
+    """Enhanced scraper for Wilo products with proper image extraction"""
     
     def __init__(self, settings):
         self.settings = settings
@@ -113,7 +113,7 @@ class WiloScraper:
             all_products = []
             
             # Process multiple categories (limit for testing)
-            categories_to_process = self.categories[:1]  # First 3 categories for testing
+            categories_to_process = self.categories[:1]  # First category for testing
             
             for i, category in enumerate(categories_to_process):
                 if not self.is_running:
@@ -151,7 +151,7 @@ class WiloScraper:
             self.browser_manager.quit()
     
     def _select_country(self, country_key):
-        """Select country (same as before)"""
+        """Select country"""
         try:
             driver = self.browser_manager.get_driver()
             wait = WebDriverWait(driver, 20)
@@ -184,7 +184,7 @@ class WiloScraper:
             return False
     
     def _navigate_to_pump_selection(self):
-        """Navigate to pump selection (enhanced with better waiting)"""
+        """Navigate to pump selection"""
         try:
             driver = self.browser_manager.get_driver()
             
@@ -358,7 +358,7 @@ class WiloScraper:
             return True
     
     def _uncheck_image_hide_checkbox(self):
-        """Uncheck 'Bilder ausblenden' to show product images - ENHANCED"""
+        """Uncheck 'Bilder ausblenden' to show product images"""
         try:
             driver = self.browser_manager.get_driver()
             
@@ -421,16 +421,6 @@ class WiloScraper:
                                 # Take screenshot to verify
                                 self.browser_manager.take_screenshot("step7_images_enabled_verification.png")
                                 
-                                # Verify the change
-                                try:
-                                    new_state = checkbox.is_selected() or checkbox.get_attribute('checked') == 'true'
-                                    if not new_state:
-                                        self.logger.info("🖼️ Images should now be VISIBLE!")
-                                    else:
-                                        self.logger.warning("⚠️ Checkbox might still be checked")
-                                except:
-                                    pass
-                                
                                 break
                             else:
                                 self.logger.info("✅ 'Bilder ausblenden' already UNCHECKED - Images should be visible")
@@ -446,36 +436,6 @@ class WiloScraper:
             
             if not checkbox_found:
                 self.logger.warning("⚠️ Could not find 'Bilder ausblenden' checkbox")
-                
-                # Debug: Look for any checkboxes on the page
-                try:
-                    all_checkboxes = driver.find_elements(By.XPATH, "//input[@type='checkbox']")
-                    self.logger.info(f"Found {len(all_checkboxes)} total checkboxes on page")
-                    
-                    for i, cb in enumerate(all_checkboxes[:10]):  # Check first 10
-                        try:
-                            if cb.is_displayed():
-                                # Get surrounding text
-                                parent = cb.find_element(By.XPATH, ".//..")
-                                surrounding_text = parent.text.strip()[:100]
-                                self.logger.debug(f"Checkbox {i+1}: {surrounding_text}")
-                                
-                                # If it contains image-related text, try it
-                                if any(word in surrounding_text.lower() for word in ['bild', 'image', 'hide', 'ausblend']):
-                                    self.logger.info(f"Found potential image checkbox: {surrounding_text}")
-                                    if cb.is_selected():
-                                        try:
-                                            driver.execute_script("arguments[0].click();", cb)
-                                            self.logger.info("✅ Unchecked potential image hiding checkbox")
-                                            time.sleep(1)
-                                            checkbox_found = True
-                                            break
-                                        except:
-                                            continue
-                        except:
-                            continue
-                except Exception as e:
-                    self.logger.debug(f"Debug checkbox search failed: {e}")
             
             # Final verification - look for visible images
             try:
@@ -489,9 +449,6 @@ class WiloScraper:
                     self.logger.info(f"🖼️ Found {len(visible_images)} visible product images on page")
                 else:
                     self.logger.warning("⚠️ No product images found - they might still be hidden")
-                    
-                    # Take a debug screenshot
-                    self.browser_manager.take_screenshot("debug_no_images_found.png")
                     
             except Exception as e:
                 self.logger.debug(f"Image verification failed: {e}")
@@ -587,7 +544,7 @@ class WiloScraper:
             return True
     
     def _extract_products_from_current_view(self, category, subcategory):
-        """Extract products from current page view with ENHANCED IMAGE extraction"""
+        """Extract products from current page view with WORKING image extraction"""
         try:
             driver = self.browser_manager.get_driver()
             products = []
@@ -615,28 +572,81 @@ class WiloScraper:
                             if not product_name or len(product_name) < 3:
                                 continue
                             
-                            # ENHANCED IMAGE EXTRACTION
+                            # WORKING IMAGE EXTRACTION
                             image_url = ""
+                            has_image = False
+                            
                             try:
+                                # Find div with background-image style
                                 img_div = row.find_element(By.XPATH, ".//div[contains(@style, 'background-image')]")
                                 style_attr = img_div.get_attribute('style')
-                                if 'url(' in style_attr:
-                                    start = style_attr.find('url("') + 5
-                                    end = style_attr.find('")', start)
-                                    if start > 4 and end > start:
-                                        relative_url = style_attr[start:end]
-                                        # Decode HTML entities
-                                        relative_url = relative_url.replace('&quot;', '"').replace('&amp;', '&')
-                                        # Convert to absolute URL
-                                        if relative_url.startswith('ApplRangeHandler'):
-                                            image_url = f"https://select.wilo.com/{relative_url}"
-                                        else:
-                                            image_url = relative_url
-                                        self.logger.info(f"✅ IMAGE FOUND for {product_name}: {image_url}")
-                            except:
-                                self.logger.warning(f"❌ NO IMAGE found for {product_name}")
+                                
+                                if 'background-image:' in style_attr and 'url(' in style_attr:
+                                    # Extract URL from background-image with proper HTML entity handling
+                                    if 'url(&quot;' in style_attr:
+                                        # Handle HTML entity encoded URLs
+                                        start_pos = style_attr.find('url(&quot;') + len('url(&quot;')
+                                        end_pos = style_attr.find('&quot;)', start_pos)
+                                        
+                                        if end_pos > start_pos:
+                                            encoded_url = style_attr[start_pos:end_pos]
+                                            # Decode HTML entities
+                                            decoded_url = encoded_url.replace('&amp;', '&').replace('&quot;', '"')
+                                            
+                                            # Build complete URL
+                                            if decoded_url.startswith('ApplRangeHandler'):
+                                                image_url = f"https://select.wilo.com/{decoded_url}"
+                                            else:
+                                                image_url = decoded_url
+                                            
+                                            has_image = True
+                                            self.logger.info(f"Found image via background-image: {image_url}")
+                                    else:
+                                        # Handle regular URL format
+                                        start_pos = style_attr.find('url("') + 5
+                                        end_pos = style_attr.find('")', start_pos)
+                                        if end_pos > start_pos:
+                                            image_url = style_attr[start_pos:end_pos]
+                                            if image_url.startswith('ApplRangeHandler'):
+                                                image_url = f"https://select.wilo.com/{image_url}"
+                                            has_image = True
+                                            self.logger.info(f"Found image via regular URL: {image_url}")
+                                            
+                            except Exception as img_error:
+                                self.logger.debug(f"Image extraction failed for {product_name}: {img_error}")
                             
-                            except Exception as row_error:
+                            # Create product object
+                            product = {
+                                'id': f"{category.replace('.', '').replace(' ', '_')}_{subcategory.replace(' ', '_')}_{i+1}",
+                                'name': product_name,
+                                'category': category,
+                                'subcategory': subcategory,
+                                'image_url': image_url,
+                                'has_image': has_image,
+                                'description': f"Wilo {product_name} - Professional pump for {subcategory} applications in {category}",
+                                'specifications': {
+                                    'brand': 'Wilo',
+                                    'series': product_name,
+                                    'application': subcategory,
+                                    'category': category,
+                                    'type': 'Pump'
+                                },
+                                'price': 'Price on request',
+                                'currency': 'EUR',
+                                'country': 'Germany',
+                                'status': 'Enhanced Real Product - Extracted',
+                                'extracted_at': time.strftime('%Y-%m-%d %H:%M:%S'),
+                                'source_url': driver.current_url
+                            }
+                            
+                            products.append(product)
+                            
+                            if has_image:
+                                self.logger.info(f"Enhanced extraction - Product: {product_name} [WITH IMAGE]")
+                            else:
+                                self.logger.info(f"Enhanced extraction - Product: {product_name} [NO IMAGE]")
+                            
+                        except Exception as row_error:
                             self.logger.error(f"Error processing row: {row_error}")
                             continue
                     
@@ -647,14 +657,13 @@ class WiloScraper:
                     self.logger.error(f"Error with selector {selector}: {selector_error}")
                     continue
             
-            # Debug: Take screenshot showing current page state
+            # Take screenshot and log summary
             if products:
                 self.browser_manager.take_screenshot(f"step9_extracted_products_{subcategory[:10]}.png")
                 
-                # Log summary
                 with_images = sum(1 for p in products if p['has_image'])
                 without_images = len(products) - with_images
-                self.logger.info(f"📊 EXTRACTION SUMMARY for {subcategory}:")
+                self.logger.info(f"EXTRACTION SUMMARY for {subcategory}:")
                 self.logger.info(f"   Total products: {len(products)}")
                 self.logger.info(f"   With images: {with_images}")
                 self.logger.info(f"   Without images: {without_images}")
@@ -664,8 +673,6 @@ class WiloScraper:
         except Exception as e:
             self.logger.error(f"Failed to extract products from current view: {e}")
             return []
-
-
 
     def test_navigation(self):
         """Test navigation to Wilo website"""
@@ -703,135 +710,6 @@ class WiloScraper:
         finally:
             self.browser_manager.quit()
             
-    def _extract_sprite_image_info(self, row, product_index):
-        """Extract sprite sheet image information from product row"""
-        try:
-            image_info = {
-                'image_url': '',
-                'sprite_sheet_url': '',
-                'sprite_position': {'x': 0, 'y': 0},
-                'dimensions': {'width': 64, 'height': 64}
-            }
-            
-            # Look for div with background-image style
-            try:
-                img_div = row.find_element(By.XPATH, ".//div[contains(@style, 'background-image')]")
-                style_attr = img_div.get_attribute('style')
-                
-                if 'url(' in style_attr:
-                    # Extract URL from style
-                    start = style_attr.find('url("') + 5
-                    if start == 4:  # Try without quotes
-                        start = style_attr.find('url(') + 4
-                        end = style_attr.find(')', start)
-                    else:
-                        end = style_attr.find('")', start)
-                    
-                    if start > 4 and end > start:
-                        relative_url = style_attr[start:end]
-                        
-                        # Decode HTML entities
-                        relative_url = relative_url.replace('&quot;', '"').replace('&amp;', '&')
-                        
-                        # Build full URL
-                        if relative_url.startswith('ApplRangeHandler'):
-                            sprite_sheet_url = f"https://select.wilo.com/{relative_url}"
-                        elif relative_url.startswith('http'):
-                            sprite_sheet_url = relative_url
-                        else:
-                            sprite_sheet_url = f"https://select.wilo.com/{relative_url}"
-                        
-                        image_info['sprite_sheet_url'] = sprite_sheet_url
-                        image_info['image_url'] = sprite_sheet_url  # Use sprite as image for now
-                        
-                        # Extract background-position
-                        position_info = self._extract_background_position(style_attr)
-                        image_info['sprite_position'] = position_info
-                        
-                        # Extract dimensions  
-                        dimensions = self._extract_element_dimensions(img_div)
-                        image_info['dimensions'] = dimensions
-                        
-                        self.logger.debug(f"Sprite URL: {sprite_sheet_url}")
-                        self.logger.debug(f"Position: {position_info}")
-                        
-            except Exception as e:
-                self.logger.debug(f"Background-image extraction failed: {e}")
-            
-            return image_info
-            
-        except Exception as e:
-            self.logger.error(f"Failed to extract sprite image info: {e}")
-            return {
-                'image_url': '',
-                'sprite_sheet_url': '',
-                'sprite_position': {'x': 0, 'y': 0},
-                'dimensions': {'width': 64, 'height': 64}
-            }
-    
-    def _extract_background_position(self, style_attr):
-        """Extract background-position from CSS style"""
-        try:
-            # Simple string search for background-position
-            if 'background-position:' in style_attr:
-                start_idx = style_attr.find('background-position:') + len('background-position:')
-                end_idx = style_attr.find(';', start_idx)
-                if end_idx == -1:
-                    end_idx = len(style_attr)
-                
-                position_value = style_attr[start_idx:end_idx].strip()
-                
-                # Parse position (e.g., "0px 0px", "-64px -128px")
-                parts = position_value.split()
-                if len(parts) >= 2:
-                    x_str = parts[0].replace('px', '').replace(',', '')
-                    y_str = parts[1].replace('px', '').replace(',', '')
-                    
-                    try:
-                        x = int(float(x_str))
-                        y = int(float(y_str))
-                        return {'x': abs(x), 'y': abs(y)}
-                    except ValueError:
-                        pass
-            
-            return {'x': 0, 'y': 0}
-            
-        except Exception as e:
-            self.logger.debug(f"Background position extraction failed: {e}")
-            return {'x': 0, 'y': 0}
-    
-    def _extract_element_dimensions(self, element):
-        """Extract width and height from element"""
-        try:
-            style = element.get_attribute('style')
-            width = height = 64  # Default
-            
-            # Simple string parsing for dimensions
-            if 'width:' in style:
-                start_idx = style.find('width:') + len('width:')
-                end_idx = style.find('px', start_idx)
-                if end_idx > start_idx:
-                    try:
-                        width = int(style[start_idx:end_idx].strip())
-                    except ValueError:
-                        pass
-            
-            if 'height:' in style:
-                start_idx = style.find('height:') + len('height:')
-                end_idx = style.find('px', start_idx)
-                if end_idx > start_idx:
-                    try:
-                        height = int(style[start_idx:end_idx].strip())
-                    except ValueError:
-                        pass
-            
-            return {'width': width, 'height': height}
-            
-        except Exception as e:
-            self.logger.debug(f"Dimension extraction failed: {e}")
-            return {'width': 64, 'height': 64}
-
-
     def stop(self):
         """Stop scraping"""
         self.logger.info("Stopping enhanced scraper...")

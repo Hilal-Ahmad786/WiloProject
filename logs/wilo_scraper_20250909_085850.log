@@ -1,0 +1,150 @@
+2025-09-09 08:58:50,652 - wilo_scraper - INFO - Logging initialized - logs/wilo_scraper_20250909_085850.log
+2025-09-09 08:58:50,652 - wilo_scraper.__main__ - INFO - Starting Wilo Scraper Application
+2025-09-09 08:58:55,739 - wilo_scraper.scraper.wilo_scraper - INFO - Starting enhanced scraping for country: germany
+2025-09-09 08:58:55,743 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser (simple mode)...
+2025-09-09 08:58:55,755 - wilo_scraper.scraper.browser_manager - INFO - Trying simple Chrome setup...
+2025-09-09 08:59:15,491 - wilo_scraper.scraper.browser_manager - INFO - ✅ Chrome opened successfully!
+2025-09-09 08:59:15,493 - wilo_scraper.scraper.wilo_scraper - INFO - Navigating to Wilo website...
+2025-09-09 08:59:29,119 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step1_initial_page.png
+2025-09-09 08:59:29,120 - wilo_scraper.scraper.wilo_scraper - INFO - Looking for country span: Germany
+2025-09-09 08:59:29,245 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step2_before_country.png
+2025-09-09 08:59:30,282 - wilo_scraper.scraper.wilo_scraper - INFO - Successfully clicked country span: Germany
+2025-09-09 08:59:32,407 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step3_after_country.png
+2025-09-09 08:59:32,417 - wilo_scraper.scraper.wilo_scraper - INFO - Looking for Hydraulische Pumpenauswahl tile...
+2025-09-09 08:59:32,417 - wilo_scraper.scraper.wilo_scraper - INFO - Waiting for page to fully load after country selection...
+2025-09-09 08:59:32,417 - wilo_scraper.scraper.wilo_scraper - INFO - Waiting 5 seconds for tiles to appear...
+2025-09-09 08:59:39,509 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step4_wait_5s.png
+2025-09-09 08:59:39,590 - wilo_scraper.scraper.wilo_scraper - INFO - Waiting 10 seconds for tiles to appear...
+2025-09-09 08:59:45,980 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step4_wait_10s.png
+2025-09-09 08:59:46,055 - wilo_scraper.scraper.wilo_scraper - INFO - Waiting 15 seconds for tiles to appear...
+2025-09-09 08:59:51,318 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step4_wait_15s.png
+2025-09-09 08:59:53,953 - wilo_scraper.scraper.wilo_scraper - INFO - Waiting 20 seconds for tiles to appear...
+2025-09-09 08:59:59,125 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step4_wait_20s.png
+2025-09-09 08:59:59,925 - wilo_scraper.scraper.wilo_scraper - INFO - Waiting 25 seconds for tiles to appear...
+2025-09-09 09:00:05,078 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step4_wait_25s.png
+2025-09-09 09:00:05,886 - wilo_scraper.scraper.wilo_scraper - INFO - Waiting 30 seconds for tiles to appear...
+2025-09-09 09:00:11,037 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step4_wait_30s.png
+2025-09-09 09:00:11,915 - wilo_scraper.scraper.wilo_scraper - ERROR - Could not find pump selection tile after extended waiting
+2025-09-09 09:00:11,918 - wilo_scraper.scraper.wilo_scraper - ERROR - Enhanced scraping failed: Failed to navigate to pump selection
+2025-09-09 09:00:11,925 - wilo_scraper.scraper.browser_manager - INFO - Closing browser...
+2025-09-09 09:00:13,066 - wilo_scraper.scraper.browser_manager - INFO - ✅ Browser closed
+2025-09-09 09:00:18,836 - wilo_scraper.scraper.wilo_scraper - INFO - Starting enhanced scraping for country: germany
+2025-09-09 09:00:18,839 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser (simple mode)...
+2025-09-09 09:00:18,839 - wilo_scraper.scraper.browser_manager - INFO - Trying simple Chrome setup...
+2025-09-09 09:00:20,929 - wilo_scraper.scraper.browser_manager - INFO - ✅ Chrome opened successfully!
+2025-09-09 09:00:20,935 - wilo_scraper.scraper.wilo_scraper - INFO - Navigating to Wilo website...
+2025-09-09 09:00:35,407 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step1_initial_page.png
+2025-09-09 09:00:35,415 - wilo_scraper.scraper.wilo_scraper - INFO - Looking for country span: Germany
+2025-09-09 09:00:35,508 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step2_before_country.png
+2025-09-09 09:00:36,550 - wilo_scraper.scraper.wilo_scraper - INFO - Successfully clicked country span: Germany
+2025-09-09 09:00:38,642 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step3_after_country.png
+2025-09-09 09:00:38,642 - wilo_scraper.scraper.wilo_scraper - INFO - Looking for Hydraulische Pumpenauswahl tile...
+2025-09-09 09:00:38,642 - wilo_scraper.scraper.wilo_scraper - INFO - Waiting for page to fully load after country selection...
+2025-09-09 09:00:38,642 - wilo_scraper.scraper.wilo_scraper - INFO - Waiting 5 seconds for tiles to appear...
+2025-09-09 09:00:43,751 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step4_wait_5s.png
+2025-09-09 09:00:43,810 - wilo_scraper.scraper.wilo_scraper - INFO - Waiting 10 seconds for tiles to appear...
+2025-09-09 09:00:48,939 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step4_wait_10s.png
+2025-09-09 09:00:48,977 - wilo_scraper.scraper.wilo_scraper - INFO - Found tile with keyword 'Hydraulische': Hydraulische Pumpenauswahl
+2025-09-09 09:00:50,999 - wilo_scraper.scraper.wilo_scraper - INFO - Successfully clicked pump selection tile
+2025-09-09 09:00:53,505 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step5_after_tile_click.png
+2025-09-09 09:00:56,512 - wilo_scraper.scraper.wilo_scraper - INFO - After tile click, current URL: https://select.wilo.com/ApplRange.aspx
+2025-09-09 09:00:56,514 - wilo_scraper.scraper.wilo_scraper - INFO - Extracting products from category: 01. Heizung
+2025-09-09 09:00:56,636 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step6_category_0_start.png
+2025-09-09 09:00:56,663 - wilo_scraper.scraper.wilo_scraper - INFO - Category dropdown not found or 01. Heizung already selected
+2025-09-09 09:00:56,663 - wilo_scraper.scraper.wilo_scraper - INFO - 🖼️ Looking for 'Bilder ausblenden' checkbox to show images...
+2025-09-09 09:00:56,678 - wilo_scraper.scraper.wilo_scraper - INFO - Found 'Bilder ausblenden' checkbox (selector 1)
+2025-09-09 09:00:56,678 - wilo_scraper.scraper.wilo_scraper - INFO - Current state: CHECKED
+2025-09-09 09:00:56,684 - wilo_scraper.scraper.wilo_scraper - INFO - ✅ Successfully UNCHECKED 'Bilder ausblenden' with JavaScript click
+2025-09-09 09:00:58,879 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step7_images_enabled_verification.png
+2025-09-09 09:01:01,032 - wilo_scraper.scraper.wilo_scraper - INFO - 🖼️ Found 48 visible product images on page
+2025-09-09 09:01:01,032 - wilo_scraper.scraper.wilo_scraper - INFO - Found 3 subcategories for 01. Heizung
+2025-09-09 09:01:01,032 - wilo_scraper.scraper.wilo_scraper - INFO - Processing subcategory 1/2: Umwälzpumpen
+2025-09-09 09:01:01,117 - wilo_scraper.scraper.wilo_scraper - INFO - Clicked subcategory: Umwälzpumpen
+2025-09-09 09:01:07,285 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step8_products_Umwälzpump.png
+2025-09-09 09:01:07,307 - wilo_scraper.scraper.wilo_scraper - INFO - Found 9 grid rows with selector: //tr[contains(@class, 'jqgrow')]
+2025-09-09 09:01:07,341 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:07,343 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos PICO plus [WITH IMAGE]
+2025-09-09 09:01:07,367 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:07,369 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos MAXO [WITH IMAGE]
+2025-09-09 09:01:07,384 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:07,386 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos MAXO-D [WITH IMAGE]
+2025-09-09 09:01:07,405 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:07,408 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos MAXO-Z [WITH IMAGE]
+2025-09-09 09:01:07,427 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:07,428 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos PICO plus [WITH IMAGE]
+2025-09-09 09:01:07,442 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:07,444 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Varios PICO-STG [WITH IMAGE]
+2025-09-09 09:01:07,457 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:07,459 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos MAXO plus [WITH IMAGE]
+2025-09-09 09:01:07,470 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:07,471 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos PICO HU [WITH IMAGE]
+2025-09-09 09:01:07,489 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:07,491 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos PICO plus [WITH IMAGE]
+2025-09-09 09:01:07,621 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step9_extracted_products_Umwälzpump.png
+2025-09-09 09:01:07,621 - wilo_scraper.scraper.wilo_scraper - INFO - EXTRACTION SUMMARY for Umwälzpumpen:
+2025-09-09 09:01:07,621 - wilo_scraper.scraper.wilo_scraper - INFO -    Total products: 9
+2025-09-09 09:01:07,621 - wilo_scraper.scraper.wilo_scraper - INFO -    With images: 9
+2025-09-09 09:01:07,621 - wilo_scraper.scraper.wilo_scraper - INFO -    Without images: 0
+2025-09-09 09:01:07,621 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted 9 products from Umwälzpumpen
+2025-09-09 09:01:07,740 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step7_cat0_sub0_products.png
+2025-09-09 09:01:07,740 - wilo_scraper.scraper.wilo_scraper - INFO - Processing subcategory 2/2: Inline-Pumpen
+2025-09-09 09:01:07,760 - wilo_scraper.scraper.wilo_scraper - INFO - Clicked subcategory: Inline-Pumpen
+2025-09-09 09:01:13,903 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step8_products_Inline-Pum.png
+2025-09-09 09:01:13,910 - wilo_scraper.scraper.wilo_scraper - INFO - Found 13 grid rows with selector: //tr[contains(@class, 'jqgrow')]
+2025-09-09 09:01:13,935 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:13,938 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-D [WITH IMAGE]
+2025-09-09 09:01:13,954 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:13,955 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Atmos GIGA-I [WITH IMAGE]
+2025-09-09 09:01:13,960 - wilo_scraper.scraper.wilo_scraper - ERROR - Error processing row: Message: no such element: Unable to locate element: {"method":"xpath","selector":".//span[@class='common_lbl_bold']"}
+  (Session info: chrome=140.0.7339.80); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Stacktrace:
+0   chromedriver                        0x0000000102853668 cxxbridge1$str$ptr + 2882776
+1   chromedriver                        0x000000010284b594 cxxbridge1$str$ptr + 2849796
+2   chromedriver                        0x00000001023750dc _RNvCslE4myv9Sbr3_7___rustc35___rust_no_alloc_shim_is_unstable_v2 + 73436
+3   chromedriver                        0x00000001023bc474 _RNvCslE4myv9Sbr3_7___rustc35___rust_no_alloc_shim_is_unstable_v2 + 365172
+4   chromedriver                        0x00000001023b1d10 _RNvCslE4myv9Sbr3_7___rustc35___rust_no_alloc_shim_is_unstable_v2 + 322320
+5   chromedriver                        0x00000001023fd66c _RNvCslE4myv9Sbr3_7___rustc35___rust_no_alloc_shim_is_unstable_v2 + 631916
+6   chromedriver                        0x00000001023b0130 _RNvCslE4myv9Sbr3_7___rustc35___rust_no_alloc_shim_is_unstable_v2 + 315184
+7   chromedriver                        0x0000000102817b98 cxxbridge1$str$ptr + 2638344
+8   chromedriver                        0x000000010281adb0 cxxbridge1$str$ptr + 2651168
+9   chromedriver                        0x00000001027f8634 cxxbridge1$str$ptr + 2509988
+10  chromedriver                        0x000000010281b65c cxxbridge1$str$ptr + 2653388
+11  chromedriver                        0x00000001027e9dd0 cxxbridge1$str$ptr + 2450496
+12  chromedriver                        0x000000010283aee4 cxxbridge1$str$ptr + 2782548
+13  chromedriver                        0x000000010283b064 cxxbridge1$str$ptr + 2782932
+14  chromedriver                        0x000000010284b1e0 cxxbridge1$str$ptr + 2848848
+15  libsystem_pthread.dylib             0x000000018871ffa8 _pthread_start + 148
+16  libsystem_pthread.dylib             0x000000018871ada0 thread_start + 8
+
+2025-09-09 09:01:13,984 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:13,986 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: CronoLine-IL-E [WITH IMAGE]
+2025-09-09 09:01:13,999 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:14,001 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: CronoTwin-DL-E [WITH IMAGE]
+2025-09-09 09:01:14,020 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:14,022 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA [WITH IMAGE]
+2025-09-09 09:01:14,036 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:14,037 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA-D [WITH IMAGE]
+2025-09-09 09:01:14,050 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:14,052 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA2.0-D [WITH IMAGE]
+2025-09-09 09:01:14,065 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:14,067 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Stratos GIGA2.0-I [WITH IMAGE]
+2025-09-09 09:01:14,083 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:14,084 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: VeroLine-IPL [WITH IMAGE]
+2025-09-09 09:01:14,096 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:14,098 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: VeroTwin-DPL [WITH IMAGE]
+2025-09-09 09:01:14,117 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:14,118 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos GIGA2.0-D [WITH IMAGE]
+2025-09-09 09:01:14,132 - wilo_scraper.scraper.wilo_scraper - INFO - Found image via regular URL: https://select.wilo.com/ApplRangeHandler.vhd?action=getSeriesImage&file=8dTdugHYRVvCoUolkoAgYkOCqKQSMhZUa5AnWFqfrAPseYQy0JAktHxF%2bsvbMFmHcc3NB9fthhxy%2fycRkWNjZjjEs%2bCdBOvhWr%2bilsvBxWoOHTusW3M%2frzCBIgby2BmTQWxxwhlYHdy999YhGSX4sH35sahw3pgNN9ZIL8kWS1y671YwuQ%2f49th4kyFVsripQzGJiuqZIW4E269dzcPw8kssj34NrxD0rlvWJ3mh4f44Hiu3zXF8nXZVrLgKyt6c3y68vUM1yjI6LNgqC7XiIg%3d%3d&lm=638929600121583291
+2025-09-09 09:01:14,134 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced extraction - Product: Yonos GIGA2.0-I [WITH IMAGE]
+2025-09-09 09:01:14,262 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step9_extracted_products_Inline-Pum.png
+2025-09-09 09:01:14,262 - wilo_scraper.scraper.wilo_scraper - INFO - EXTRACTION SUMMARY for Inline-Pumpen:
+2025-09-09 09:01:14,262 - wilo_scraper.scraper.wilo_scraper - INFO -    Total products: 12
+2025-09-09 09:01:14,262 - wilo_scraper.scraper.wilo_scraper - INFO -    With images: 12
+2025-09-09 09:01:14,262 - wilo_scraper.scraper.wilo_scraper - INFO -    Without images: 0
+2025-09-09 09:01:14,262 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted 12 products from Inline-Pumpen
+2025-09-09 09:01:14,381 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/step7_cat0_sub1_products.png
+2025-09-09 09:01:14,381 - wilo_scraper.scraper.wilo_scraper - INFO - Total extracted 21 products from 01. Heizung
+2025-09-09 09:01:14,405 - wilo_scraper.scraper.wilo_scraper - INFO - Extracted 21 products from 01. Heizung
+2025-09-09 09:01:16,414 - wilo_scraper.scraper.wilo_scraper - INFO - Enhanced scraping completed. Found 21 products total
+2025-09-09 09:01:16,414 - wilo_scraper.scraper.browser_manager - INFO - Closing browser...
+2025-09-09 09:01:17,527 - wilo_scraper.scraper.browser_manager - INFO - ✅ Browser closed

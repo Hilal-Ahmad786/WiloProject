@@ -1,4 +1,13 @@
+#!/usr/bin/env python3
 """
+Update the catalog scraper to extract the specific elements you identified
+"""
+
+def update_catalog_scraper():
+    """Update the catalog scraper with new extraction methods"""
+    
+    # Read the updated scraper content from above
+    updated_content = '''"""
 Enhanced Wilo Catalog Scraper for new catalog page
 Scrapes from: https://wilo.com/de/de/Katalog/de/anwendung/industrie/heizung/heizung
 Updated to extract specific elements from product pages
@@ -146,56 +155,16 @@ class WiloCatalogScraper:
             self.logger.error(f"Failed to extract products from cards: {e}")
             return []
     
-        def _extract_card_data(self, card, index):
-        """Extract data from a single product card with better error handling"""
+    def _extract_card_data(self, card, index):
+        """Extract data from a single product card"""
         try:
-            # Multiple strategies to extract product name
-            product_name = ""
-            
-            # Strategy 1: Card footer h3
+            # Extract product name from card footer
             try:
                 name_element = card.find_element(By.XPATH, ".//div[@class='card-footer']//h3")
                 product_name = name_element.text.strip()
-                self.logger.debug(f"Found name via card-footer h3: {product_name}")
             except:
-                pass
-            
-            # Strategy 2: Any h3 in the card
-            if not product_name:
-                try:
-                    name_element = card.find_element(By.XPATH, ".//h3")
-                    product_name = name_element.text.strip()
-                    self.logger.debug(f"Found name via any h3: {product_name}")
-                except:
-                    pass
-            
-            # Strategy 3: Card title attribute or alt text
-            if not product_name:
-                try:
-                    title_element = card.find_element(By.XPATH, ".//*[@title]")
-                    product_name = title_element.get_attribute('title').strip()
-                    self.logger.debug(f"Found name via title attribute: {product_name}")
-                except:
-                    pass
-            
-            # Strategy 4: Any text content that looks like a product name
-            if not product_name:
-                try:
-                    text_elements = card.find_elements(By.XPATH, ".//*[text()]")
-                    for elem in text_elements:
-                        text = elem.text.strip()
-                        # Look for text that contains "Wilo" and is substantial
-                        if text and len(text) > 5 and ('wilo' in text.lower() or 'atmos' in text.lower() or 'pump' in text.lower()):
-                            product_name = text
-                            self.logger.debug(f"Found name via text content: {product_name}")
-                            break
-                except:
-                    pass
-            
-            # Strategy 5: Use a fallback name based on index
-            if not product_name:
-                product_name = f"Wilo Product {index + 1}"
-                self.logger.warning(f"Using fallback name for card {index + 1}: {product_name}")
+                self.logger.warning(f"Could not find product name in card {index+1}")
+                return None
             
             # Extract image from card
             image_url = ""
@@ -213,29 +182,17 @@ class WiloCatalogScraper:
             except:
                 self.logger.warning(f"Could not find image in card {index+1}")
             
-            # Extract product link with multiple strategies
+            # Extract product link
             product_link = ""
-            link_selectors = [
-                ".//a[@class='stretched-link']",
-                ".//a[contains(@class, 'stretched')]",
-                ".//a[@href]",
-                ".//a"
-            ]
-            
-            for selector in link_selectors:
-                try:
-                    link_element = card.find_element(By.XPATH, selector)
-                    href = link_element.get_attribute('href')
-                    if href:
-                        if href.startswith('/'):
-                            product_link = f"https://wilo.com{href}"
-                        else:
-                            product_link = href
-                        break
-                except:
-                    continue
-            
-            if not product_link:
+            try:
+                link_element = card.find_element(By.XPATH, ".//a[@class='stretched-link']")
+                href = link_element.get_attribute('href')
+                if href:
+                    if href.startswith('/'):
+                        product_link = f"https://wilo.com{href}"
+                    else:
+                        product_link = href
+            except:
                 self.logger.warning(f"Could not find product link in card {index+1}")
             
             card_data = {
@@ -249,14 +206,9 @@ class WiloCatalogScraper:
             return card_data
             
         except Exception as e:
-            self.logger.error(f"Failed to extract card data for card {index+1}: {e}")
-            # Return fallback data instead of None
-            return {
-                'name': f"Wilo Product {index + 1}",
-                'card_image_url': '',
-                'product_link': '',
-                'card_index': index
-            }
+            self.logger.error(f"Failed to extract card data: {e}")
+            return None
+    
     def _get_product_details(self, card, card_data, index):
         """Click on card and extract detailed product information"""
         try:
@@ -554,14 +506,14 @@ class WiloCatalogScraper:
                         text = elem.text.strip()
                         if text and len(text) > 50:  # Only substantial content
                             # Clean up the text
-                            text = re.sub(r'\s+', ' ', text)  # Normalize whitespace
+                            text = re.sub(r'\\s+', ' ', text)  # Normalize whitespace
                             if text not in long_description_parts:
                                 long_description_parts.append(text)
                 except:
                     continue
             
             # Combine parts with proper formatting
-            long_description = "\n\n".join(long_description_parts)
+            long_description = "\\n\\n".join(long_description_parts)
             
             self.logger.info(f"Extracted long description: {len(long_description)} characters")
             return long_description
@@ -590,7 +542,7 @@ class WiloCatalogScraper:
             # Long description
             if long_desc:
                 # Split long description into paragraphs
-                paragraphs = long_desc.split('\n\n')
+                paragraphs = long_desc.split('\\n\\n')
                 for paragraph in paragraphs:
                     if paragraph.strip():
                         html_parts.append(f"<p>{paragraph.strip()}</p>")
@@ -599,7 +551,7 @@ class WiloCatalogScraper:
             html_parts.append("<h3>Über Wilo</h3>")
             html_parts.append("<p>Wilo ist ein führender Hersteller von Pumpen und Pumpensystemen für Heizung, Kühlung, Klimatechnik, Wasserversorgung und Abwasserbehandlung.</p>")
             
-            return "\n".join(html_parts)
+            return "\\n".join(html_parts)
             
         except Exception as e:
             self.logger.error(f"Failed to build full description: {e}")
@@ -648,3 +600,41 @@ class WiloCatalogScraper:
         self.is_running = False
         if self.progress_callback:
             self.progress_callback("Catalog scraping stopped by user", stop_progress=True)
+'''
+    
+    # Write the updated scraper
+    with open('scraper/wilo_catalog_scraper.py', 'w') as f:
+        f.write(updated_content)
+    
+    print("✅ Updated catalog scraper with new extraction methods")
+
+def main():
+    """Main update function"""
+    print("🔧 UPDATING CATALOG SCRAPER WITH SPECIFIC ELEMENT EXTRACTION")
+    print("=" * 70)
+    
+    try:
+        update_catalog_scraper()
+        
+        print("\n✅ CATALOG SCRAPER UPDATED!")
+        print("\n🎯 Updated Extraction Methods:")
+        print("• Carousel media extraction (images and videos)")
+        print("• Short description from 'pl-md-8 col' element")
+        print("• Advantages from 'cl-your-advantages' section")
+        print("• Long description from text-module sections")
+        print("• Comprehensive Shopify-ready descriptions")
+        
+        print("\n🚀 Test your scraper:")
+        print("python main.py")
+        print("Select 'New Catalog Scraper'")
+        print("Set to extract 1-2 products")
+        print("Check the results for proper content extraction")
+        
+    except Exception as e:
+        print(f"❌ Error during update: {e}")
+        return 1
+    
+    return 0
+
+if __name__ == "__main__":
+    exit(main())

@@ -213,18 +213,14 @@ class MainWindow:
             
             categories = set(p.get('category', 'Unknown') for p in self.scraped_products)
             
-            # Update stats text
+            # Update stats text - FIXED F-STRING
             self.stats_text.config(state='normal')
             self.stats_text.delete(1.0, tk.END)
             
-            stats = f"Total Products: {total_products}
-"
-            stats += f"Catalog Products: {catalog_products}
-"
-            stats += f"Original Products: {original_products}
-"
-            stats += f"Unique Categories: {len(categories)}
-"
+            stats = f"Total Products: {total_products}\n"
+            stats += f"Catalog Products: {catalog_products}\n" 
+            stats += f"Original Products: {original_products}\n"
+            stats += f"Unique Categories: {len(categories)}\n"
             
             if self.scraped_products:
                 last_product = self.scraped_products[-1]
@@ -246,16 +242,15 @@ class MainWindow:
             # Switch to Shopify tab
             self.notebook.select(1)
             
-            # Show upload confirmation
-            result = messagebox.askyesno(
-                "Quick Upload", 
-                f"Upload {len(self.scraped_products)} products to Shopify?
-
-"
-                f"Catalog products: {sum(1 for p in self.scraped_products if p.get('source') == 'catalog')}
-"
-                f"Original products: {sum(1 for p in self.scraped_products if p.get('source') != 'catalog')}"
-            )
+            # Show upload confirmation - FIXED F-STRING
+            catalog_count = sum(1 for p in self.scraped_products if p.get('source') == 'catalog')
+            original_count = sum(1 for p in self.scraped_products if p.get('source') != 'catalog')
+            
+            message = f"Upload {len(self.scraped_products)} products to Shopify?\n\n"
+            message += f"Catalog products: {catalog_count}\n"
+            message += f"Original products: {original_count}"
+            
+            result = messagebox.askyesno("Quick Upload", message)
             
             if result:
                 self.shopify_config.upload_scraped_products()
@@ -274,12 +269,8 @@ class MainWindow:
                 messagebox.showinfo("No Data", "No products to clear.")
                 return
             
-            result = messagebox.askyesno(
-                "Clear All Results", 
-                f"Clear all {len(self.scraped_products)} scraped products?
-
-This cannot be undone."
-            )
+            message = f"Clear all {len(self.scraped_products)} scraped products?\n\nThis cannot be undone."
+            result = messagebox.askyesno("Clear All Results", message)
             
             if result:
                 self.scraped_products.clear()
@@ -369,9 +360,8 @@ This cannot be undone."
     def clear_results(self):
         """Clear results table"""
         try:
-            result = messagebox.askyesno("Clear Results", "Clear results table?
-
-This will not affect scraped products.")
+            message = "Clear results table?\n\nThis will not affect scraped products."
+            result = messagebox.askyesno("Clear Results", message)
             
             if result:
                 self.results_table.clear()

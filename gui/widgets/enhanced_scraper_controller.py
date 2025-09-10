@@ -162,7 +162,7 @@ class EnhancedScraperController(ttk.LabelFrame):
         ttk.Label(count_frame, textvariable=self.product_count_var, font=('Arial', 12, 'bold')).pack(side='left', padx=5)
         
         # Bind scraper type change
-        self.scraper_type_var.trace('w', self._on_scraper_type_changed)
+        self.scraper_type_var.trace_add('write', self._on_scraper_type_changed)
         self._on_scraper_type_changed()
     
     def _on_scraper_type_changed(self, *args):
@@ -300,15 +300,11 @@ class EnhancedScraperController(ttk.LabelFrame):
         scraper_name = "Catalog" if scraper_type == "catalog" else "Original"
         self.status_var.set(f"{scraper_name} scraping completed! Found {product_count} products")
         
-        messagebox.showinfo(
-            "Scraping Complete", 
-            f"✅ {scraper_name} scraping completed!
-
-"
-            f"Found {product_count} new products
-"
-            f"Total products: {len(self.scraped_products)}"
-        )
+        message = f"✅ {scraper_name} scraping completed!\n\n"
+        message += f"Found {product_count} new products\n"
+        message += f"Total products: {len(self.scraped_products)}"
+        
+        messagebox.showinfo("Scraping Complete", message)
     
     def _on_scraping_failed(self, error_message):
         """Handle scraping failure"""
@@ -409,23 +405,17 @@ class EnhancedScraperController(ttk.LabelFrame):
         scrollbar.pack(side='right', fill='y')
         
         # Display results
-        results_text.insert('1.0', f"=== SCRAPING RESULTS ({len(self.scraped_products)} products) ===
-
-")
+        header = f"=== SCRAPING RESULTS ({len(self.scraped_products)} products) ===\n\n"
+        results_text.insert('1.0', header)
         
         for i, product in enumerate(self.scraped_products, 1):
-            results_text.insert('end', f"{i}. {product.get('name', 'Unknown')}
-")
-            results_text.insert('end', f"   Source: {product.get('source', 'unknown')}
-")
-            results_text.insert('end', f"   Category: {product.get('category', 'Unknown')}
-")
+            results_text.insert('end', f"{i}. {product.get('name', 'Unknown')}\n")
+            results_text.insert('end', f"   Source: {product.get('source', 'unknown')}\n")
+            results_text.insert('end', f"   Category: {product.get('category', 'Unknown')}\n")
             if product.get('short_description'):
                 desc = product['short_description'][:100] + "..." if len(product['short_description']) > 100 else product['short_description']
-                results_text.insert('end', f"   Description: {desc}
-")
-            results_text.insert('end', "
-")
+                results_text.insert('end', f"   Description: {desc}\n")
+            results_text.insert('end', "\n")
         
         results_text.config(state='disabled')
     

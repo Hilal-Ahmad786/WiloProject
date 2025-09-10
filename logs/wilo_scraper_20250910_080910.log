@@ -1,0 +1,22 @@
+2025-09-10 08:09:10,932 - wilo_scraper - INFO - Logging initialized - logs/wilo_scraper_20250910_080910.log
+2025-09-10 08:09:10,932 - wilo_scraper.__main__ - INFO - Starting Wilo Scraper Application
+2025-09-10 08:09:22,657 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Starting catalog scraping for max 2 products
+2025-09-10 08:09:22,683 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser (simple mode)...
+2025-09-10 08:09:22,684 - wilo_scraper.scraper.browser_manager - INFO - Trying simple Chrome setup...
+2025-09-10 08:09:46,534 - wilo_scraper.scraper.browser_manager - INFO - ✅ Chrome opened successfully!
+2025-09-10 08:09:46,544 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Navigating to Wilo catalog page...
+2025-09-10 08:09:58,551 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_step1_initial_page.png
+2025-09-10 08:10:03,595 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Found 46 product cards
+2025-09-10 08:10:03,595 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing 2 cards (limited by max_products=2)
+2025-09-10 08:10:03,688 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted card data: Wilo-Atmos TERA-SCH
+2025-09-10 08:10:03,754 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Clicked on product card: Wilo-Atmos TERA-SCH
+2025-09-10 08:10:08,901 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_step2_product_0_page.png
+2025-09-10 08:10:09,260 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 31 images and 0 videos
+2025-09-10 08:10:09,457 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted short description: 341 characters
+2025-09-10 08:10:09,509 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 9 advantages
+2025-09-10 08:10:09,623 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted long description: 721 characters
+2025-09-10 08:10:12,732 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Successfully extracted product: Wilo-Atmos TERA-SCH
+2025-09-10 08:10:14,754 - wilo_scraper.scraper.wilo_catalog_scraper - WARNING - Could not find product name in card 2
+2025-09-10 08:10:16,763 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Catalog scraping completed. Found 1 products
+2025-09-10 08:10:16,763 - wilo_scraper.scraper.browser_manager - INFO - Closing browser...
+2025-09-10 08:10:16,857 - wilo_scraper.scraper.browser_manager - INFO - ✅ Browser closed

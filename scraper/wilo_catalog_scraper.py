@@ -1,5 +1,5 @@
 """
-Enhanced Wilo Catalog Scraper with better media extraction
+Enhanced Wilo Catalog Scraper with Produktauswahl navigation and table extraction
 """
 
 import time
@@ -98,23 +98,77 @@ class WiloCatalogScraper:
                 try:
                     self.logger.info(f"=== PROCESSING CARD {i+1} ===")
                     
-                    # Re-find cards each time to avoid stale element reference
+                    # Enhanced card finding with better debugging
                     cards = []
-                    for selector in card_selectors:
+                    current_url = driver.current_url
+                    self.logger.info(f"🌐 Current URL: {current_url}")
+                    
+                    # Verify we're on the catalog page
+                    if not ("katalog" in current_url.lower() and "industrie/heizung" in current_url.lower()):
+                        self.logger.warning(f"⚠️  Not on catalog page, navigating...")
+                        driver.get(self.catalog_url)
+                        time.sleep(5)
+                        self.browser_manager.take_screenshot(f"catalog_navigation_fix_card_{i}.png")
+                    
+                    # Try to find cards with enhanced error handling
+                    for selector_idx, selector in enumerate(card_selectors):
                         try:
+                            self.logger.info(f"🔍 Trying selector {selector_idx + 1}: {selector}")
                             found_cards = wait.until(EC.presence_of_all_elements_located((By.XPATH, selector)))
-                            if found_cards and len(found_cards) > i:
+                            if found_cards:
                                 cards = found_cards
-                                self.logger.info(f"Re-found {len(cards)} cards for iteration {i+1}")
-                                break
+                                self.logger.info(f"✅ Found {len(cards)} cards with selector {selector_idx + 1}")
+                                
+                                # Verify we have enough cards
+                                if len(cards) > i:
+                                    self.logger.info(f"✅ Card {i+1} is available in the list")
+                                    break
+                                else:
+                                    self.logger.warning(f"⚠️  Only {len(cards)} cards found, but need card {i+1}")
+                                    
                         except TimeoutException:
+                            self.logger.warning(f"⏰ Timeout with selector {selector_idx + 1}")
+                            continue
+                        except Exception as e:
+                            self.logger.error(f"❌ Error with selector {selector_idx + 1}: {e}")
                             continue
                     
-                    if not cards or len(cards) <= i:
-                        self.logger.warning(f"No card found at position {i+1}")
+                    # Final validation
+                    if not cards:
+                        self.logger.error(f"❌ No cards found with any selector")
+                        self.browser_manager.take_screenshot(f"no_cards_found_card_{i}.png")
                         break
                     
+                    if len(cards) <= i:
+                        self.logger.warning(f"❌ No card found at position {i+1} (found {len(cards)} total cards)")
+                        self.browser_manager.take_screenshot(f"insufficient_cards_card_{i}.png")
+                        
+                        # Try scrolling down to load more cards
+                        try:
+                            self.logger.info("📜 Trying to scroll down to load more cards...")
+                            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                            time.sleep(3)
+                            driver.execute_script("window.scrollTo(0, 0);")
+                            time.sleep(2)
+                            
+                            # Try finding cards again after scroll
+                            for selector in card_selectors:
+                                try:
+                                    refreshed_cards = driver.find_elements(By.XPATH, selector)
+                                    if len(refreshed_cards) > i:
+                                        cards = refreshed_cards
+                                        self.logger.info(f"✅ After scrolling, found {len(cards)} cards")
+                                        break
+                                except:
+                                    continue
+                        except Exception as scroll_e:
+                            self.logger.warning(f"Scroll attempt failed: {scroll_e}")
+                        
+                        if len(cards) <= i:
+                            break
+                    
                     card = cards[i]
+                    self.logger.info(f"🎯 Selected card {i+1} for processing")
                     
                     # Extract card data
                     card_data = self.extract_card_data_safe(card, i)
@@ -135,10 +189,20 @@ class WiloCatalogScraper:
                     else:
                         self.logger.warning(f"❌ Failed to extract card data for card {i+1}")
                     
-                    time.sleep(2)
+                    # Add extra wait between cards to ensure proper navigation
+                    if i < max_products - 1:  # Don't wait after the last card
+                        self.logger.info(f"⏳ Waiting before processing next card...")
+                        time.sleep(3)
                     
                 except Exception as e:
                     self.logger.error(f"❌ Error processing card {i+1}: {e}")
+                    # Try to return to catalog page before continuing
+                    try:
+                        driver.get(self.catalog_url)
+                        time.sleep(5)
+                        self.logger.info("🔄 Returned to catalog page after error")
+                    except Exception as nav_e:
+                        self.logger.error(f"❌ Failed to return to catalog after error: {nav_e}")
                     continue
             
             self.logger.info(f"=== EXTRACTION COMPLETE ===")
@@ -252,11 +316,20 @@ class WiloCatalogScraper:
             return None
     
     def extract_product_page_details(self, card_data):
-        """Extract detailed info from product page"""
+        """Extract detailed info from product page and navigate to Produktauswahl"""
         try:
             driver = self.browser_manager.get_driver()
             
-            # Get real product name from H1
+            # Extract media and descriptions from main product page first
+            media_items = self.extract_all_media()
+            short_description = self.extract_short_description()
+            advantages = self.extract_advantages()
+            long_description = self.extract_long_description()
+            
+            # Now navigate to Produktauswahl and extract table data
+            table_data = self.navigate_to_produktauswahl_and_extract_tables()
+            
+            # Get real product name from H1 (but exclude it from the final description)
             real_product_name = ""
             try:
                 h1_element = driver.find_element(By.XPATH, "//h1[@class='m-0']")
@@ -270,14 +343,6 @@ class WiloCatalogScraper:
                 except:
                     real_product_name = f"Wilo Product {card_data.get('card_index', 0) + 1}"
                     self.logger.warning(f"Using fallback name: {real_product_name}")
-            
-            # Extract media with enhanced extraction
-            media_items = self.extract_all_media()
-            
-            # Extract descriptions and advantages
-            short_description = self.extract_short_description()
-            advantages = self.extract_advantages()
-            long_description = self.extract_long_description()
             
             # Create comprehensive product object
             product = {
@@ -294,6 +359,7 @@ class WiloCatalogScraper:
                 'advantages': advantages,
                 'long_description': long_description,
                 'full_description': self.build_full_description(short_description, advantages, long_description),
+                'technical_specifications': table_data,
                 'product_url': driver.current_url,
                 'extracted_at': time.strftime('%Y-%m-%d %H:%M:%S'),
                 'specifications': {
@@ -314,17 +380,184 @@ class WiloCatalogScraper:
             self.logger.info(f"   Short desc length: {len(short_description)} chars")
             self.logger.info(f"   Advantages count: {len(advantages)}")
             self.logger.info(f"   Product images: {len(media_items['images'])}")
-            
-            if short_description:
-                self.logger.info(f"   Short desc preview: {short_description[:100]}...")
-            if advantages:
-                self.logger.info(f"   First advantage: {advantages[0][:50]}...")
+            self.logger.info(f"   Technical tables: {len(table_data)}")
             
             return product
             
         except Exception as e:
             self.logger.error(f"Failed to extract product details: {e}")
             return None
+
+    def navigate_to_produktauswahl_and_extract_tables(self):
+        """Navigate to Produktauswahl tab and extract table data from the selected product"""
+        try:
+            driver = self.browser_manager.get_driver()
+            wait = WebDriverWait(driver, 15)
+            table_data = []
+            
+            # Step 1: Click on Produktauswahl tab
+            self.logger.info("Looking for Produktauswahl tab...")
+            
+            produktauswahl_selectors = [
+                "//li[@class='nav-item']//a[contains(@href, '#range_productlist') and contains(text(), 'Produktauswahl')]",
+                "//a[contains(@href, '#range_productlist')]",
+                "//a[contains(text(), 'Produktauswahl')]"
+            ]
+            
+            produktauswahl_clicked = False
+            for selector in produktauswahl_selectors:
+                try:
+                    tab_element = wait.until(EC.element_to_be_clickable((By.XPATH, selector)))
+                    driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", tab_element)
+                    time.sleep(1)
+                    driver.execute_script("arguments[0].click();", tab_element)
+                    self.logger.info("✅ Successfully clicked Produktauswahl tab")
+                    produktauswahl_clicked = True
+                    break
+                except Exception as e:
+                    self.logger.warning(f"Failed to click Produktauswahl with selector {selector}: {e}")
+                    continue
+            
+            if not produktauswahl_clicked:
+                self.logger.warning("❌ Could not click Produktauswahl tab")
+                return []
+            
+            time.sleep(3)
+            self.browser_manager.take_screenshot("produktauswahl_table_page.png")
+            
+            # Step 2: Find the table and click on the first item
+            self.logger.info("Looking for product table...")
+            
+            table_selectors = [
+                "//table//tbody//tr[1]//td[1]//a",
+                "//tbody//tr[1]//td[1]//a",
+                "//tr[1]//td[1]//a"
+            ]
+            
+            first_product_clicked = False
+            selected_product_name = ""
+            for selector in table_selectors:
+                try:
+                    first_product_link = wait.until(EC.element_to_be_clickable((By.XPATH, selector)))
+                    selected_product_name = first_product_link.text.strip()
+                    self.logger.info(f"✅ Found first product in table: {selected_product_name}")
+                    
+                    driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", first_product_link)
+                    time.sleep(1)
+                    driver.execute_script("arguments[0].click();", first_product_link)
+                    self.logger.info(f"✅ Successfully clicked on first product: {selected_product_name}")
+                    first_product_clicked = True
+                    break
+                except Exception as e:
+                    self.logger.warning(f"Failed to click first product with selector {selector}: {e}")
+                    continue
+            
+            if not first_product_clicked:
+                self.logger.warning("❌ Could not click on first product in table")
+                return []
+            
+            time.sleep(5)
+            self.browser_manager.take_screenshot("product_detail_tables_page.png")
+            
+            # Step 3: Extract all table data from the new page
+            self.logger.info("🔍 Starting table data extraction from product detail page...")
+            
+            # Look for tables with technical specifications
+            table_containers = driver.find_elements(By.XPATH, "//div[contains(@class, 'cl-card-table-simple')]//table[@class='cl-table-simple']")
+            
+            self.logger.info(f"📊 Found {len(table_containers)} tables on the page")
+            
+            if len(table_containers) == 0:
+                self.logger.warning("❌ No tables found with the expected selectors")
+                # Try alternative selectors
+                alternative_selectors = [
+                    "//table",
+                    "//div[contains(@class, 'table')]//table",
+                    "//div[contains(@class, 'row')]//table"
+                ]
+                
+                for alt_selector in alternative_selectors:
+                    try:
+                        alt_tables = driver.find_elements(By.XPATH, alt_selector)
+                        if alt_tables:
+                            self.logger.info(f"📊 Found {len(alt_tables)} tables with alternative selector: {alt_selector}")
+                            table_containers = alt_tables[:4]  # Limit to first 4 tables
+                            break
+                    except Exception as e:
+                        continue
+            
+            for i, table in enumerate(table_containers):
+                try:
+                    table_dict = {}
+                    
+                    self.logger.info(f"🔍 Processing table {i+1}/{len(table_containers)}...")
+                    
+                    # Extract table header
+                    header_elements = table.find_elements(By.XPATH, ".//thead//th")
+                    if header_elements:
+                        table_title = header_elements[0].text.strip()
+                        table_dict['title'] = table_title
+                        self.logger.info(f"📋 Table title: '{table_title}'")
+                    else:
+                        table_dict['title'] = f"Technical Data Table {i+1}"
+                        self.logger.info(f"📋 No header found, using default title: {table_dict['title']}")
+                    
+                    # Extract table rows
+                    rows = table.find_elements(By.XPATH, ".//tbody//tr")
+                    table_rows = {}
+                    
+                    self.logger.info(f"📝 Found {len(rows)} rows in table")
+                    
+                    for row_idx, row in enumerate(rows):
+                        try:
+                            cells = row.find_elements(By.XPATH, ".//td")
+                            if len(cells) >= 2:
+                                key = cells[0].text.strip()
+                                value = cells[1].text.strip()
+                                if key and value:
+                                    table_rows[key] = value
+                                    self.logger.debug(f"   Row {row_idx+1}: '{key}' = '{value}'")
+                                else:
+                                    self.logger.debug(f"   Row {row_idx+1}: Empty key or value")
+                            else:
+                                self.logger.debug(f"   Row {row_idx+1}: Less than 2 cells ({len(cells)} cells)")
+                        except Exception as e:
+                            self.logger.warning(f"   Error processing row {row_idx+1}: {e}")
+                            continue
+                    
+                    table_dict['data'] = table_rows
+                    table_dict['product_name'] = selected_product_name
+                    table_data.append(table_dict)
+                    
+                    self.logger.info(f"✅ Successfully extracted {len(table_rows)} data rows from table: '{table_dict['title']}'")
+                    
+                    # Log first few entries for debugging
+                    if table_rows:
+                        first_entries = list(table_rows.items())[:3]
+                        self.logger.info(f"   Sample data: {first_entries}")
+                    
+                except Exception as e:
+                    self.logger.error(f"❌ Error extracting table {i+1}: {e}")
+                    continue
+            
+            # Final summary
+            total_data_points = sum(len(table['data']) for table in table_data)
+            self.logger.info(f"🎉 TABLE EXTRACTION COMPLETE!")
+            self.logger.info(f"   ✅ Successfully extracted {len(table_data)} tables")
+            self.logger.info(f"   ✅ Total data points: {total_data_points}")
+            self.logger.info(f"   📊 Tables found: {[table['title'] for table in table_data]}")
+            
+            if len(table_data) == 0:
+                self.logger.warning("❌ WARNING: No table data was extracted!")
+                # Take a screenshot for debugging
+                self.browser_manager.take_screenshot("no_tables_found_debug.png")
+            
+            return table_data
+            
+        except Exception as e:
+            self.logger.error(f"❌ Failed to navigate to Produktauswahl and extract tables: {e}")
+            self.browser_manager.take_screenshot("table_extraction_error.png")
+            return []
 
     def extract_all_media(self):
         """Extract images/videos by clicking thumbnails; if none, capture a single product image."""
@@ -381,7 +614,6 @@ class WiloCatalogScraper:
             # 1) Find and iterate thumbnails
             thumbs = driver.find_elements(
                 By.XPATH,
-                # your structure shows thumbnails inside .mt-3.cl-gutters--2auto .row .col .cl-image-preview
                 "//div[contains(@class,'cl-image-preview')][.//img]"
             )
             self.logger.info(f"Found {len(thumbs)} thumbnail tiles")
@@ -520,7 +752,7 @@ class WiloCatalogScraper:
             return {'images': [], 'videos': [], 'all_media': []}
 
     def extract_short_description(self):
-        """Extract short description"""
+        """Extract short description (excluding product heading)"""
         try:
             driver = self.browser_manager.get_driver()
             
@@ -533,12 +765,21 @@ class WiloCatalogScraper:
             
             short_description_parts = []
             
+            # Get the product name to exclude it
+            product_heading = ""
+            try:
+                h1_element = driver.find_element(By.XPATH, "//h1")
+                product_heading = h1_element.text.strip()
+            except:
+                pass
+            
             for selector in short_desc_selectors:
                 try:
                     elements = driver.find_elements(By.XPATH, selector)
                     for elem in elements:
                         text = elem.text.strip()
-                        if text and len(text) > 10:
+                        # Skip if this text is the product heading
+                        if text and len(text) > 10 and text != product_heading:
                             short_description_parts.append(text)
                 except:
                     continue
@@ -583,7 +824,7 @@ class WiloCatalogScraper:
             self.logger.error(f"Failed to extract advantages: {e}")
             return []
     
-    def extract_long_description(self):
+    def extract_long_description(self, product_name=""):
         """Extract long description"""
         try:
             driver = self.browser_manager.get_driver()
@@ -601,8 +842,18 @@ class WiloCatalogScraper:
                     for elem in elements:
                         text = elem.text.strip()
                         if text and len(text) > 50:
+                            # Clean up the text
                             text = re.sub(r'\s+', ' ', text)
-                            if text not in long_description_parts:
+                            
+                            # Skip unwanted content
+                            skip_text = any([
+                                'über wilo' in text.lower(),
+                                'wilo ist ein' in text.lower(),
+                                text == product_name,
+                                text.lower().startswith(product_name.lower().split()[0]) if product_name else False
+                            ])
+                            
+                            if not skip_text and text not in long_description_parts:
                                 long_description_parts.append(text)
                 except:
                     continue
@@ -616,7 +867,7 @@ class WiloCatalogScraper:
             return ""
     
     def build_full_description(self, short_desc, advantages, long_desc):
-        """Build comprehensive description"""
+        """Build comprehensive description (excluding product heading and 'Über Wilo' section)"""
         try:
             html_parts = []
             
@@ -634,10 +885,12 @@ class WiloCatalogScraper:
                 paragraphs = long_desc.split('\n\n')
                 for paragraph in paragraphs:
                     if paragraph.strip():
+                        # Skip paragraphs that contain "Über Wilo" content
+                        if "über wilo" in paragraph.lower() or "wilo ist ein" in paragraph.lower():
+                            continue
                         html_parts.append(f"<p>{paragraph.strip()}</p>")
             
-            html_parts.append("<h3>Über Wilo</h3>")
-            html_parts.append("<p>Wilo ist ein führender Hersteller von Pumpen und Pumpensystemen.</p>")
+            # Note: Removed the "Über Wilo" section as requested
             
             return "\n".join(html_parts)
             

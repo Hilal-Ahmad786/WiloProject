@@ -1,0 +1,179 @@
+2025-09-12 09:34:32,834 - wilo_scraper - INFO - Logging initialized - logs/wilo_scraper_20250912_093432.log
+2025-09-12 09:34:32,834 - wilo_scraper.__main__ - INFO - Starting Wilo Scraper Application
+2025-09-12 09:34:41,325 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Starting catalog scraping for max 2 products
+2025-09-12 09:34:41,328 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser (simple mode)...
+2025-09-12 09:34:41,328 - wilo_scraper.scraper.browser_manager - INFO - Trying simple Chrome setup...
+2025-09-12 09:34:51,024 - wilo_scraper.scraper.browser_manager - INFO - ✅ Chrome opened successfully!
+2025-09-12 09:34:51,025 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Navigating to Wilo catalog page...
+2025-09-12 09:35:00,645 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_step1_initial_page.png
+2025-09-12 09:35:05,704 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === PROCESSING CARD 1 ===
+2025-09-12 09:35:05,741 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Re-found 46 cards for iteration 1
+2025-09-12 09:35:05,771 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted card data for position 1
+2025-09-12 09:35:05,827 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Clicked via link for card 1
+2025-09-12 09:35:10,975 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_product_0_page.png
+2025-09-12 09:35:10,989 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Found 7 thumbnail tiles
+2025-09-12 09:35:12,341 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [thumb 1] Added image: https://cms.media.wilo.com/dcipicpfinder/wilo352932/9652775/wilo352932_3.png
+2025-09-12 09:35:17,169 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [thumb 2] Added image: https://cms.media.wilo.com/dcipicpfinder/wilo363687/9652787/wilo363687_3.png
+2025-09-12 09:35:22,189 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [thumb 3] Added image: https://cms.media.wilo.com/dcipicpfinder/wilo363688/9652799/wilo363688_3.png
+2025-09-12 09:35:27,053 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [thumb 4] Added image: https://cms.media.wilo.com/dcianimpfinder/wilo520791/6327122/wilo520791_thumbnail.jpg
+2025-09-12 09:35:31,927 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [thumb 5] Added video: https://cms.media.wilo.com/resources/video7/video_embed.html?url=/dcividpfinder/wilo511705/5930178/video_config.json&autostart=false&defaultquality=0&mute=false&st=de&tb=auto&loop=
+2025-09-12 09:35:36,875 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [thumb 6] Added video: https://cms.media.wilo.com/resources/video7/video_embed.html?url=/dcividpfinder/wilo683555/9307367/video_config.json&autostart=false&defaultquality=0&mute=false&st=auto&tb=auto&loop={loop}
+2025-09-12 09:35:42,277 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [thumb 7] Added image: https://cms.media.wilo.com/dcipicpfinder/wilo317177/4092769/wilo317177_3.png
+2025-09-12 09:35:42,278 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Media extraction complete - Images: 5, Videos: 2
+2025-09-12 09:35:42,376 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted short description: 1013 characters
+2025-09-12 09:35:42,419 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 9 advantages
+2025-09-12 09:35:42,432 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted long description: 0 characters
+2025-09-12 09:35:42,433 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Looking for Produktauswahl tab...
+2025-09-12 09:35:43,582 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Successfully clicked Produktauswahl tab
+2025-09-12 09:35:46,709 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/produktauswahl_table_page.png
+2025-09-12 09:35:46,709 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Looking for product table...
+2025-09-12 09:35:46,748 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Found first product in table: Atmos TERA-SCH125/200-30/2
+2025-09-12 09:35:47,837 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Successfully clicked on first product: Atmos TERA-SCH125/200-30/2
+2025-09-12 09:35:52,971 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/product_detail_tables_page.png
+2025-09-12 09:35:52,972 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracting table data from product detail page...
+2025-09-12 09:35:52,985 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Found 13 tables on the page
+2025-09-12 09:35:53,000 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: Hydraulische Daten
+2025-09-12 09:35:53,083 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 5 rows from table: Hydraulische Daten
+2025-09-12 09:35:53,106 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: Motordaten
+2025-09-12 09:35:53,208 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 8 rows from table: Motordaten
+2025-09-12 09:35:53,215 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: Einbaumaße
+2025-09-12 09:35:53,243 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 2 rows from table: Einbaumaße
+2025-09-12 09:35:53,252 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: Werkstoffe
+2025-09-12 09:35:53,300 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 4 rows from table: Werkstoffe
+2025-09-12 09:35:53,307 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: 
+2025-09-12 09:35:53,322 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 0 rows from table: 
+2025-09-12 09:35:53,335 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: 
+2025-09-12 09:35:53,399 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 0 rows from table: 
+2025-09-12 09:35:53,410 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: 
+2025-09-12 09:35:53,457 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 0 rows from table: 
+2025-09-12 09:35:53,465 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: 
+2025-09-12 09:35:53,489 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 0 rows from table: 
+2025-09-12 09:35:53,497 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: 
+2025-09-12 09:35:53,547 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 0 rows from table: 
+2025-09-12 09:35:53,554 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: 
+2025-09-12 09:35:53,600 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 0 rows from table: 
+2025-09-12 09:35:53,608 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: 
+2025-09-12 09:35:53,716 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 0 rows from table: 
+2025-09-12 09:35:53,723 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: 
+2025-09-12 09:35:53,748 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 0 rows from table: 
+2025-09-12 09:35:53,756 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: 
+2025-09-12 09:35:53,796 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 0 rows from table: 
+2025-09-12 09:35:53,796 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Successfully extracted 13 tables
+2025-09-12 09:35:53,808 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted real name from H1: Atmos TERA-SCH125/200-30/2
+2025-09-12 09:35:53,810 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 PRODUCT DEBUG for Atmos TERA-SCH125/200-30/2:
+2025-09-12 09:35:53,810 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Real name from H1: Atmos TERA-SCH125/200-30/2
+2025-09-12 09:35:53,810 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc length: 1013 chars
+2025-09-12 09:35:53,810 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Advantages count: 9
+2025-09-12 09:35:53,810 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Product images: 5
+2025-09-12 09:35:53,810 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Technical tables: 13
+2025-09-12 09:35:56,845 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted: Atmos TERA-SCH125/200-30/2
+2025-09-12 09:35:58,865 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === PROCESSING CARD 2 ===
+2025-09-12 09:36:29,543 - wilo_scraper.scraper.wilo_catalog_scraper - WARNING - No card found at position 2
+2025-09-12 09:36:29,544 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === EXTRACTION COMPLETE ===
+2025-09-12 09:36:29,544 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Successfully processed 1 out of 2 cards
+2025-09-12 09:36:29,586 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Catalog scraping completed. Found 1 products
+2025-09-12 09:36:29,586 - wilo_scraper.scraper.browser_manager - INFO - Closing browser...
+2025-09-12 09:36:29,727 - wilo_scraper.scraper.browser_manager - INFO - ✅ Browser closed
+2025-09-12 09:43:25,207 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Testing catalog navigation...
+2025-09-12 09:43:25,251 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser (simple mode)...
+2025-09-12 09:43:25,253 - wilo_scraper.scraper.browser_manager - INFO - Trying simple Chrome setup...
+2025-09-12 09:43:27,803 - wilo_scraper.scraper.browser_manager - INFO - ✅ Chrome opened successfully!
+2025-09-12 09:43:36,482 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_navigation_test.png
+2025-09-12 09:43:36,488 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Navigation test successful
+2025-09-12 09:43:36,505 - wilo_scraper.scraper.browser_manager - INFO - Closing browser...
+2025-09-12 09:43:36,592 - wilo_scraper.scraper.browser_manager - INFO - ✅ Browser closed
+2025-09-12 09:44:01,440 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Starting catalog scraping for max 2 products
+2025-09-12 09:44:01,442 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser (simple mode)...
+2025-09-12 09:44:01,442 - wilo_scraper.scraper.browser_manager - INFO - Trying simple Chrome setup...
+2025-09-12 09:44:03,263 - wilo_scraper.scraper.browser_manager - INFO - ✅ Chrome opened successfully!
+2025-09-12 09:44:03,264 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Navigating to Wilo catalog page...
+2025-09-12 09:44:09,640 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_step1_initial_page.png
+2025-09-12 09:44:14,647 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === PROCESSING CARD 1 ===
+2025-09-12 09:44:14,698 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Re-found 46 cards for iteration 1
+2025-09-12 09:44:14,728 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted card data for position 1
+2025-09-12 09:44:14,767 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Clicked via link for card 1
+2025-09-12 09:44:19,917 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_product_0_page.png
+2025-09-12 09:44:19,933 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Found 7 thumbnail tiles
+2025-09-12 09:44:20,798 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [thumb 1] Added image: https://cms.media.wilo.com/dcipicpfinder/wilo352932/9652775/wilo352932_3.png
+2025-09-12 09:44:21,461 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [thumb 2] Added image: https://cms.media.wilo.com/dcipicpfinder/wilo317177/4092769/wilo317177_3.png
+2025-09-12 09:44:22,794 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [thumb 4] Added image: https://cms.media.wilo.com/dcipicpfinder/wilo363687/9652787/wilo363687_3.png
+2025-09-12 09:44:23,456 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [thumb 5] Added image: https://cms.media.wilo.com/dcipicpfinder/wilo363688/9652799/wilo363688_3.png
+2025-09-12 09:44:24,133 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [thumb 6] Added image: https://cms.media.wilo.com/dcianimpfinder/wilo520791/6327122/wilo520791_thumbnail.jpg
+2025-09-12 09:44:25,385 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [thumb 7] Added video: https://cms.media.wilo.com/resources/video7/video_embed.html?url=/dcividpfinder/wilo683555/9307367/video_config.json&autostart=false&defaultquality=0&mute=false&st=auto&tb=auto&loop={loop}
+2025-09-12 09:44:25,385 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Media extraction complete - Images: 5, Videos: 1
+2025-09-12 09:44:25,462 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted short description: 1013 characters
+2025-09-12 09:44:25,503 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 9 advantages
+2025-09-12 09:44:25,515 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted long description: 0 characters
+2025-09-12 09:44:25,516 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Looking for Produktauswahl tab...
+2025-09-12 09:44:26,619 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Successfully clicked Produktauswahl tab
+2025-09-12 09:44:29,739 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/produktauswahl_table_page.png
+2025-09-12 09:44:29,739 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Looking for product table...
+2025-09-12 09:44:29,768 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Found first product in table: Atmos TERA-SCH125/200-30/2
+2025-09-12 09:44:30,851 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Successfully clicked on first product: Atmos TERA-SCH125/200-30/2
+2025-09-12 09:44:35,983 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/product_detail_tables_page.png
+2025-09-12 09:44:35,984 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracting table data from product detail page...
+2025-09-12 09:44:35,991 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Found 13 tables on the page
+2025-09-12 09:44:36,006 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: Hydraulische Daten
+2025-09-12 09:44:36,091 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 5 rows from table: Hydraulische Daten
+2025-09-12 09:44:36,101 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: Motordaten
+2025-09-12 09:44:36,204 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 8 rows from table: Motordaten
+2025-09-12 09:44:36,212 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: Einbaumaße
+2025-09-12 09:44:36,238 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 2 rows from table: Einbaumaße
+2025-09-12 09:44:36,245 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: Werkstoffe
+2025-09-12 09:44:36,290 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 4 rows from table: Werkstoffe
+2025-09-12 09:44:36,298 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: 
+2025-09-12 09:44:36,312 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 0 rows from table: 
+2025-09-12 09:44:36,320 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: 
+2025-09-12 09:44:36,375 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 0 rows from table: 
+2025-09-12 09:44:36,381 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: 
+2025-09-12 09:44:36,425 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 0 rows from table: 
+2025-09-12 09:44:36,435 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: 
+2025-09-12 09:44:36,462 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 0 rows from table: 
+2025-09-12 09:44:36,470 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: 
+2025-09-12 09:44:36,514 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 0 rows from table: 
+2025-09-12 09:44:36,523 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: 
+2025-09-12 09:44:36,565 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 0 rows from table: 
+2025-09-12 09:44:36,573 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: 
+2025-09-12 09:44:36,666 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 0 rows from table: 
+2025-09-12 09:44:36,674 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: 
+2025-09-12 09:44:36,704 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 0 rows from table: 
+2025-09-12 09:44:36,713 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Processing table: 
+2025-09-12 09:44:36,753 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 0 rows from table: 
+2025-09-12 09:44:36,753 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Successfully extracted 13 tables
+2025-09-12 09:44:36,763 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted real name from H1: Atmos TERA-SCH125/200-30/2
+2025-09-12 09:44:36,765 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 PRODUCT DEBUG for Atmos TERA-SCH125/200-30/2:
+2025-09-12 09:44:36,766 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Real name from H1: Atmos TERA-SCH125/200-30/2
+2025-09-12 09:44:36,766 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc length: 1013 chars
+2025-09-12 09:44:36,766 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Advantages count: 9
+2025-09-12 09:44:36,766 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Product images: 5
+2025-09-12 09:44:36,766 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Technical tables: 13
+2025-09-12 09:44:39,803 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted: Atmos TERA-SCH125/200-30/2
+2025-09-12 09:44:41,847 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === PROCESSING CARD 2 ===
+2025-09-12 09:44:59,465 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Stopping catalog scraper...
+2025-09-12 09:45:05,351 - wilo_scraper.scraper.wilo_catalog_scraper - ERROR - ❌ Error processing card 2: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=140.0.7339.133)
+Stacktrace:
+0   chromedriver                        0x0000000105143674 cxxbridge1$str$ptr + 2882776
+1   chromedriver                        0x000000010513b5a0 cxxbridge1$str$ptr + 2849796
+2   chromedriver                        0x0000000104c650dc _RNvCslE4myv9Sbr3_7___rustc35___rust_no_alloc_shim_is_unstable_v2 + 73436
+3   chromedriver                        0x0000000104c3f0a4 chromedriver + 143524
+4   chromedriver                        0x0000000104cd4504 _RNvCslE4myv9Sbr3_7___rustc35___rust_no_alloc_shim_is_unstable_v2 + 529156
+5   chromedriver                        0x0000000104ced1cc _RNvCslE4myv9Sbr3_7___rustc35___rust_no_alloc_shim_is_unstable_v2 + 630732
+6   chromedriver                        0x0000000104ca0130 _RNvCslE4myv9Sbr3_7___rustc35___rust_no_alloc_shim_is_unstable_v2 + 315184
+7   chromedriver                        0x0000000105107ba4 cxxbridge1$str$ptr + 2638344
+8   chromedriver                        0x000000010510adbc cxxbridge1$str$ptr + 2651168
+9   chromedriver                        0x00000001050e8640 cxxbridge1$str$ptr + 2509988
+10  chromedriver                        0x000000010510b668 cxxbridge1$str$ptr + 2653388
+11  chromedriver                        0x00000001050d9ddc cxxbridge1$str$ptr + 2450496
+12  chromedriver                        0x000000010512aef0 cxxbridge1$str$ptr + 2782548
+13  chromedriver                        0x000000010512b070 cxxbridge1$str$ptr + 2782932
+14  chromedriver                        0x000000010513b1ec cxxbridge1$str$ptr + 2848848
+15  libsystem_pthread.dylib             0x000000018871ffa8 _pthread_start + 148
+16  libsystem_pthread.dylib             0x000000018871ada0 thread_start + 8
+
+2025-09-12 09:45:05,352 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === EXTRACTION COMPLETE ===
+2025-09-12 09:45:05,352 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Successfully processed 1 out of 2 cards
+2025-09-12 09:45:05,354 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Catalog scraping completed. Found 1 products
+2025-09-12 09:45:05,354 - wilo_scraper.scraper.browser_manager - INFO - Closing browser...
+2025-09-12 09:45:05,556 - wilo_scraper.scraper.browser_manager - INFO - ✅ Browser closed

@@ -1,0 +1,60 @@
+2025-09-10 13:50:11,614 - wilo_scraper - INFO - Logging initialized - logs/wilo_scraper_20250910_135011.log
+2025-09-10 13:50:11,615 - wilo_scraper.__main__ - INFO - Starting Wilo Scraper Application
+2025-09-10 13:50:29,023 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Starting catalog scraping for max 2 products
+2025-09-10 13:50:29,028 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser (simple mode)...
+2025-09-10 13:50:29,030 - wilo_scraper.scraper.browser_manager - INFO - Trying simple Chrome setup...
+2025-09-10 13:50:31,840 - wilo_scraper.scraper.browser_manager - INFO - ✅ Chrome opened successfully!
+2025-09-10 13:50:31,875 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Navigating to Wilo catalog page...
+2025-09-10 13:50:44,765 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_step1_initial_page.png
+2025-09-10 13:50:49,786 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === PROCESSING CARD 1 ===
+2025-09-10 13:50:49,826 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Re-found 46 cards for iteration 1
+2025-09-10 13:50:49,864 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted card data for position 1
+2025-09-10 13:50:49,910 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Clicked via link for card 1
+2025-09-10 13:50:55,060 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_product_0_page.png
+2025-09-10 13:50:55,087 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted real name from H1: Wilo-Atmos TERA-SCH
+2025-09-10 13:50:55,087 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracting media from carousel…
+2025-09-10 13:50:55,138 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Found 2 carousel inner containers
+2025-09-10 13:50:55,184 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Carousel 1: found 7 items
+2025-09-10 13:50:55,203 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Added image 1: https://cms.media.wilo.com/dcipicpfinder/wilo317177/4092769/wilo317177_3.png
+2025-09-10 13:50:55,220 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Added image 2: data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22560%22%20height%3D%22560%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20%25%7Bw%7D%20%25%7Bh%7D%22%20preserveAspectRatio%3D%22none%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20style%3D%22fill%3Atransparent%3B%22%3E%3C%2Frect%3E%3C%2Fsvg%3E
+2025-09-10 13:50:55,602 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Carousel 2: found 1 items
+2025-09-10 13:50:55,667 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Media extraction complete - Images: 2, Videos: 0
+2025-09-10 13:50:55,866 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted short description: 1013 characters
+2025-09-10 13:50:55,947 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 9 advantages
+2025-09-10 13:50:55,961 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted long description: 0 characters
+2025-09-10 13:50:55,963 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 PRODUCT DEBUG for Wilo-Atmos TERA-SCH:
+2025-09-10 13:50:55,964 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Real name from H1: Wilo-Atmos TERA-SCH
+2025-09-10 13:50:55,964 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc length: 1013 chars
+2025-09-10 13:50:55,964 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Advantages count: 9
+2025-09-10 13:50:55,964 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Product images: 2
+2025-09-10 13:50:55,964 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc preview: Splitcase-Pumpe für einen zuverlässigen Betrieb und energieeffizienten Transport großer Volumenström...
+2025-09-10 13:50:55,964 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    First advantage: Zuverlässiger Dauerbetrieb für eine effiziente Tri...
+2025-09-10 13:50:59,025 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted: Wilo-Atmos TERA-SCH
+2025-09-10 13:51:01,043 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === PROCESSING CARD 2 ===
+2025-09-10 13:51:01,066 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Re-found 46 cards for iteration 2
+2025-09-10 13:51:01,103 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted card data for position 2
+2025-09-10 13:51:01,141 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Clicked via link for card 2
+2025-09-10 13:51:06,317 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_product_1_page.png
+2025-09-10 13:51:06,338 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted real name from H1: Wilo-SCP
+2025-09-10 13:51:06,338 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracting media from carousel…
+2025-09-10 13:51:06,344 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Found 2 carousel inner containers
+2025-09-10 13:51:06,356 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Carousel 1: found 1 items
+2025-09-10 13:51:06,375 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Added image 1: https://cms.media.wilo.com/dcipicpfinder/wilo6778/1525883/wilo6778_3.png
+2025-09-10 13:51:06,386 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Carousel 2: found 1 items
+2025-09-10 13:51:06,408 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Media extraction complete - Images: 1, Videos: 0
+2025-09-10 13:51:06,439 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted short description: 27 characters
+2025-09-10 13:51:06,467 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 5 advantages
+2025-09-10 13:51:06,478 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted long description: 0 characters
+2025-09-10 13:51:06,480 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 PRODUCT DEBUG for Wilo-SCP:
+2025-09-10 13:51:06,481 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Real name from H1: Wilo-SCP
+2025-09-10 13:51:06,481 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc length: 27 chars
+2025-09-10 13:51:06,481 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Advantages count: 5
+2025-09-10 13:51:06,481 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Product images: 1
+2025-09-10 13:51:06,481 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc preview: Ihre Vorteile Ihre Vorteile...
+2025-09-10 13:51:06,481 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    First advantage: Effiziente Hydraulik für große Fördermengen bis zu...
+2025-09-10 13:51:09,535 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted: Wilo-SCP
+2025-09-10 13:51:11,541 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === EXTRACTION COMPLETE ===
+2025-09-10 13:51:11,541 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Successfully processed 2 out of 2 cards
+2025-09-10 13:51:11,559 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Catalog scraping completed. Found 2 products
+2025-09-10 13:51:11,559 - wilo_scraper.scraper.browser_manager - INFO - Closing browser...
+2025-09-10 13:51:11,692 - wilo_scraper.scraper.browser_manager - INFO - ✅ Browser closed

@@ -1,0 +1,150 @@
+2025-09-10 09:44:17,438 - wilo_scraper - INFO - Logging initialized - logs/wilo_scraper_20250910_094417.log
+2025-09-10 09:44:17,438 - wilo_scraper.__main__ - INFO - Starting Wilo Scraper Application
+2025-09-10 09:44:23,438 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Starting catalog scraping for max 2 products
+2025-09-10 09:44:23,444 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser (simple mode)...
+2025-09-10 09:44:23,444 - wilo_scraper.scraper.browser_manager - INFO - Trying simple Chrome setup...
+2025-09-10 09:44:26,034 - wilo_scraper.scraper.browser_manager - INFO - ✅ Chrome opened successfully!
+2025-09-10 09:44:26,061 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Navigating to Wilo catalog page...
+2025-09-10 09:44:36,054 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_step1_initial_page.png
+2025-09-10 09:44:41,073 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === PROCESSING CARD 1 ===
+2025-09-10 09:44:41,107 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Re-found 46 cards for iteration 1
+2025-09-10 09:44:41,143 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted card data for position 1
+2025-09-10 09:44:41,212 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Clicked via link for card 1
+2025-09-10 09:44:46,370 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_product_0_page.png
+2025-09-10 09:44:46,402 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted real name from H1: Wilo-Atmos TERA-SCH
+2025-09-10 09:44:46,502 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 2 images and 0 videos
+2025-09-10 09:44:46,565 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted short description: 1013 characters
+2025-09-10 09:44:46,608 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 9 advantages
+2025-09-10 09:44:46,621 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted long description: 0 characters
+2025-09-10 09:44:46,623 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 PRODUCT DEBUG for Wilo-Atmos TERA-SCH:
+2025-09-10 09:44:46,623 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Real name from H1: Wilo-Atmos TERA-SCH
+2025-09-10 09:44:46,623 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc length: 1013 chars
+2025-09-10 09:44:46,623 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Advantages count: 9
+2025-09-10 09:44:46,623 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Product images: 2
+2025-09-10 09:44:46,623 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc preview: Splitcase-Pumpe für einen zuverlässigen Betrieb und energieeffizienten Transport großer Volumenström...
+2025-09-10 09:44:46,624 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    First advantage: Zuverlässiger Dauerbetrieb für eine effiziente Tri...
+2025-09-10 09:44:49,704 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted: Wilo-Atmos TERA-SCH
+2025-09-10 09:44:51,717 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === PROCESSING CARD 2 ===
+2025-09-10 09:44:51,741 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Re-found 46 cards for iteration 2
+2025-09-10 09:44:51,769 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted card data for position 2
+2025-09-10 09:44:51,819 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Clicked via link for card 2
+2025-09-10 09:44:57,000 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_product_1_page.png
+2025-09-10 09:44:57,020 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted real name from H1: Wilo-SCP
+2025-09-10 09:44:57,115 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 1 images and 0 videos
+2025-09-10 09:44:57,161 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted short description: 27 characters
+2025-09-10 09:44:57,192 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 5 advantages
+2025-09-10 09:44:57,202 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted long description: 0 characters
+2025-09-10 09:44:57,204 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 PRODUCT DEBUG for Wilo-SCP:
+2025-09-10 09:44:57,204 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Real name from H1: Wilo-SCP
+2025-09-10 09:44:57,204 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc length: 27 chars
+2025-09-10 09:44:57,204 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Advantages count: 5
+2025-09-10 09:44:57,204 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Product images: 1
+2025-09-10 09:44:57,204 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc preview: Ihre Vorteile Ihre Vorteile...
+2025-09-10 09:44:57,204 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    First advantage: Effiziente Hydraulik für große Fördermengen bis zu...
+2025-09-10 09:45:00,261 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted: Wilo-SCP
+2025-09-10 09:45:02,262 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === EXTRACTION COMPLETE ===
+2025-09-10 09:45:02,262 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Successfully processed 2 out of 2 cards
+2025-09-10 09:45:02,271 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Catalog scraping completed. Found 2 products
+2025-09-10 09:45:02,271 - wilo_scraper.scraper.browser_manager - INFO - Closing browser...
+2025-09-10 09:45:02,381 - wilo_scraper.scraper.browser_manager - INFO - ✅ Browser closed
+2025-09-10 09:49:18,799 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Starting catalog scraping for max 5 products
+2025-09-10 09:49:18,804 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser (simple mode)...
+2025-09-10 09:49:18,806 - wilo_scraper.scraper.browser_manager - INFO - Trying simple Chrome setup...
+2025-09-10 09:49:22,773 - wilo_scraper.scraper.browser_manager - INFO - ✅ Chrome opened successfully!
+2025-09-10 09:49:22,784 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Navigating to Wilo catalog page...
+2025-09-10 09:49:29,255 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_step1_initial_page.png
+2025-09-10 09:49:34,350 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === PROCESSING CARD 1 ===
+2025-09-10 09:49:34,384 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Re-found 46 cards for iteration 1
+2025-09-10 09:49:34,417 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted card data for position 1
+2025-09-10 09:49:34,468 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Clicked via link for card 1
+2025-09-10 09:49:39,621 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_product_0_page.png
+2025-09-10 09:49:39,653 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted real name from H1: Wilo-Atmos TERA-SCH
+2025-09-10 09:49:39,744 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 2 images and 0 videos
+2025-09-10 09:49:39,798 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted short description: 1013 characters
+2025-09-10 09:49:39,843 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 9 advantages
+2025-09-10 09:49:39,857 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted long description: 0 characters
+2025-09-10 09:49:39,861 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 PRODUCT DEBUG for Wilo-Atmos TERA-SCH:
+2025-09-10 09:49:39,861 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Real name from H1: Wilo-Atmos TERA-SCH
+2025-09-10 09:49:39,861 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc length: 1013 chars
+2025-09-10 09:49:39,861 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Advantages count: 9
+2025-09-10 09:49:39,861 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Product images: 2
+2025-09-10 09:49:39,861 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc preview: Splitcase-Pumpe für einen zuverlässigen Betrieb und energieeffizienten Transport großer Volumenström...
+2025-09-10 09:49:39,861 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    First advantage: Zuverlässiger Dauerbetrieb für eine effiziente Tri...
+2025-09-10 09:49:42,956 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted: Wilo-Atmos TERA-SCH
+2025-09-10 09:49:44,962 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === PROCESSING CARD 2 ===
+2025-09-10 09:49:45,000 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Re-found 46 cards for iteration 2
+2025-09-10 09:49:45,053 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted card data for position 2
+2025-09-10 09:49:45,115 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Clicked via link for card 2
+2025-09-10 09:49:50,441 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_product_1_page.png
+2025-09-10 09:49:50,645 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted real name from H1: Wilo-SCP
+2025-09-10 09:49:50,723 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 1 images and 0 videos
+2025-09-10 09:49:50,777 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted short description: 27 characters
+2025-09-10 09:49:50,810 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 5 advantages
+2025-09-10 09:49:50,824 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted long description: 0 characters
+2025-09-10 09:49:50,840 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 PRODUCT DEBUG for Wilo-SCP:
+2025-09-10 09:49:50,840 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Real name from H1: Wilo-SCP
+2025-09-10 09:49:50,840 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc length: 27 chars
+2025-09-10 09:49:50,840 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Advantages count: 5
+2025-09-10 09:49:50,840 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Product images: 1
+2025-09-10 09:49:50,840 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc preview: Ihre Vorteile Ihre Vorteile...
+2025-09-10 09:49:50,840 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    First advantage: Effiziente Hydraulik für große Fördermengen bis zu...
+2025-09-10 09:49:54,009 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted: Wilo-SCP
+2025-09-10 09:49:56,015 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === PROCESSING CARD 3 ===
+2025-09-10 09:49:56,185 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Re-found 46 cards for iteration 3
+2025-09-10 09:49:56,389 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted card data for position 3
+2025-09-10 09:49:56,449 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Clicked via link for card 3
+2025-09-10 09:50:01,617 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_product_2_page.png
+2025-09-10 09:50:01,636 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted real name from H1: Wilo-Stratos PICO plus
+2025-09-10 09:50:01,751 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 4 images and 0 videos
+2025-09-10 09:50:01,803 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted short description: 855 characters
+2025-09-10 09:50:01,842 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 6 advantages
+2025-09-10 09:50:01,851 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted long description: 0 characters
+2025-09-10 09:50:01,854 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 PRODUCT DEBUG for Wilo-Stratos PICO plus:
+2025-09-10 09:50:01,854 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Real name from H1: Wilo-Stratos PICO plus
+2025-09-10 09:50:01,854 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc length: 855 chars
+2025-09-10 09:50:01,854 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Advantages count: 6
+2025-09-10 09:50:01,854 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Product images: 4
+2025-09-10 09:50:01,854 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc preview: Maximaler Komfort dank Einstellungsassistent. Empfohlene Serviceleistungen Ein großes Display, die e...
+2025-09-10 09:50:01,854 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    First advantage: Einfache Bedienung dank Einstellungsassistent, gro...
+2025-09-10 09:50:04,892 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted: Wilo-Stratos PICO plus
+2025-09-10 09:50:06,903 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === PROCESSING CARD 4 ===
+2025-09-10 09:50:06,912 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Re-found 46 cards for iteration 4
+2025-09-10 09:50:06,926 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted card data for position 4
+2025-09-10 09:50:06,958 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Clicked via link for card 4
+2025-09-10 09:50:12,089 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_product_3_page.png
+2025-09-10 09:50:12,116 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted real name from H1: Wilo-Yonos PICO plus
+2025-09-10 09:50:12,195 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 3 images and 0 videos
+2025-09-10 09:50:12,258 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted short description: 1643 characters
+2025-09-10 09:50:12,282 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 5 advantages
+2025-09-10 09:50:12,290 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted long description: 0 characters
+2025-09-10 09:50:12,292 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 PRODUCT DEBUG for Wilo-Yonos PICO plus:
+2025-09-10 09:50:12,292 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Real name from H1: Wilo-Yonos PICO plus
+2025-09-10 09:50:12,292 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc length: 1643 chars
+2025-09-10 09:50:12,292 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Advantages count: 5
+2025-09-10 09:50:12,292 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Product images: 3
+2025-09-10 09:50:12,292 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc preview: Wertvolle Zeit bei der Installation & Inbetriebnahme sparen. Empfohlene Serviceleistungen Sichtbares...
+2025-09-10 09:50:12,292 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    First advantage: Maximaler Bedienkomfort dank der grünen Knopf-Tech...
+2025-09-10 09:50:15,353 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted: Wilo-Yonos PICO plus
+2025-09-10 09:50:17,367 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === PROCESSING CARD 5 ===
+2025-09-10 09:50:17,379 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Re-found 46 cards for iteration 5
+2025-09-10 09:50:17,394 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted card data for position 5
+2025-09-10 09:50:17,451 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Clicked via link for card 5
+2025-09-10 09:50:22,588 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_product_4_page.png
+2025-09-10 09:50:22,612 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted real name from H1: Wilo-Stratos MAXO
+2025-09-10 09:50:22,737 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 5 images and 0 videos
+2025-09-10 09:50:22,786 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted short description: 699 characters
+2025-09-10 09:50:22,816 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 6 advantages
+2025-09-10 09:50:22,825 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted long description: 0 characters
+2025-09-10 09:50:22,827 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 PRODUCT DEBUG for Wilo-Stratos MAXO:
+2025-09-10 09:50:22,827 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Real name from H1: Wilo-Stratos MAXO
+2025-09-10 09:50:22,827 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc length: 699 chars
+2025-09-10 09:50:22,827 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Advantages count: 6
+2025-09-10 09:50:22,827 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Product images: 5
+2025-09-10 09:50:22,827 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc preview: Die smarte Pumpe für Gewerbeobjekte mit Gebäudeleittechnik. Empfohlene Serviceleistungen Mit optimie...
+2025-09-10 09:50:22,827 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    First advantage: Verschiedene Optionen zur Einbindung in die Gebäud...
+2025-09-10 09:50:25,915 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted: Wilo-Stratos MAXO
+2025-09-10 09:50:27,919 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === EXTRACTION COMPLETE ===
+2025-09-10 09:50:27,919 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Successfully processed 5 out of 5 cards
+2025-09-10 09:50:27,921 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Catalog scraping completed. Found 5 products
+2025-09-10 09:50:27,921 - wilo_scraper.scraper.browser_manager - INFO - Closing browser...
+2025-09-10 09:50:29,101 - wilo_scraper.scraper.browser_manager - INFO - ✅ Browser closed

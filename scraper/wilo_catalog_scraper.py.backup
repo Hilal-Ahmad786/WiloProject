@@ -1,5 +1,6 @@
 """
-Enhanced Wilo Catalog Scraper with better media extraction
+Enhanced Wilo Catalog Scraper for new catalog page
+Scrapes from: https://wilo.com/de/de/Katalog/de/anwendung/industrie/heizung/heizung
 """
 
 import time
@@ -12,7 +13,7 @@ from scraper.browser_manager import BrowserManager
 from utils.logger import get_logger
 
 class WiloCatalogScraper:
-    """Enhanced catalog scraper for Wilo products"""
+    """Catalog scraper for Wilo products"""
     
     def __init__(self, settings):
         self.settings = settings
@@ -74,7 +75,7 @@ class WiloCatalogScraper:
             self.browser_manager.quit()
     
     def extract_products_from_cards(self, max_products):
-        """Extract products from card elements"""
+        """Extract products from card elements - FIXED for stale elements"""
         try:
             driver = self.browser_manager.get_driver()
             wait = WebDriverWait(driver, 15)
@@ -98,7 +99,7 @@ class WiloCatalogScraper:
                 try:
                     self.logger.info(f"=== PROCESSING CARD {i+1} ===")
                     
-                    # Re-find cards each time to avoid stale element reference
+                    # RE-FIND cards each time to avoid stale element reference
                     cards = []
                     for selector in card_selectors:
                         try:
@@ -114,7 +115,7 @@ class WiloCatalogScraper:
                         self.logger.warning(f"No card found at position {i+1}")
                         break
                     
-                    card = cards[i]
+                    card = cards[i]  # Get the specific card for this iteration
                     
                     # Extract card data
                     card_data = self.extract_card_data_safe(card, i)
@@ -151,7 +152,7 @@ class WiloCatalogScraper:
             return []
     
     def extract_card_data_safe(self, card, index):
-        """Extract basic data from card"""
+        """Extract basic data from card - SAFE version"""
         try:
             product_name = f"Product {index + 1}"
             
@@ -209,7 +210,7 @@ class WiloCatalogScraper:
             }
     
     def get_product_details_safe(self, card, card_data, index):
-        """Click on card and extract product details"""
+        """Click on card and extract product details - SAFE version"""
         try:
             driver = self.browser_manager.get_driver()
             
@@ -256,7 +257,6 @@ class WiloCatalogScraper:
         try:
             driver = self.browser_manager.get_driver()
             
-            # Get real product name from H1
             real_product_name = ""
             try:
                 h1_element = driver.find_element(By.XPATH, "//h1[@class='m-0']")
@@ -271,15 +271,11 @@ class WiloCatalogScraper:
                     real_product_name = f"Wilo Product {card_data.get('card_index', 0) + 1}"
                     self.logger.warning(f"Using fallback name: {real_product_name}")
             
-            # Extract media with enhanced extraction
-            media_items = self.extract_all_media()
-            
-            # Extract descriptions and advantages
+            media_items = self.extract_carousel_media()
             short_description = self.extract_short_description()
             advantages = self.extract_advantages()
             long_description = self.extract_long_description()
             
-            # Create comprehensive product object
             product = {
                 'id': f"catalog_{card_data['card_index']+1}_{int(time.time())}",
                 'name': real_product_name,
@@ -308,7 +304,6 @@ class WiloCatalogScraper:
                 'status': 'Catalog Product - Real Extraction'
             }
             
-            # Debug logging
             self.logger.info(f"🔍 PRODUCT DEBUG for {real_product_name}:")
             self.logger.info(f"   Real name from H1: {real_product_name}")
             self.logger.info(f"   Short desc length: {len(short_description)} chars")
@@ -325,200 +320,193 @@ class WiloCatalogScraper:
         except Exception as e:
             self.logger.error(f"Failed to extract product details: {e}")
             return None
-
-    def extract_all_media(self):
-        """Extract images/videos by clicking thumbnails; if none, capture a single product image."""
+    
+        def extract_carousel_media(self):
+        """Extract ALL images and videos from carousel and thumbnails - ENHANCED"""
         try:
             driver = self.browser_manager.get_driver()
-            wait = WebDriverWait(driver, 10)
-            media_items = {'images': [], 'videos': [], 'all_media': []}
-
-            def _norm(url: str) -> str:
-                if not url:
-                    return url
-                url = url.strip()
-                if url.startswith('//'):
-                    return f"https:{url}"
-                if url.startswith('/'):
-                    return f"https://wilo.com{url}"
-                return url
-
-            def _get_active_media_src():
-                """Return (type, src) from the active main slide: 'image' or 'video'."""
-                try:
-                    active = driver.find_element(
-                        By.XPATH,
-                        "//div[contains(@class,'carousel-inner')]"
-                        "//div[contains(@class,'carousel-item') and contains(@class,'active')]"
-                    )
-                except Exception:
-                    return None, None
-
-                # Prefer image in active slide
-                try:
-                    img = active.find_element(By.XPATH, ".//img[@src or @data-src or @srcset]")
-                    src = img.get_attribute('src') or img.get_attribute('data-src') or ""
-                    if not src:
-                        srcset = img.get_attribute('srcset') or ""
-                        if srcset:
-                            parts = [p.strip() for p in srcset.split(',') if p.strip()]
-                            if parts:
-                                src = parts[-1].split(' ')[0]
-                    return "image", _norm(src)
-                except Exception:
-                    pass
-
-                # Fallback: iframe video in active slide
-                try:
-                    iframe = active.find_element(By.XPATH, ".//iframe[@src]")
-                    vsrc = iframe.get_attribute('src') or ""
-                    return "video", _norm(vsrc)
-                except Exception:
-                    pass
-
-                return None, None
-
-            # 1) Find and iterate thumbnails
-            thumbs = driver.find_elements(
-                By.XPATH,
-                # your structure shows thumbnails inside .mt-3.cl-gutters--2auto .row .col .cl-image-preview
-                "//div[contains(@class,'cl-image-preview')][.//img]"
-            )
-            self.logger.info(f"Found {len(thumbs)} thumbnail tiles")
-
-            if thumbs:
-                # Initial main src (to detect change after clicking a thumb)
-                _, prev_src = _get_active_media_src()
-
-                for idx, tile in enumerate(thumbs, start=1):
+            
+            media_items = {
+                'images': [],
+                'videos': [],
+                'all_media': []
+            }
+            
+            # Extract from main carousel (role="listitem")
+            print("🔍 Extracting from main carousel...")
+            try:
+                carousel_items = driver.find_elements(By.XPATH, "//div[@role='listitem']")
+                print(f"Found {len(carousel_items)} carousel items")
+                
+                for i, item in enumerate(carousel_items):
                     try:
-                        # Scroll into view (center) to avoid intercept issues
-                        driver.execute_script("arguments[0].scrollIntoView({block:'center'});", tile)
-                        time.sleep(0.1)
-
-                        # Click thumbnail (try standard click first, then JS)
-                        try:
-                            tile.click()
-                        except Exception:
-                            driver.execute_script("arguments[0].click();", tile)
-
-                        # Wait until the active media changes src or becomes available
-                        def _changed(drv):
-                            t, s = _get_active_media_src()
-                            if s and s != (prev_src or ""):
-                                return (t, s)
-                            return False
-
-                        try:
-                            result = WebDriverWait(driver, 8).until(_changed)
-                            new_type, new_src = result
-                        except TimeoutException:
-                            # If main didn't update, fall back to the thumb's own img URL
-                            try:
-                                timg = tile.find_element(By.XPATH, ".//img[@src or @data-src or @srcset]")
-                                t_src = timg.get_attribute('src') or timg.get_attribute('data-src') or ""
-                                if not t_src:
-                                    t_ss = timg.get_attribute('srcset') or ""
-                                    if t_ss:
-                                        parts = [p.strip() for p in t_ss.split(',') if p.strip()]
-                                        if parts:
-                                            t_src = parts[-1].split(' ')[0]
-                                new_type, new_src = "image", _norm(t_src)
-                            except Exception:
-                                new_type, new_src = None, None
-
-                        # Record media
-                        if new_src:
-                            if new_type == "video":
-                                if new_src not in media_items['videos']:
-                                    media_items['videos'].append(new_src)
+                        # Look for images in carousel item
+                        imgs = item.find_elements(By.XPATH, ".//img[@src]")
+                        for img in imgs:
+                            src = img.get_attribute('src')
+                            if src:
+                                # Convert relative URLs to absolute
+                                if src.startswith('//'):
+                                    src = f"https:{src}"
+                                elif src.startswith('/'):
+                                    src = f"https://wilo.com{src}"
+                                
+                                if src not in media_items['images']:
+                                    media_items['images'].append(src)
+                                    media_items['all_media'].append({
+                                        'type': 'image',
+                                        'url': src,
+                                        'alt': img.get_attribute('alt') or f'Product Image {len(media_items["images"])}',
+                                        'source': 'carousel'
+                                    })
+                                    print(f"   📸 Added carousel image {len(media_items['images'])}")
+                        
+                        # Look for videos in carousel item (iframe elements)
+                        iframes = item.find_elements(By.XPATH, ".//iframe[@src]")
+                        for iframe in iframes:
+                            src = iframe.get_attribute('src')
+                            if src and 'video' in src.lower():
+                                # Convert relative URLs to absolute
+                                if src.startswith('//'):
+                                    src = f"https:{src}"
+                                elif src.startswith('/'):
+                                    src = f"https://wilo.com{src}"
+                                
+                                if src not in media_items['videos']:
+                                    media_items['videos'].append(src)
                                     media_items['all_media'].append({
                                         'type': 'video',
-                                        'url': new_src,
+                                        'url': src,
                                         'title': f'Product Video {len(media_items["videos"])}',
                                         'source': 'carousel'
                                     })
-                                    self.logger.info(f"[thumb {idx}] Added video: {new_src}")
-                            else:
-                                # Accept images including png/jpg/webp/gif; allow others too if provided
-                                if new_src not in media_items['images']:
-                                    media_items['images'].append(new_src)
-                                    media_items['all_media'].append({
-                                        'type': 'image',
-                                        'url': new_src,
-                                        'alt': f'Carousel Image {len(media_items["images"])}',
-                                        'source': 'carousel'
-                                    })
-                                    self.logger.info(f"[thumb {idx}] Added image: {new_src}")
-
-                            prev_src = new_src  # update baseline
-
+                                    print(f"   🎥 Added carousel video {len(media_items['videos'])}")
+                    
                     except Exception as e:
-                        self.logger.warning(f"Error processing thumbnail {idx}: {e}")
+                        print(f"   ⚠️ Error processing carousel item {i}: {e}")
                         continue
-
-            # 2) If no thumbnails or none yielded media, capture a single main product image
-            if not media_items['images'] and not media_items['videos']:
-                self.logger.info("No media via thumbnails; trying to capture a single main product image")
-                try:
-                    # Try the active carousel image first
-                    mtype, msrc = _get_active_media_src()
-                    if msrc and mtype == "image":
-                        media_items['images'].append(msrc)
-                        media_items['all_media'].append({
-                            'type': 'image',
-                            'url': msrc,
-                            'alt': 'Main Product Image',
-                            'source': 'carousel'
-                        })
-                        self.logger.info(f"[single] Added main product image: {msrc}")
-                    elif msrc and mtype == "video":
-                        media_items['videos'].append(msrc)
-                        media_items['all_media'].append({
-                            'type': 'video',
-                            'url': msrc,
-                            'title': 'Product Video 1',
-                            'source': 'carousel'
-                        })
-                        self.logger.info(f"[single] Added main product video: {msrc}")
-                    else:
-                        # As a last resort, any large image inside the carousel area
-                        try:
-                            any_img = driver.find_element(
-                                By.XPATH,
-                                "//div[contains(@class,'carousel-inner')]//img[@src or @data-src or @srcset]"
-                            )
-                            src = any_img.get_attribute('src') or any_img.get_attribute('data-src') or ""
-                            if not src:
-                                ss = any_img.get_attribute('srcset') or ""
-                                if ss:
-                                    parts = [p.strip() for p in ss.split(',') if p.strip()]
-                                    if parts:
-                                        src = parts[-1].split(' ')[0]
-                            src = _norm(src)
-                            if src:
+                        
+            except Exception as e:
+                print(f"❌ Error extracting from carousel: {e}")
+            
+            # Extract from thumbnail section (cl-image-preview)
+            print("🔍 Extracting from thumbnails...")
+            try:
+                thumbnail_imgs = driver.find_elements(By.XPATH, "//div[contains(@class, 'cl-image-preview')]//img[@src]")
+                print(f"Found {len(thumbnail_imgs)} thumbnail images")
+                
+                for i, img in enumerate(thumbnail_imgs):
+                    try:
+                        src = img.get_attribute('src')
+                        if src:
+                            # Convert relative URLs to absolute
+                            if src.startswith('//'):
+                                src = f"https:{src}"
+                            elif src.startswith('/'):
+                                src = f"https://wilo.com{src}"
+                            
+                            # Add if not already present
+                            if src not in media_items['images']:
                                 media_items['images'].append(src)
                                 media_items['all_media'].append({
                                     'type': 'image',
                                     'url': src,
-                                    'alt': 'Product Image',
-                                    'source': 'carousel'
+                                    'alt': img.get_attribute('alt') or f'Product Thumbnail {len(media_items["images"])}',
+                                    'source': 'thumbnail'
                                 })
-                                self.logger.info(f"[fallback single] Added product image: {src}")
-                        except Exception:
-                            pass
-                except Exception as e:
-                    self.logger.error(f"Error capturing single product image: {e}")
-
-            self.logger.info(
-                f"Media extraction complete - Images: {len(media_items['images'])}, Videos: {len(media_items['videos'])}"
-            )
+                                print(f"   📸 Added thumbnail image {len(media_items['images'])}")
+                    
+                    except Exception as e:
+                        print(f"   ⚠️ Error processing thumbnail {i}: {e}")
+                        continue
+                        
+            except Exception as e:
+                print(f"❌ Error extracting thumbnails: {e}")
+            
+            # Also look for any other images on the page
+            print("🔍 Extracting additional images...")
+            try:
+                additional_selectors = [
+                    "//img[contains(@src, 'wilo.com')]",
+                    "//img[contains(@src, 'cms.media.wilo.com')]",
+                    "//img[contains(@class, 'cl-img')]"
+                ]
+                
+                for selector in additional_selectors:
+                    try:
+                        additional_imgs = driver.find_elements(By.XPATH, selector)
+                        for img in additional_imgs:
+                            src = img.get_attribute('src')
+                            if src:
+                                # Convert relative URLs to absolute
+                                if src.startswith('//'):
+                                    src = f"https:{src}"
+                                elif src.startswith('/'):
+                                    src = f"https://wilo.com{src}"
+                                
+                                # Add if not already present
+                                if src not in media_items['images']:
+                                    media_items['images'].append(src)
+                                    media_items['all_media'].append({
+                                        'type': 'image',
+                                        'url': src,
+                                        'alt': img.get_attribute('alt') or f'Additional Image {len(media_items["images"])}',
+                                        'source': 'additional'
+                                    })
+                                    print(f"   📸 Added additional image {len(media_items['images'])}")
+                    except:
+                        continue
+                        
+            except Exception as e:
+                print(f"❌ Error extracting additional images: {e}")
+            
+            # Look for video thumbnails that might indicate videos
+            print("🔍 Extracting video thumbnails...")
+            try:
+                video_thumbnail_selectors = [
+                    "//img[contains(@src, 'still.jpg')]",
+                    "//img[contains(@src, 'thumbnail') and contains(@src, 'video')]",
+                    "//img[contains(@src, 'dcividpfinder')]"
+                ]
+                
+                for selector in video_thumbnail_selectors:
+                    try:
+                        video_thumbs = driver.find_elements(By.XPATH, selector)
+                        for thumb in video_thumbs:
+                            src = thumb.get_attribute('src')
+                            if src and 'still.jpg' in src:
+                                # This is likely a video thumbnail
+                                if src.startswith('//'):
+                                    src = f"https:{src}"
+                                elif src.startswith('/'):
+                                    src = f"https://wilo.com{src}"
+                                
+                                # Add as both image and potential video indicator
+                                if src not in media_items['images']:
+                                    media_items['images'].append(src)
+                                    media_items['all_media'].append({
+                                        'type': 'image',
+                                        'url': src,
+                                        'alt': f'Video Thumbnail {len(media_items["images"])}',
+                                        'source': 'video_thumbnail'
+                                    })
+                                    print(f"   🎬 Added video thumbnail {len(media_items['images'])}")
+                    except:
+                        continue
+                        
+            except Exception as e:
+                print(f"❌ Error extracting video thumbnails: {e}")
+            
+            print(f"📊 MEDIA EXTRACTION COMPLETE:")
+            print(f"   📸 Total images: {len(media_items['images'])}")
+            print(f"   🎥 Total videos: {len(media_items['videos'])}")
+            print(f"   📁 Total media items: {len(media_items['all_media'])}")
+            
             return media_items
             
         except Exception as e:
-            self.logger.error(f"Failed to extract media: {e}")
+            self.logger.error(f"Failed to extract media items: {e}")
             return {'images': [], 'videos': [], 'all_media': []}
-
     def extract_short_description(self):
         """Extract short description"""
         try:

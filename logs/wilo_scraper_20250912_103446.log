@@ -1,0 +1,220 @@
+2025-09-12 10:34:46,655 - wilo_scraper - INFO - Logging initialized - logs/wilo_scraper_20250912_103446.log
+2025-09-12 10:34:46,655 - wilo_scraper.__main__ - INFO - Starting Wilo Scraper Application
+2025-09-12 10:34:49,142 - wilo_scraper.gui.widgets.enhanced_scraper_controller - INFO - Starting scraping with max_products = 2
+2025-09-12 10:34:49,143 - wilo_scraper.gui.widgets.enhanced_scraper_controller - INFO - Worker thread starting with max_products = 2
+2025-09-12 10:34:49,143 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Starting catalog scraping for max 2 products
+2025-09-12 10:34:49,147 - wilo_scraper.scraper.browser_manager - INFO - Setting up Chrome browser (simple mode)...
+2025-09-12 10:34:49,148 - wilo_scraper.scraper.browser_manager - INFO - Trying simple Chrome setup...
+2025-09-12 10:34:54,280 - wilo_scraper.scraper.browser_manager - INFO - ✅ Chrome opened successfully!
+2025-09-12 10:34:54,285 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Navigating to Wilo catalog page...
+2025-09-12 10:35:02,985 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_step1_initial_page.png
+2025-09-12 10:35:08,001 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === PROCESSING CARD 1 ===
+2025-09-12 10:35:08,007 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🌐 Current URL: https://wilo.com/de/de/Katalog/de/anwendung/industrie/heizung/heizung
+2025-09-12 10:35:08,007 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Trying selector 1: //div[contains(@class, 'card cl-overview h-100 rebrush')]
+2025-09-12 10:35:08,055 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Found 46 cards with selector 1
+2025-09-12 10:35:08,055 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Card 1 is available in the list
+2025-09-12 10:35:08,056 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🎯 Selected card 1 for processing
+2025-09-12 10:35:08,114 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted card data for position 1
+2025-09-12 10:35:08,119 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Stored catalog URL: https://wilo.com/de/de/Katalog/de/anwendung/industrie/heizung/heizung
+2025-09-12 10:35:08,158 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Clicked via link for card 1
+2025-09-12 10:35:13,408 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_product_0_page.png
+2025-09-12 10:35:13,466 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted real name from H1: Wilo-Atmos TERA-SCH
+2025-09-12 10:35:13,512 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Found 7 thumbnail tiles
+2025-09-12 10:35:14,966 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [thumb 1] Added image: https://cms.media.wilo.com/dcipicpfinder/wilo352932/9652775/wilo352932_3.png
+2025-09-12 10:35:15,132 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [thumb 2] Added image: https://cms.media.wilo.com/dcipicpfinder/wilo317177/4092769/wilo317177_3.png
+2025-09-12 10:35:16,472 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [thumb 4] Added image: https://cms.media.wilo.com/dcipicpfinder/wilo363687/9652787/wilo363687_3.png
+2025-09-12 10:35:17,143 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [thumb 5] Added image: https://cms.media.wilo.com/dcipicpfinder/wilo363688/9652799/wilo363688_3.png
+2025-09-12 10:35:17,834 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [thumb 6] Added image: https://cms.media.wilo.com/dcianimpfinder/wilo520791/6327122/wilo520791_thumbnail.jpg
+2025-09-12 10:35:19,088 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [thumb 7] Added video: https://cms.media.wilo.com/resources/video7/video_embed.html?url=/dcividpfinder/wilo683555/9307367/video_config.json&autostart=false&defaultquality=0&mute=false&st=auto&tb=auto&loop={loop}
+2025-09-12 10:35:19,089 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Media extraction complete - Images: 5, Videos: 1
+2025-09-12 10:35:19,158 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted short description: 506 characters
+2025-09-12 10:35:19,202 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 9 advantages
+2025-09-12 10:35:19,214 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted long description: 0 characters
+2025-09-12 10:35:19,214 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Looking for Produktauswahl tab...
+2025-09-12 10:35:20,365 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully clicked Produktauswahl tab
+2025-09-12 10:35:23,499 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/produktauswahl_table_page.png
+2025-09-12 10:35:23,499 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Looking for product table...
+2025-09-12 10:35:23,545 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Found first product in table: Atmos TERA-SCH125/200-30/2
+2025-09-12 10:35:24,744 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully clicked on first product: Atmos TERA-SCH125/200-30/2
+2025-09-12 10:35:29,870 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/product_detail_tables_page.png
+2025-09-12 10:35:29,871 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Starting table data extraction from product detail page...
+2025-09-12 10:35:29,885 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📊 Found 13 tables on the page
+2025-09-12 10:35:29,885 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 1/13...
+2025-09-12 10:35:29,902 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: 'Hydraulische Daten'
+2025-09-12 10:35:29,908 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 5 rows in table
+2025-09-12 10:35:29,990 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 5 data rows from table: 'Hydraulische Daten'
+2025-09-12 10:35:29,990 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Sample data: [('Maximaler Betriebsdruck PN', '16 bar'), ('Min. Medientemperatur Tmin', '-10 °C'), ('Max. Medientemperatur Tmax', '100 °C')]
+2025-09-12 10:35:29,990 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 2/13...
+2025-09-12 10:35:29,998 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: 'Motordaten'
+2025-09-12 10:35:30,002 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 8 rows in table
+2025-09-12 10:35:30,139 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 8 data rows from table: 'Motordaten'
+2025-09-12 10:35:30,139 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Sample data: [('Netzanschluss', '3~400 V, 50 Hz'), ('Spannungstoleranz', '±10 %'), ('Motornennleistung P2', '30 kW')]
+2025-09-12 10:35:30,139 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 3/13...
+2025-09-12 10:35:30,147 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: 'Einbaumaße'
+2025-09-12 10:35:30,151 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 2 rows in table
+2025-09-12 10:35:30,188 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 2 data rows from table: 'Einbaumaße'
+2025-09-12 10:35:30,188 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Sample data: [('Saugseitiger Rohranschluss DNs', 'DN 150'), ('Druckseitiger Rohranschluss DNd', 'DN 125')]
+2025-09-12 10:35:30,188 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 4/13...
+2025-09-12 10:35:30,197 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: 'Werkstoffe'
+2025-09-12 10:35:30,202 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 4 rows in table
+2025-09-12 10:35:30,247 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 4 data rows from table: 'Werkstoffe'
+2025-09-12 10:35:30,247 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Sample data: [('Pumpengehäuse', 'Grauguss'), ('Laufrad', 'Grauguss'), ('Welle', 'Edelstahl')]
+2025-09-12 10:35:30,247 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 5/13...
+2025-09-12 10:35:30,254 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: ''
+2025-09-12 10:35:30,259 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 1 rows in table
+2025-09-12 10:35:30,270 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 0 data rows from table: ''
+2025-09-12 10:35:30,270 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 6/13...
+2025-09-12 10:35:30,277 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: ''
+2025-09-12 10:35:30,282 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 5 rows in table
+2025-09-12 10:35:30,365 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 0 data rows from table: ''
+2025-09-12 10:35:30,365 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 7/13...
+2025-09-12 10:35:30,375 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: ''
+2025-09-12 10:35:30,381 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 4 rows in table
+2025-09-12 10:35:30,422 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 0 data rows from table: ''
+2025-09-12 10:35:30,422 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 8/13...
+2025-09-12 10:35:30,430 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: ''
+2025-09-12 10:35:30,434 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 2 rows in table
+2025-09-12 10:35:30,453 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 0 data rows from table: ''
+2025-09-12 10:35:30,453 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 9/13...
+2025-09-12 10:35:30,461 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: ''
+2025-09-12 10:35:30,465 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 4 rows in table
+2025-09-12 10:35:30,506 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 0 data rows from table: ''
+2025-09-12 10:35:30,506 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 10/13...
+2025-09-12 10:35:30,513 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: ''
+2025-09-12 10:35:30,518 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 4 rows in table
+2025-09-12 10:35:30,568 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 0 data rows from table: ''
+2025-09-12 10:35:30,568 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 11/13...
+2025-09-12 10:35:30,576 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: ''
+2025-09-12 10:35:30,580 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 7 rows in table
+2025-09-12 10:35:30,715 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 0 data rows from table: ''
+2025-09-12 10:35:30,715 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 12/13...
+2025-09-12 10:35:30,724 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: ''
+2025-09-12 10:35:30,728 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 2 rows in table
+2025-09-12 10:35:30,750 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 0 data rows from table: ''
+2025-09-12 10:35:30,750 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 13/13...
+2025-09-12 10:35:30,759 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: ''
+2025-09-12 10:35:30,764 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 3 rows in table
+2025-09-12 10:35:30,800 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 0 data rows from table: ''
+2025-09-12 10:35:30,800 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🎉 TABLE EXTRACTION COMPLETE!
+2025-09-12 10:35:30,801 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    ✅ Successfully extracted 13 tables
+2025-09-12 10:35:30,801 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    ✅ Total data points: 19
+2025-09-12 10:35:30,801 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    📊 Tables found: ['Hydraulische Daten', 'Motordaten', 'Einbaumaße', 'Werkstoffe', '', '', '', '', '', '', '', '', '']
+2025-09-12 10:35:30,803 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 PRODUCT DEBUG for Wilo-Atmos TERA-SCH:
+2025-09-12 10:35:30,803 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Real name from H1: Wilo-Atmos TERA-SCH
+2025-09-12 10:35:30,803 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc length: 506 chars
+2025-09-12 10:35:30,803 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Advantages count: 9
+2025-09-12 10:35:30,803 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Product images: 5
+2025-09-12 10:35:30,803 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Technical tables: 13
+2025-09-12 10:35:30,803 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔄 Starting navigation back to catalog page for next product...
+2025-09-12 10:35:30,803 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📍 Navigation attempt 1/3
+2025-09-12 10:35:30,803 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🌐 Using direct navigation to original catalog URL...
+2025-09-12 10:35:37,500 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📍 Current URL after navigation: https://wilo.com/de/de/Katalog/de/anwendung/industrie/heizung/heizung
+2025-09-12 10:35:37,525 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully returned to catalog page via direct navigation
+2025-09-12 10:35:37,525 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📊 Found 46 product cards on catalog page
+2025-09-12 10:35:37,968 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_back_navigation_0_success.png
+2025-09-12 10:35:37,969 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🎉 Navigation back to catalog completed successfully!
+2025-09-12 10:35:37,985 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted: Wilo-Atmos TERA-SCH
+2025-09-12 10:35:37,985 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ⏳ Waiting before processing next card...
+2025-09-12 10:35:40,989 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === PROCESSING CARD 2 ===
+2025-09-12 10:35:41,026 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🌐 Current URL: https://wilo.com/de/de/Katalog/de/anwendung/industrie/heizung/heizung
+2025-09-12 10:35:41,026 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Trying selector 1: //div[contains(@class, 'card cl-overview h-100 rebrush')]
+2025-09-12 10:35:41,039 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Found 46 cards with selector 1
+2025-09-12 10:35:41,039 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Card 2 is available in the list
+2025-09-12 10:35:41,039 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🎯 Selected card 2 for processing
+2025-09-12 10:35:41,090 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted card data for position 2
+2025-09-12 10:35:41,099 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Stored catalog URL: https://wilo.com/de/de/Katalog/de/anwendung/industrie/heizung/heizung
+2025-09-12 10:35:41,163 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Clicked via link for card 2
+2025-09-12 10:35:46,370 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_product_1_page.png
+2025-09-12 10:35:46,402 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted real name from H1: Wilo-SCP
+2025-09-12 10:35:46,416 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Found 0 thumbnail tiles
+2025-09-12 10:35:46,417 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - No media via thumbnails; trying to capture a single main product image
+2025-09-12 10:35:46,434 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - [single] Added main product image: https://cms.media.wilo.com/dcipicpfinder/wilo6778/1525883/wilo6778_3.png
+2025-09-12 10:35:46,434 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Media extraction complete - Images: 1, Videos: 0
+2025-09-12 10:35:46,468 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted short description: 13 characters
+2025-09-12 10:35:46,507 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted 5 advantages
+2025-09-12 10:35:46,516 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Extracted long description: 0 characters
+2025-09-12 10:35:46,516 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Looking for Produktauswahl tab...
+2025-09-12 10:35:47,643 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully clicked Produktauswahl tab
+2025-09-12 10:35:50,776 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/produktauswahl_table_page.png
+2025-09-12 10:35:50,777 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Looking for product table...
+2025-09-12 10:35:50,829 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Found first product in table: SCP 50/180HA-1,1/4/50
+2025-09-12 10:35:51,972 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully clicked on first product: SCP 50/180HA-1,1/4/50
+2025-09-12 10:35:57,103 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/product_detail_tables_page.png
+2025-09-12 10:35:57,103 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Starting table data extraction from product detail page...
+2025-09-12 10:35:57,111 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📊 Found 12 tables on the page
+2025-09-12 10:35:57,111 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 1/12...
+2025-09-12 10:35:57,128 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: 'Hydraulische Daten'
+2025-09-12 10:35:57,138 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 5 rows in table
+2025-09-12 10:35:57,207 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 5 data rows from table: 'Hydraulische Daten'
+2025-09-12 10:35:57,207 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Sample data: [('Maximaler Betriebsdruck PN', '16 bar'), ('Min. Medientemperatur Tmin', '-20 °C'), ('Max. Medientemperatur Tmax', '120 °C')]
+2025-09-12 10:35:57,207 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 2/12...
+2025-09-12 10:35:57,223 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: 'Motordaten'
+2025-09-12 10:35:57,227 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 8 rows in table
+2025-09-12 10:35:57,316 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 8 data rows from table: 'Motordaten'
+2025-09-12 10:35:57,317 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Sample data: [('Netzanschluss', '3~400 V, 50 Hz'), ('Spannungstoleranz', '±10 %'), ('Motornennleistung P2', '1,1 kW')]
+2025-09-12 10:35:57,317 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 3/12...
+2025-09-12 10:35:57,325 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: 'Einbaumaße'
+2025-09-12 10:35:57,330 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 2 rows in table
+2025-09-12 10:35:57,350 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 2 data rows from table: 'Einbaumaße'
+2025-09-12 10:35:57,350 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Sample data: [('Saugseitiger Rohranschluss DNs', 'DN 65'), ('Druckseitiger Rohranschluss DNd', 'DN 50')]
+2025-09-12 10:35:57,350 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 4/12...
+2025-09-12 10:35:57,356 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: 'Werkstoffe'
+2025-09-12 10:35:57,360 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 3 rows in table
+2025-09-12 10:35:57,393 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 3 data rows from table: 'Werkstoffe'
+2025-09-12 10:35:57,393 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Sample data: [('Pumpengehäuse', 'Grauguss'), ('Laufrad', 'Edelstahl'), ('Welle', 'Edelstahl')]
+2025-09-12 10:35:57,393 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 5/12...
+2025-09-12 10:35:57,404 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: ''
+2025-09-12 10:35:57,408 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 1 rows in table
+2025-09-12 10:35:57,419 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 0 data rows from table: ''
+2025-09-12 10:35:57,419 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 6/12...
+2025-09-12 10:35:57,427 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: ''
+2025-09-12 10:35:57,432 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 4 rows in table
+2025-09-12 10:35:57,478 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 0 data rows from table: ''
+2025-09-12 10:35:57,478 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 7/12...
+2025-09-12 10:35:57,486 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: ''
+2025-09-12 10:35:57,490 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 1 rows in table
+2025-09-12 10:35:57,500 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 0 data rows from table: ''
+2025-09-12 10:35:57,500 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 8/12...
+2025-09-12 10:35:57,510 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: ''
+2025-09-12 10:35:57,515 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 3 rows in table
+2025-09-12 10:35:57,548 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 0 data rows from table: ''
+2025-09-12 10:35:57,548 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 9/12...
+2025-09-12 10:35:57,554 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: ''
+2025-09-12 10:35:57,558 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 4 rows in table
+2025-09-12 10:35:57,600 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 0 data rows from table: ''
+2025-09-12 10:35:57,600 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 10/12...
+2025-09-12 10:35:57,608 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: ''
+2025-09-12 10:35:57,612 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 11 rows in table
+2025-09-12 10:35:57,786 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 0 data rows from table: ''
+2025-09-12 10:35:57,786 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 11/12...
+2025-09-12 10:35:57,794 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: ''
+2025-09-12 10:35:57,798 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 2 rows in table
+2025-09-12 10:35:57,821 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 0 data rows from table: ''
+2025-09-12 10:35:57,821 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 Processing table 12/12...
+2025-09-12 10:35:57,829 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📋 Table title: ''
+2025-09-12 10:35:57,832 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📝 Found 4 rows in table
+2025-09-12 10:35:57,874 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted 0 data rows from table: ''
+2025-09-12 10:35:57,875 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🎉 TABLE EXTRACTION COMPLETE!
+2025-09-12 10:35:57,875 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    ✅ Successfully extracted 12 tables
+2025-09-12 10:35:57,875 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    ✅ Total data points: 18
+2025-09-12 10:35:57,875 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    📊 Tables found: ['Hydraulische Daten', 'Motordaten', 'Einbaumaße', 'Werkstoffe', '', '', '', '', '', '', '', '']
+2025-09-12 10:35:57,880 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔍 PRODUCT DEBUG for Wilo-SCP:
+2025-09-12 10:35:57,880 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Real name from H1: Wilo-SCP
+2025-09-12 10:35:57,880 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Short desc length: 13 chars
+2025-09-12 10:35:57,880 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Advantages count: 5
+2025-09-12 10:35:57,880 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Product images: 1
+2025-09-12 10:35:57,880 - wilo_scraper.scraper.wilo_catalog_scraper - INFO -    Technical tables: 12
+2025-09-12 10:35:57,880 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🔄 Starting navigation back to catalog page for next product...
+2025-09-12 10:35:57,880 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📍 Navigation attempt 1/3
+2025-09-12 10:35:57,880 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🌐 Using direct navigation to original catalog URL...
+2025-09-12 10:36:04,084 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📍 Current URL after navigation: https://wilo.com/de/de/Katalog/de/anwendung/industrie/heizung/heizung
+2025-09-12 10:36:04,113 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully returned to catalog page via direct navigation
+2025-09-12 10:36:04,113 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 📊 Found 46 product cards on catalog page
+2025-09-12 10:36:04,555 - wilo_scraper.scraper.browser_manager - INFO - Screenshot: logs/screenshots/catalog_back_navigation_1_success.png
+2025-09-12 10:36:04,555 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - 🎉 Navigation back to catalog completed successfully!
+2025-09-12 10:36:04,604 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - ✅ Successfully extracted: Wilo-SCP
+2025-09-12 10:36:04,604 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - === EXTRACTION COMPLETE ===
+2025-09-12 10:36:04,604 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Successfully processed 2 out of 2 cards
+2025-09-12 10:36:04,615 - wilo_scraper.scraper.wilo_catalog_scraper - INFO - Catalog scraping completed. Found 2 products
+2025-09-12 10:36:04,615 - wilo_scraper.scraper.browser_manager - INFO - Closing browser...
+2025-09-12 10:36:04,742 - wilo_scraper.scraper.browser_manager - INFO - ✅ Browser closed

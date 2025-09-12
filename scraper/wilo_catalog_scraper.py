@@ -277,6 +277,10 @@ class WiloCatalogScraper:
         try:
             driver = self.browser_manager.get_driver()
             
+            # Store the catalog URL to navigate back to later
+            catalog_url = driver.current_url
+            self.logger.info(f"Stored catalog URL: {catalog_url}")
+            
             # Try clicking via link first
             clicked = False
             if card_data.get('product_link'):
@@ -306,28 +310,86 @@ class WiloCatalogScraper:
             
             product_details = self.extract_product_page_details(card_data)
             
-            driver.back()
-            time.sleep(3)
+            # Navigate back to catalog page with multiple fallback methods
+            self.logger.info(f"🔄 Starting navigation back to catalog page for next product...")
+            
+            navigation_success = False
+            max_attempts = 3
+            
+            for attempt in range(max_attempts):
+                self.logger.info(f"📍 Navigation attempt {attempt + 1}/{max_attempts}")
+                
+                try:
+                    # Method 1: Direct navigation to original catalog URL (most reliable)
+                    self.logger.info("🌐 Using direct navigation to original catalog URL...")
+                    driver.get(self.catalog_url)
+                    time.sleep(5)  # Give more time for page to load
+                    
+                    # Verify we're on the catalog page by checking URL and page elements
+                    current_url = driver.current_url
+                    self.logger.info(f"📍 Current URL after navigation: {current_url}")
+                    
+                    # Check if we're on the catalog page
+                    if "katalog" in current_url.lower() and "industrie/heizung" in current_url.lower():
+                        # Double-check by looking for product cards
+                        try:
+                            wait = WebDriverWait(driver, 10)
+                            cards = wait.until(EC.presence_of_all_elements_located(
+                                (By.XPATH, "//div[contains(@class, 'card cl-overview h-100 rebrush')]")
+                            ))
+                            if len(cards) > index + 1:  # Make sure we have more cards to process
+                                self.logger.info(f"✅ Successfully returned to catalog page via direct navigation")
+                                self.logger.info(f"📊 Found {len(cards)} product cards on catalog page")
+                                navigation_success = True
+                                break
+                            else:
+                                self.logger.warning(f"⚠️  Found only {len(cards)} cards, need at least {index + 2}")
+                        except Exception as e:
+                            self.logger.warning(f"❌ Could not find product cards: {e}")
+                    else:
+                        self.logger.warning(f"❌ URL doesn't look like catalog page: {current_url}")
+                        
+                except Exception as e:
+                    self.logger.error(f"❌ Direct navigation attempt {attempt + 1} failed: {e}")
+                
+                if not navigation_success and attempt < max_attempts - 1:
+                    self.logger.info("⏳ Waiting before next attempt...")
+                    time.sleep(3)
+            
+            if navigation_success:
+                self.browser_manager.take_screenshot(f"catalog_back_navigation_{index}_success.png")
+                self.logger.info(f"🎉 Navigation back to catalog completed successfully!")
+            else:
+                self.logger.error("❌ All navigation attempts failed!")
+                self.browser_manager.take_screenshot(f"catalog_back_navigation_{index}_failed.png")
+                
+                # As a last resort, try to refresh the page
+                try:
+                    self.logger.info("🔄 Last resort: Refreshing catalog page...")
+                    driver.refresh()
+                    time.sleep(5)
+                    navigation_success = True
+                except Exception as e:
+                    self.logger.error(f"❌ Even refresh failed: {e}")
             
             return product_details
             
         except Exception as e:
             self.logger.error(f"Failed to get product details: {e}")
+            # Try to navigate back even if extraction failed
+            try:
+                self.logger.info("🔄 Attempting navigation back after error...")
+                driver.get(self.catalog_url)
+                time.sleep(5)
+                self.logger.info("✅ Navigated back to catalog after error")
+            except Exception as nav_e:
+                self.logger.error(f"❌ Failed to navigate back after error: {nav_e}")
             return None
     
     def extract_product_page_details(self, card_data):
         """Extract detailed info from product page and navigate to Produktauswahl"""
         try:
             driver = self.browser_manager.get_driver()
-            
-            # Extract media and descriptions from main product page first
-            media_items = self.extract_all_media()
-            short_description = self.extract_short_description()
-            advantages = self.extract_advantages()
-            long_description = self.extract_long_description()
-            
-            # Now navigate to Produktauswahl and extract table data
-            table_data = self.navigate_to_produktauswahl_and_extract_tables()
             
             # Get real product name from H1 (but exclude it from the final description)
             real_product_name = ""
@@ -344,6 +406,15 @@ class WiloCatalogScraper:
                     real_product_name = f"Wilo Product {card_data.get('card_index', 0) + 1}"
                     self.logger.warning(f"Using fallback name: {real_product_name}")
             
+            # Extract media and descriptions from main product page first
+            media_items = self.extract_all_media()
+            short_description = self.extract_short_description(real_product_name)
+            advantages = self.extract_advantages()
+            long_description = self.extract_long_description(real_product_name)
+            
+            # Now navigate to Produktauswahl and extract table data
+            table_data = self.navigate_to_produktauswahl_and_extract_tables()
+            
             # Create comprehensive product object
             product = {
                 'id': f"catalog_{card_data['card_index']+1}_{int(time.time())}",
@@ -358,7 +429,7 @@ class WiloCatalogScraper:
                 'short_description': short_description,
                 'advantages': advantages,
                 'long_description': long_description,
-                'full_description': self.build_full_description(short_description, advantages, long_description),
+                'full_description': self.build_full_description(short_description, advantages, long_description, table_data, real_product_name),
                 'technical_specifications': table_data,
                 'product_url': driver.current_url,
                 'extracted_at': time.strftime('%Y-%m-%d %H:%M:%S'),
@@ -751,7 +822,7 @@ class WiloCatalogScraper:
             self.logger.error(f"Failed to extract media: {e}")
             return {'images': [], 'videos': [], 'all_media': []}
 
-    def extract_short_description(self):
+    def extract_short_description(self, product_name=""):
         """Extract short description (excluding product heading)"""
         try:
             driver = self.browser_manager.get_driver()
@@ -765,26 +836,42 @@ class WiloCatalogScraper:
             
             short_description_parts = []
             
-            # Get the product name to exclude it
-            product_heading = ""
-            try:
-                h1_element = driver.find_element(By.XPATH, "//h1")
-                product_heading = h1_element.text.strip()
-            except:
-                pass
-            
             for selector in short_desc_selectors:
                 try:
                     elements = driver.find_elements(By.XPATH, selector)
                     for elem in elements:
                         text = elem.text.strip()
-                        # Skip if this text is the product heading
-                        if text and len(text) > 10 and text != product_heading:
-                            short_description_parts.append(text)
+                        # Skip if this text is the product heading or contains unwanted content
+                        if text and len(text) > 10:
+                            # Skip product name and other unwanted content
+                            skip_text = any([
+                                text == product_name,
+                                'über wilo' in text.lower(),
+                                'wilo ist ein' in text.lower(),
+                                text.lower().startswith(product_name.lower().split()[0]) if product_name else False,
+                                'anwendung:' in text.lower(),
+                                'produkttyp:' in text.lower()
+                            ])
+                            
+                            if not skip_text:
+                                short_description_parts.append(text)
                 except:
                     continue
             
-            short_description = " ".join(short_description_parts)
+            # Remove duplicates while preserving order
+            unique_parts = []
+            seen_parts = set()
+            for part in short_description_parts:
+                if part not in seen_parts:
+                    unique_parts.append(part)
+                    seen_parts.add(part)
+            
+            short_description = " ".join(unique_parts)
+            
+            # Additional cleanup
+            short_description = re.sub(r'\s+', ' ', short_description)  # Remove extra spaces
+            short_description = short_description.strip()
+            
             self.logger.info(f"Extracted short description: {len(short_description)} characters")
             return short_description
             
@@ -866,37 +953,83 @@ class WiloCatalogScraper:
             self.logger.error(f"Failed to extract long description: {e}")
             return ""
     
-    def build_full_description(self, short_desc, advantages, long_desc):
+    def build_full_description(self, short_desc, advantages, long_desc, table_data=None, product_name=""):
         """Build comprehensive description (excluding product heading and 'Über Wilo' section)"""
         try:
             html_parts = []
             
+            # Clean and deduplicate short description
             if short_desc:
-                html_parts.append(f"<div class='product-intro'>{short_desc}</div>")
+                # Remove duplicate sentences
+                sentences = short_desc.split('.')
+                unique_sentences = []
+                seen_sentences = set()
+                
+                for sentence in sentences:
+                    sentence = sentence.strip()
+                    if sentence and sentence not in seen_sentences and len(sentence) > 10:
+                        # Skip sentences that contain product headings or "Über Wilo"
+                        if not any(skip_phrase in sentence.lower() for skip_phrase in [
+                            product_name.lower() if product_name else 'xxxxx',
+                            'über wilo', 'wilo ist ein', 'anwendung:', 'produkttyp:'
+                        ]):
+                            unique_sentences.append(sentence)
+                            seen_sentences.add(sentence)
+                
+                clean_description = '. '.join(unique_sentences)
+                if clean_description and not clean_description.endswith('.'):
+                    clean_description += '.'
+                    
+                html_parts.append(f"<div class='product-intro'>{clean_description}</div>")
             
+            # Add advantages section
             if advantages:
-                html_parts.append("<h3>Ihre Vorteile</h3>")
+                html_parts.append("<h3>Your Advantages</h3>")
                 html_parts.append("<ul>")
                 for advantage in advantages:
-                    html_parts.append(f"<li>{advantage}</li>")
+                    # Skip empty or very short advantages
+                    if advantage.strip() and len(advantage.strip()) > 10:
+                        html_parts.append(f"<li>{advantage.strip()}</li>")
                 html_parts.append("</ul>")
             
+            # Add technical specifications from table data
+            if table_data:
+                html_parts.append("<h3>Technical Specifications</h3>")
+                
+                for table in table_data:
+                    table_title = table.get('title', '')
+                    table_rows = table.get('data', {})
+                    
+                    # Only include tables with meaningful titles and data
+                    if table_title and table_rows and len(table_title) > 1:
+                        html_parts.append(f"<h4>{table_title}</h4>")
+                        html_parts.append("<ul>")
+                        for key, value in table_rows.items():
+                            if key.strip() and value.strip():
+                                html_parts.append(f"<li><strong>{key}:</strong> {value}</li>")
+                        html_parts.append("</ul>")
+            
+            # Add long description (cleaned)
             if long_desc:
                 paragraphs = long_desc.split('\n\n')
                 for paragraph in paragraphs:
-                    if paragraph.strip():
-                        # Skip paragraphs that contain "Über Wilo" content
-                        if "über wilo" in paragraph.lower() or "wilo ist ein" in paragraph.lower():
-                            continue
-                        html_parts.append(f"<p>{paragraph.strip()}</p>")
+                    paragraph = paragraph.strip()
+                    if paragraph:
+                        # Skip paragraphs that contain "Über Wilo" content or product headings
+                        skip_paragraph = any(skip_phrase in paragraph.lower() for skip_phrase in [
+                            'über wilo', 'wilo ist ein', product_name.lower() if product_name else 'xxxxx'
+                        ])
+                        
+                        if not skip_paragraph and len(paragraph) > 20:
+                            html_parts.append(f"<p>{paragraph}</p>")
             
-            # Note: Removed the "Über Wilo" section as requested
+            # Note: Completely removed the "Über Wilo" section as requested
             
             return "\n".join(html_parts)
             
         except Exception as e:
             self.logger.error(f"Failed to build description: {e}")
-            return short_desc or "Wilo Produkt"
+            return short_desc or "Wilo Product"
     
     def test_navigation(self):
         """Test navigation to catalog page"""

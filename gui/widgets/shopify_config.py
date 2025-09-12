@@ -1,5 +1,5 @@
 """
-Complete Shopify configuration widget with German-only content
+Complete Shopify configuration widget - ENGLISH VERSION
 """
 
 import tkinter as tk
@@ -45,52 +45,70 @@ class ShopifyClient:
             return None
     
     def create_product(self, product_data):
-        """Create product with German text only"""
+        """Create product with English text"""
         try:
             print("=" * 80)
-            print("SHOPIFY PRODUCT CREATION - GERMAN ONLY")
+            print("SHOPIFY PRODUCT CREATION - ENGLISH VERSION")
             
             name = product_data.get('name', 'Wilo Product')
             short_description = product_data.get('short_description', '')
             advantages = product_data.get('advantages', [])
-            category = product_data.get('category', 'Industrie Heizung')
-            subcategory = product_data.get('subcategory', 'Heizungspumpen')
+            category = product_data.get('category', 'Industrial Heating')
+            subcategory = product_data.get('subcategory', 'Heating Pumps')
+            table_data = product_data.get('technical_specifications', [])
             
             print(f"Product: {name}")
             print(f"Description: {len(short_description)} chars")
             print(f"Advantages: {len(advantages)} items")
+            print(f"Technical Tables: {len(table_data)} tables")
             
-            # Build German description
+            # Build English description
             html_parts = []
             html_parts.append(f"<h1>{name}</h1>")
             
             if short_description and len(short_description.strip()) > 20:
                 html_parts.append(f"<p>{short_description}</p>")
-                print("ADDED REAL GERMAN DESCRIPTION")
+                print("ADDED REAL ENGLISH DESCRIPTION")
             else:
-                html_parts.append(f"<p>Professionelle {name} von Wilo für industrielle Anwendungen.</p>")
+                html_parts.append(f"<p>Professional {name} from Wilo for industrial applications.</p>")
             
-            html_parts.append(f"<p><strong>Anwendung:</strong> {category}</p>")
-            html_parts.append(f"<p><strong>Produkttyp:</strong> {subcategory}</p>")
+            html_parts.append(f"<p><strong>Application:</strong> {category}</p>")
+            html_parts.append(f"<p><strong>Product Type:</strong> {subcategory}</p>")
             
             if advantages and len(advantages) > 0:
-                html_parts.append("<h3>Ihre Vorteile</h3>")
+                html_parts.append("<h3>Your Advantages</h3>")
                 html_parts.append("<ul>")
                 for advantage in advantages:
                     if advantage and len(advantage.strip()) > 10:
                         html_parts.append(f"<li>{advantage.strip()}</li>")
                 html_parts.append("</ul>")
-                print(f"ADDED {len(advantages)} GERMAN ADVANTAGES")
+                print(f"ADDED {len(advantages)} REAL ADVANTAGES")
             else:
-                html_parts.append("<h3>Hauptmerkmale</h3>")
+                html_parts.append("<h3>Key Features</h3>")
                 html_parts.append("<ul>")
-                html_parts.append("<li>Hochwertige deutsche Ingenieurskunst</li>")
-                html_parts.append("<li>Energieeffizienter Betrieb</li>")
-                html_parts.append("<li>Zuverlässige Leistung für industrielle Anwendungen</li>")
+                html_parts.append("<li>High-quality German engineering</li>")
+                html_parts.append("<li>Energy-efficient operation</li>")
+                html_parts.append("<li>Reliable performance for industrial applications</li>")
                 html_parts.append("</ul>")
             
-            html_parts.append("<h3>Über Wilo</h3>")
-            html_parts.append("<p>Wilo ist ein führender Hersteller von Pumpen und Pumpensystemen für Heizung, Kühlung, Klimatechnik, Wasserversorgung und Abwasserbehandlung.</p>")
+            # Add technical specifications
+            if table_data and len(table_data) > 0:
+                html_parts.append("<h3>Technical Specifications</h3>")
+                for table in table_data:
+                    table_title = table.get('title', '')
+                    table_rows = table.get('data', {})
+                    
+                    if table_title and table_rows:
+                        html_parts.append(f"<h4>{table_title}</h4>")
+                        html_parts.append("<ul>")
+                        for key, value in table_rows.items():
+                            if key.strip() and value.strip():
+                                html_parts.append(f"<li><strong>{key}:</strong> {value}</li>")
+                        html_parts.append("</ul>")
+                print(f"ADDED {len(table_data)} TECHNICAL SPECIFICATION TABLES")
+            
+            html_parts.append("<h3>About Wilo</h3>")
+            html_parts.append("<p>Wilo is a leading manufacturer of pumps and pump systems for heating, cooling, air conditioning, water supply and wastewater treatment.</p>")
             
             body_html = "\n".join(html_parts)
             
@@ -106,7 +124,7 @@ class ShopifyClient:
                 if validated:
                     valid_images.append({
                         'src': validated, 
-                        'alt': f"{name} - Produktbild"
+                        'alt': f"{name} - Product Image"
                     })
                     print("Added validated card image")
             
@@ -116,7 +134,7 @@ class ShopifyClient:
                     if validated and validated not in [img['src'] for img in valid_images]:
                         valid_images.append({
                             'src': validated, 
-                            'alt': f"{name} - Bild {i+1}"
+                            'alt': f"{name} - Image {i+1}"
                         })
                         print(f"Added validated image {i+1}")
             
@@ -125,7 +143,7 @@ class ShopifyClient:
                 'body_html': body_html,
                 'vendor': 'Wilo',
                 'product_type': subcategory,
-                'tags': f"Wilo, {category}, {subcategory}, Deutsche Qualität",
+                'tags': f"Wilo, {category}, {subcategory}, German Quality",
                 'status': 'draft',
                 'variants': [{
                     'title': 'Standard',
@@ -175,14 +193,14 @@ class ShopifyConfig(ttk.LabelFrame):
     
     def _create_widgets(self):
         # Connection Section
-        connection_frame = ttk.LabelFrame(self, text="Verbindungseinstellungen", padding="5")
+        connection_frame = ttk.LabelFrame(self, text="Connection Settings", padding="5")
         connection_frame.pack(fill='x', pady=5)
         
         ttk.Label(connection_frame, text="Shop URL:").grid(row=0, column=0, sticky='w', pady=2)
         self.shop_url_var = tk.StringVar(value=getattr(self.settings, 'shopify_shop_url', ''))
         shop_entry = ttk.Entry(connection_frame, textvariable=self.shop_url_var, width=40)
         shop_entry.grid(row=0, column=1, sticky='w', padx=5)
-        ttk.Label(connection_frame, text="(z.B., meinshop.myshopify.com)", font=('Arial', 8)).grid(row=0, column=2, sticky='w', padx=5)
+        ttk.Label(connection_frame, text="(e.g., myshop.myshopify.com)", font=('Arial', 8)).grid(row=0, column=2, sticky='w', padx=5)
         
         ttk.Label(connection_frame, text="Access Token:").grid(row=1, column=0, sticky='w', pady=2)
         self.access_token_var = tk.StringVar(value=getattr(self.settings, 'shopify_access_token', ''))
@@ -192,7 +210,7 @@ class ShopifyConfig(ttk.LabelFrame):
         self.show_token_var = tk.BooleanVar()
         show_cb = ttk.Checkbutton(
             connection_frame, 
-            text="Anzeigen", 
+            text="Show", 
             variable=self.show_token_var,
             command=lambda: token_entry.config(show="" if self.show_token_var.get() else "*")
         )
@@ -201,18 +219,18 @@ class ShopifyConfig(ttk.LabelFrame):
         button_frame = ttk.Frame(connection_frame)
         button_frame.grid(row=2, column=0, columnspan=3, pady=10, sticky='w')
         
-        self.test_button = ttk.Button(button_frame, text="Verbindung testen", command=self.test_connection)
+        self.test_button = ttk.Button(button_frame, text="Test Connection", command=self.test_connection)
         self.test_button.pack(side='left', padx=5)
         
-        self.save_button = ttk.Button(button_frame, text="Einstellungen speichern", command=self.save_settings)
+        self.save_button = ttk.Button(button_frame, text="Save Settings", command=self.save_settings)
         self.save_button.pack(side='left', padx=5)
         
-        self.status_var = tk.StringVar(value="Nicht verbunden")
+        self.status_var = tk.StringVar(value="Not connected")
         status_label = ttk.Label(connection_frame, textvariable=self.status_var)
         status_label.grid(row=3, column=0, columnspan=3, pady=5, sticky='w')
         
         # Upload Section
-        upload_frame = ttk.LabelFrame(self, text="Produkt Upload", padding="5")
+        upload_frame = ttk.LabelFrame(self, text="Product Upload", padding="5")
         upload_frame.pack(fill='x', pady=5)
         
         upload_controls = ttk.Frame(upload_frame)
@@ -220,34 +238,34 @@ class ShopifyConfig(ttk.LabelFrame):
         
         self.upload_button = ttk.Button(
             upload_controls,
-            text="Gescrapte Produkte hochladen",
+            text="Upload Scraped Products",
             command=self.upload_scraped_products,
             state='disabled'
         )
         self.upload_button.pack(side='left', padx=5)
         
-        self.export_button = ttk.Button(upload_controls, text="Exportieren", command=self.export_products)
+        self.export_button = ttk.Button(upload_controls, text="Export Products", command=self.export_products)
         self.export_button.pack(side='left', padx=5)
         
-        self.progress_var = tk.StringVar(value="Bereit für Upload")
+        self.progress_var = tk.StringVar(value="Ready for upload")
         ttk.Label(upload_frame, textvariable=self.progress_var).pack(pady=5)
         
         self.progress_bar = ttk.Progressbar(upload_frame, mode='determinate')
         self.progress_bar.pack(fill='x', pady=5)
         
         # Upload options
-        options_frame = ttk.LabelFrame(upload_frame, text="Upload Optionen", padding="5")
+        options_frame = ttk.LabelFrame(upload_frame, text="Upload Options", padding="5")
         options_frame.pack(fill='x', pady=5)
         
         self.draft_mode_var = tk.BooleanVar(value=True)
         ttk.Checkbutton(
             options_frame,
-            text="Produkte als Entwürfe erstellen (empfohlen)",
+            text="Create products as drafts (recommended)",
             variable=self.draft_mode_var
         ).pack(anchor='w')
         
         # Results section
-        results_frame = ttk.LabelFrame(self, text="Upload Ergebnisse", padding="5")
+        results_frame = ttk.LabelFrame(self, text="Upload Results", padding="5")
         results_frame.pack(fill='both', expand=True, pady=5)
         
         self.results_text = tk.Text(results_frame, height=8, state='disabled')
@@ -261,10 +279,10 @@ class ShopifyConfig(ttk.LabelFrame):
         access_token = self.access_token_var.get().strip()
         
         if not shop_url or not access_token:
-            messagebox.showwarning("Fehlende Angaben", "Bitte Shop URL und Access Token eingeben")
+            messagebox.showwarning("Missing Information", "Please enter Shop URL and Access Token")
             return
         
-        self.status_var.set("Teste Verbindung...")
+        self.status_var.set("Testing connection...")
         self.test_button.config(state='disabled')
         
         thread = threading.Thread(target=self._test_connection_worker)
@@ -286,7 +304,7 @@ class ShopifyConfig(ttk.LabelFrame):
             
             if response.status_code == 200:
                 shop_data = response.json().get('shop', {})
-                shop_name = shop_data.get('name', 'Unbekannt')
+                shop_name = shop_data.get('name', 'Unknown')
                 self.after(0, self._update_connection_status, True, shop_name)
             else:
                 self.after(0, self._update_connection_status, False, f"HTTP {response.status_code}")
@@ -297,13 +315,13 @@ class ShopifyConfig(ttk.LabelFrame):
         try:
             if success:
                 self.is_connected = True
-                self.status_var.set(f"Verbunden mit {info}")
+                self.status_var.set(f"Connected to {info}")
                 self.upload_button.config(state='normal')
-                messagebox.showinfo("Erfolg", f"Erfolgreich verbunden mit {info}!")
+                messagebox.showinfo("Success", f"Successfully connected to {info}!")
             else:
                 self.is_connected = False
-                self.status_var.set(f"Verbindung fehlgeschlagen: {info}")
-                messagebox.showerror("Fehler", f"Verbindung fehlgeschlagen: {info}")
+                self.status_var.set(f"Connection failed: {info}")
+                messagebox.showerror("Error", f"Connection failed: {info}")
         finally:
             self.test_button.config(state='normal')
     
@@ -315,21 +333,21 @@ class ShopifyConfig(ttk.LabelFrame):
                 self.settings.shopify_access_token = self.access_token_var.get().strip()
             if hasattr(self.settings, 'save'):
                 self.settings.save()
-            messagebox.showinfo("Erfolg", "Einstellungen gespeichert!")
+            messagebox.showinfo("Success", "Settings saved successfully!")
         except Exception as e:
-            messagebox.showerror("Fehler", f"Speichern fehlgeschlagen: {e}")
+            messagebox.showerror("Error", f"Save failed: {e}")
     
     def upload_scraped_products(self):
         if not self.is_connected:
-            messagebox.showwarning("Nicht verbunden", "Bitte zuerst Verbindung testen")
+            messagebox.showwarning("Not Connected", "Please test connection first")
             return
         
         products = self.get_scraped_products()
         if not products:
-            messagebox.showwarning("Keine Produkte", "Keine Produkte zum Hochladen gefunden")
+            messagebox.showwarning("No Products", "No products to upload found")
             return
         
-        result = messagebox.askyesno("Bestätigen", f"{len(products)} Produkte hochladen?")
+        result = messagebox.askyesno("Confirm Upload", f"Upload {len(products)} products to Shopify?")
         if not result:
             return
         
@@ -347,14 +365,14 @@ class ShopifyConfig(ttk.LabelFrame):
             self.after(0, lambda: self.progress_bar.config(maximum=len(products), value=0))
             
             for i, product in enumerate(products):
-                self.after(0, lambda i=i, p=product: self.progress_var.set(f"Lade hoch {i+1}/{len(products)}: {p.get('name', 'Unbekannt')}"))
+                self.after(0, lambda i=i, p=product: self.progress_var.set(f"Uploading {i+1}/{len(products)}: {p.get('name', 'Unknown')}"))
                 
                 result = client.create_product(product)
                 if result:
                     successful.append({'product': product, 'shopify_id': result['id']})
                     print(f"SUCCESS: {product.get('name')} (ID: {result['id']})")
                 else:
-                    failed.append({'product': product, 'error': 'Erstellung fehlgeschlagen'})
+                    failed.append({'product': product, 'error': 'Creation failed'})
                     print(f"FAILED: {product.get('name')}")
                 
                 self.after(0, lambda i=i: self.progress_bar.config(value=i+1))
@@ -362,54 +380,54 @@ class ShopifyConfig(ttk.LabelFrame):
             
             self.after(0, lambda: self._display_results(successful, failed))
         except Exception as e:
-            self.after(0, lambda: messagebox.showerror("Fehler", f"Upload fehlgeschlagen: {e}"))
+            self.after(0, lambda: messagebox.showerror("Error", f"Upload failed: {e}"))
         finally:
             self.after(0, lambda: self.upload_button.config(state='normal'))
-            self.after(0, lambda: self.progress_var.set("Upload abgeschlossen"))
+            self.after(0, lambda: self.progress_var.set("Upload completed"))
     
     def _display_results(self, successful, failed):
         self.results_text.config(state='normal')
         self.results_text.delete(1.0, tk.END)
         
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        self.results_text.insert(tk.END, f"=== UPLOAD ERGEBNISSE - {timestamp} ===\n\n")
+        self.results_text.insert(tk.END, f"=== UPLOAD RESULTS - {timestamp} ===\n\n")
         
-        self.results_text.insert(tk.END, f"Gesamt: {len(successful) + len(failed)}\n")
-        self.results_text.insert(tk.END, f"Erfolgreich: {len(successful)}\n")
-        self.results_text.insert(tk.END, f"Fehlgeschlagen: {len(failed)}\n\n")
+        self.results_text.insert(tk.END, f"Total: {len(successful) + len(failed)}\n")
+        self.results_text.insert(tk.END, f"Successful: {len(successful)}\n")
+        self.results_text.insert(tk.END, f"Failed: {len(failed)}\n\n")
         
         if successful:
-            self.results_text.insert(tk.END, "=== ERFOLGREICH ===\n")
+            self.results_text.insert(tk.END, "=== SUCCESSFUL ===\n")
             for item in successful:
                 product = item['product']
                 shopify_id = item['shopify_id']
-                self.results_text.insert(tk.END, f"✅ {product.get('name', 'Unbekannt')} (ID: {shopify_id})\n")
+                self.results_text.insert(tk.END, f"✅ {product.get('name', 'Unknown')} (ID: {shopify_id})\n")
             self.results_text.insert(tk.END, "\n")
         
         if failed:
-            self.results_text.insert(tk.END, "=== FEHLGESCHLAGEN ===\n")
+            self.results_text.insert(tk.END, "=== FAILED ===\n")
             for item in failed:
                 product = item['product']
-                error = item.get('error', 'Unbekannter Fehler')
-                self.results_text.insert(tk.END, f"❌ {product.get('name', 'Unbekannt')} - {error}\n")
+                error = item.get('error', 'Unknown error')
+                self.results_text.insert(tk.END, f"❌ {product.get('name', 'Unknown')} - {error}\n")
         
         self.results_text.config(state='disabled')
         
         if len(failed) == 0:
-            messagebox.showinfo("Abgeschlossen", f"Alle {len(successful)} Produkte erfolgreich hochgeladen!")
+            messagebox.showinfo("Completed", f"All {len(successful)} products uploaded successfully!")
         else:
-            messagebox.showwarning("Abgeschlossen mit Fehlern", f"Erfolgreich: {len(successful)}, Fehlgeschlagen: {len(failed)}")
+            messagebox.showwarning("Completed with Errors", f"Successful: {len(successful)}, Failed: {len(failed)}")
     
     def export_products(self):
         products = self.get_scraped_products()
         if not products:
-            messagebox.showwarning("Keine Produkte", "Keine Produkte zum Exportieren")
+            messagebox.showwarning("No Products", "No products to export")
             return
         
         file_path = filedialog.asksaveasfilename(
-            title="Produkte speichern",
+            title="Save Products",
             defaultextension=".json",
-            filetypes=[("JSON Dateien", "*.json"), ("Alle Dateien", "*.*")]
+            filetypes=[("JSON Files", "*.json"), ("All Files", "*.*")]
         )
         
         if not file_path:
@@ -418,9 +436,9 @@ class ShopifyConfig(ttk.LabelFrame):
         try:
             with open(file_path, 'w', encoding='utf-8') as f:
                 json.dump(products, f, indent=2, ensure_ascii=False)
-            messagebox.showinfo("Exportiert", f"{len(products)} Produkte exportiert!")
+            messagebox.showinfo("Exported", f"{len(products)} products exported successfully!")
         except Exception as e:
-            messagebox.showerror("Fehler", f"Export fehlgeschlagen: {e}")
+            messagebox.showerror("Error", f"Export failed: {e}")
     
     def get_scraped_products(self):
         return []

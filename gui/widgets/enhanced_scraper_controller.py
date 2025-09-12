@@ -1,5 +1,5 @@
 """
-Enhanced scraper controller widget - CATALOG ONLY VERSION
+Enhanced scraper controller widget - ENGLISH VERSION with fixed product limit
 """
 
 import tkinter as tk
@@ -9,7 +9,7 @@ from scraper.wilo_catalog_scraper import WiloCatalogScraper
 from gui.widgets.browser_settings import BrowserSettings
 
 class EnhancedScraperController(ttk.LabelFrame):
-    """Enhanced controller for catalog scraper only"""
+    """Enhanced controller for catalog scraper only - ENGLISH VERSION"""
     
     def __init__(self, parent, settings):
         super().__init__(parent, text="Catalog Scraping Controls", padding="10")
@@ -39,12 +39,13 @@ class EnhancedScraperController(ttk.LabelFrame):
 ✅ Extracts real product names from H1 elements
 ✅ Gets actual descriptions and advantages 
 ✅ Handles multiple images per product
+✅ Extracts technical specifications from tables
 ✅ Works with all product cards"""
         
         ttk.Label(info_frame, text=info_text, justify='left').pack(anchor='w')
         
         # Product Limit Control
-        limit_frame = ttk.LabelFrame(self, text="Product Extraction Limits", padding="5")
+        limit_frame = ttk.LabelFrame(self, text="Product Extraction Settings", padding="5")
         limit_frame.pack(fill='x', pady=5)
         
         # Catalog scraper limit
@@ -141,7 +142,9 @@ class EnhancedScraperController(ttk.LabelFrame):
             return
         
         try:
+            # FIXED: Get the actual value from the GUI
             max_products = int(self.catalog_limit_var.get())
+            self.logger.info(f"Starting scraping with max_products = {max_products}")
             
             # Update browser settings
             browser_settings = self.browser_settings.get_settings()
@@ -162,7 +165,7 @@ class EnhancedScraperController(ttk.LabelFrame):
             
             self.status_var.set(f"Starting catalog scraping (max {max_products} products)...")
             
-            # Start in separate thread
+            # Start in separate thread with CORRECT max_products value
             thread = threading.Thread(target=self._catalog_scraping_worker, args=(max_products,))
             thread.daemon = True
             thread.start()
@@ -174,6 +177,8 @@ class EnhancedScraperController(ttk.LabelFrame):
     def _catalog_scraping_worker(self, max_products):
         """Worker thread for catalog scraping"""
         try:
+            # FIXED: Pass the correct max_products value
+            self.logger.info(f"Worker thread starting with max_products = {max_products}")
             products = self.catalog_scraper.start_scraping(max_products)
             self.scraped_products.extend(products)
             
@@ -305,6 +310,8 @@ class EnhancedScraperController(ttk.LabelFrame):
                 results_text.insert('end', f"   Description: {desc}\n")
             if product.get('advantages'):
                 results_text.insert('end', f"   Advantages: {len(product['advantages'])} items\n")
+            if product.get('technical_specifications'):
+                results_text.insert('end', f"   Technical Tables: {len(product['technical_specifications'])} tables\n")
             results_text.insert('end', "\n")
         
         results_text.config(state='disabled')
@@ -324,3 +331,9 @@ class EnhancedScraperController(ttk.LabelFrame):
             self.scraped_products.clear()
             self.product_count_var.set("0")
             self.status_var.set("Results cleared")
+    
+    @property
+    def logger(self):
+        """Get logger instance"""
+        from utils.logger import get_logger
+        return get_logger(__name__)
